@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>My Fourth Trimester Plan</title>
+<meta name="description" content="A workbook for the weeks after birth: the first hour, a circle of support and what each person can do, a feeding plan, help at home, rest and visitors, a birth story, and a guide for supporters. A companion to The Fourth Trimester Mandala.">
+<link rel="icon" href="../favicon.svg?v=1" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Mulish:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+/* The same palette as The Fourth Trimester Mandala: a yellow center warming through blush and peach to rose. */
+:root{
+  --bg:#FDF7F1; --surface:#FFFFFF; --ink:#4E2A2E; --muted:#8E6366; --line:#F1DCD2; --field:#FFFDFB;
+  --baby:#FAE29C; --mother:#F8C8B8; --partner:#F1B097; --circle:#EA9C91; --edu:#DF8A8E; --best:#D17489; --center:#F5D27A; --gold:#C08A2E;
+  --on-light:#4E2A2E; --on-dark:#FFFFFF;
+  --display:"Marcellus", "Cormorant Garamond", Georgia, serif;
+  --body:"Mulish", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#261A1C; --surface:#302124; --ink:#F6E6DE; --muted:#CBA39D; --line:#4A3135; --field:#2A1C1F;
+  --baby:#F3D78A; --mother:#F0BCAB; --partner:#E8A48A; --circle:#DA8C84; --edu:#CF7C84; --best:#BF6679; --center:#E8C467; --gold:#E8BE5E;
+  --on-light:#3A1F22; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#261A1C; --surface:#302124; --ink:#F6E6DE; --muted:#CBA39D; --line:#4A3135; --field:#2A1C1F;
+  --baby:#F3D78A; --mother:#F0BCAB; --partner:#E8A48A; --circle:#DA8C84; --edu:#CF7C84; --best:#BF6679; --center:#E8C467; --gold:#E8BE5E;
+  --on-light:#3A1F22; color-scheme:dark }
+:root[data-theme="light"]{color-scheme:light}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;margin:0}
+.wrap{max-width:880px;margin:0 auto;padding-inline:16px;padding-block:28px 64px}
+a{color:var(--ink);text-underline-offset:2px}
+header.top{display:grid;gap:8px;margin-bottom:18px;position:relative;padding-right:52px}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(34px,6vw,52px);line-height:1.05;margin:0}
+.lede{color:var(--muted);margin:2px 0 0;max-width:64ch}
+.themebtn{position:absolute;top:-4px;right:0;width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--ink);cursor:pointer;padding:0}
+.themebtn svg{width:20px;height:20px}
+.themebtn .sun{display:none} .is-dark .themebtn .moon{display:none} .is-dark .themebtn .sun{display:block}
+.themebtn:focus-visible,.btn:focus-visible,.chip:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+/* a small sunrise band, the mandala's rings laid flat */
+.band{height:8px;border-radius:999px;background:linear-gradient(90deg,var(--center),var(--baby) 16%,var(--mother) 34%,var(--partner) 52%,var(--circle) 68%,var(--edu) 84%,var(--best));margin:6px 0 4px}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:14px 0}
+.btn{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer}
+.btn:hover{background:var(--bg)}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.toolbar .note{flex-basis:100%;margin:2px 0 0;font-size:13px;color:var(--muted)}
+.saved{font-size:13px;color:var(--muted);margin-left:auto}
+
+nav.toc{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
+.chip{font-size:13px;font-weight:600;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:7px}
+.chip i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+
+section.part{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);border-radius:16px;padding:20px 20px 22px;margin:0 0 22px;display:grid;gap:14px;scroll-margin-top:12px}
+section.part h2{font-family:var(--display);font-weight:400;font-size:30px;line-height:1.1;margin:0;display:flex;align-items:center;gap:12px}
+section.part h2 .num{font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--on-light);background:var(--c);border-radius:999px;padding:3px 9px}
+section.part h3{font-family:var(--display);font-weight:400;font-size:21px;margin:6px 0 0}
+.intro{margin:0;color:var(--muted);max-width:66ch}
+.hint{margin:0;font-size:14px;color:var(--muted)}
+
+/* fields */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 14px}
+label.f{display:grid;gap:4px;font-size:13.5px;font-weight:600}
+label.f span.sub{font-weight:400;color:var(--muted)}
+input[type=text],input[type=tel],input[type=date],textarea,select{font:inherit;font-size:15px;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:9px;padding:8px 10px;width:100%}
+textarea{resize:vertical;min-height:84px;line-height:1.55;overflow:hidden}
+input:focus,textarea:focus,select:focus{outline:2px solid color-mix(in srgb, var(--c, var(--ink)) 70%, var(--ink));outline-offset:1px}
+.card{border:1px solid var(--line);border-left:4px solid var(--c);border-radius:12px;padding:12px 14px;display:grid;gap:10px;background:color-mix(in srgb, var(--c) 7%, var(--surface))}
+.card .cardhead{display:flex;justify-content:space-between;align-items:center;gap:8px;font-family:var(--display);font-size:18px}
+.remove{font:inherit;font-size:12.5px;border:none;background:none;color:var(--muted);cursor:pointer;text-decoration:underline}
+.add{justify-self:start}
+
+/* checklists */
+ul.checks{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+ul.checks li{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start}
+ul.checks li.task{grid-template-columns:22px 1fr minmax(120px,190px)}
+ul.checks input[type=checkbox],.radio input{width:18px;height:18px;margin:3px 0 0;accent-color:var(--best)}
+ul.checks li.task input[type=text],select.who{padding:4px 8px;font-size:14px}
+ul.checks .why{display:block;font-size:13.5px;color:var(--muted)}
+@media (max-width:560px){ ul.checks li.task{grid-template-columns:22px 1fr} ul.checks li.task input[type=text],ul.checks li.task select{grid-column:2} }
+.cats{display:grid;gap:12px}
+.cat{display:grid;gap:8px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);border-top:4px solid var(--c);align-content:start}
+.cat h3{margin:0;display:flex;align-items:center;gap:10px}
+.cat h3 i{width:12px;height:12px;border-radius:50%;background:var(--c)}
+.colhead{display:grid;grid-template-columns:22px 1fr minmax(120px,190px);gap:10px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:560px){ .colhead{display:none} }
+.radio{display:flex;flex-wrap:wrap;gap:8px 18px}
+.radio label{display:flex;gap:8px;align-items:center;font-size:15px}
+
+/* the circle of support, drawn from the names she writes */
+.assign{display:grid;gap:12px}
+.person{border:1px solid var(--line);border-left:5px solid var(--c);border-radius:12px;padding:12px 14px;display:grid;gap:8px;background:color-mix(in srgb, var(--c) 7%, var(--surface))}
+.person h3{margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.person h3 span{font-family:var(--body);font-size:13.5px;color:var(--muted)}
+.person ul{margin:0;padding-left:20px;display:grid;gap:4px}
+.person .cat-l{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.person .req{font-size:14.5px;margin:0;white-space:pre-wrap}
+.empty{margin:0;color:var(--muted);font-size:14.5px}
+.circlefig{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center}
+.circlefig svg{width:230px;height:230px;flex:none}
+.circlefig text{font-family:var(--body);font-size:11.5px;font-weight:700;fill:var(--on-light);text-anchor:middle;dominant-baseline:central}
+.circlefig figcaption{flex:1 1 220px;font-size:14px;color:var(--muted)}
+
+/* reading for supporters */
+.learn{display:grid;gap:12px}
+.learn article{border-left:4px solid var(--c);padding:4px 0 4px 14px;display:grid;gap:6px}
+.learn article h3{margin:0}
+.learn p{margin:0;max-width:68ch}
+.learn ul{margin:0;padding-left:20px;display:grid;gap:5px}
+.urgent{border:1px solid var(--best);border-left:5px solid var(--best);border-radius:12px;padding:12px 14px;display:grid;gap:6px}
+.urgent p{margin:0}
+.private{background:color-mix(in srgb, var(--mother) 22%, transparent);border-radius:10px;padding:10px 12px;font-size:14.5px;margin:0}
+.foot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin-top:10px}
+
+/* printing: a clean workbook, one part to a page, with lines left for writing by hand */
+@media print{
+  @page{size:letter;margin:0.6in}
+  :root{--bg:#fff;--surface:#fff;--field:#fff}
+  body{font-size:11.5pt;background:#fff}
+  .toolbar,nav.toc,.themebtn,.remove,.add,.noprint{display:none!important}
+  .wrap{max-width:none;padding:0}
+  section.part{break-before:page;border:none;border-top:5pt solid var(--c);border-radius:0;padding:12pt 0 0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  section.part:first-of-type{break-before:auto}
+  section.part.skip{display:none}
+  .person{break-before:page;break-inside:avoid}
+  .person:first-child{break-before:auto}
+  .card,.cat,.learn article,.urgent{break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  input[type=text],input[type=tel],input[type=date],select{border:none;border-bottom:1px solid #bbb;border-radius:0;padding:2pt 0;background:none}
+  textarea{border:1px solid #ddd;background:repeating-linear-gradient(#fff 0 23px,#ddd 23px 24px);-webkit-print-color-adjust:exact;print-color-adjust:exact;line-height:24px;padding:0 6pt;resize:none}
+  .band{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  ::placeholder{color:transparent}
+  select{appearance:none;-webkit-appearance:none;background:none}
+  input[type=date]::-webkit-calendar-picker-indicator{display:none}
+  .blankfield{color:transparent!important}
+  a{text-decoration:none}
+}
+</style>
+<script>
+try{ var t=localStorage.getItem("ft-theme"); if(t==="light"||t==="dark") document.documentElement.setAttribute("data-theme",t); }catch(e){}
+</script>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <button class="themebtn" type="button" id="themebtn" aria-label="Switch to dark mode">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+    </button>
+    <div class="eyebrow">A workbook from The Fourth Trimester Mandala</div>
+    <h1>My Fourth Trimester Plan</h1>
+    <div class="band" aria-hidden="true"></div>
+    <p class="lede">A place to gather what you will need after your baby arrives: your first hour, your circle of support and what you would love from each of them, your feeding plan, the help that keeps a home running, time to rest, and your birth story when you are ready to tell it. Fill it in with your partner in the last weeks of pregnancy, then share it, so the people around you know how to hold you while you hold your baby.</p>
+  </header>
+
+  <div class="toolbar">
+    <button class="btn primary" type="button" id="print">Print or save as PDF</button>
+    <button class="btn" type="button" id="printblank">Print a blank copy</button>
+    <button class="btn" type="button" id="clear">Clear everything</button>
+    <span class="saved" id="saved" aria-live="polite"></span>
+    <p class="note">What you write is saved only in this browser, on this device, and is not sent anywhere. To share it, print it or save it as a PDF. Your birth story is printed only if you choose.</p>
+  </div>
+
+  <nav class="toc" id="toc" aria-label="Parts of the workbook"></nav>
+  <form id="wb" autocomplete="off" onsubmit="return false"></form>
+
+  <p class="foot">A companion to <a href="../">The Fourth Trimester Mandala</a>, created by Erin Singleton, a student in APPPAH's Prenatal &amp; Perinatal Educator certification. An educational workbook, not medical advice. Share your first hour and feeding plans with your midwife or doctor ahead of time; medical needs come first.</p>
+</div>
+
+<script>
+(function(){
+"use strict";
+const form=document.getElementById("wb");
+const esc=t=>String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+
+/* ---------- small builders: each field carries its own name, and that name is its place in what is saved ---------- */
+const txt=(k,label,ph="",type="text")=>`<label class="f">${label}<input type="${type}" name="${k}" placeholder="${esc(ph)}"></label>`;
+const area=(k,label,ph="",sub="")=>`<label class="f">${label}${sub?` <span class="sub">${sub}</span>`:""}<textarea name="${k}" placeholder="${esc(ph)}"></textarea></label>`;
+const checks=(k,items)=>`<ul class="checks">${items.map((it,i)=>{ const [t,why]=Array.isArray(it)?it:[it,""]; return `<li><input type="checkbox" name="${k}.${i}" id="${k}.${i}"><label for="${k}.${i}">${t}${why?`<span class="why">${why}</span>`:""}</label></li>`; }).join("")}</ul>`;
+const tasks=(k,items)=>`<div class="colhead" aria-hidden="true"><span></span><span>Needed</span><span>Who will do it</span></div><ul class="checks">${items.map((t,i)=>`<li class="task"><input type="checkbox" name="${k}.${i}" id="${k}.${i}"><label for="${k}.${i}">${t}</label><select class="who" name="${k}.${i}.who" aria-label="Who will do it: ${esc(t)}"></select></li>`).join("")}</ul>`;
+const radio=(k,opts)=>`<div class="radio" role="radiogroup">${opts.map((o,i)=>`<label><input type="radio" name="${k}" value="${i}">${o}</label>`).join("")}</div>`;
+
+/* Repeating cards, such as supporters or requests: a minimum number shown, and more can be added. */
+const REP={};
+function rep(id, min, label, row, btn="Add another"){ REP[id]={min,label,row}; return `<div class="rep" id="rep-${id}" style="display:grid;gap:10px"></div><button class="btn add" type="button" data-add="${id}">${btn}</button>`; }
+function drawRep(id,n){
+  const r=REP[id], box=document.getElementById("rep-"+id);
+  box.innerHTML=Array.from({length:n},(_,i)=>`<div class="card" data-i="${i}"><div class="cardhead"><span>${r.label(i)}</span>${i>=r.min?`<button class="remove" type="button" data-remove="${id}" data-i="${i}">Remove</button>`:""}</div>${r.row(id+"."+i,i)}</div>`).join("");
+}
+
+/* ---------- the parts of the workbook ---------- */
+const PARTS=[
+ {id:"me", c:"--center", title:"About me and my baby", html:()=>`
+   <p class="intro">The basics, so anyone reading this knows who it is for.</p>
+   <div class="grid">${txt("me.name","My name")}${txt("me.baby","My baby's name","Or the names we are thinking about")}${txt("me.due","Due date","","date")}${txt("me.born","Birth date","Fill in after the birth","date")}${txt("me.place","Where I plan to give birth")}${txt("me.provider","My midwife or doctor")}${txt("me.babydoc","My baby's care provider")}</div>
+   ${txt("me.words","Three words for how I want these weeks to feel","For example: slow, warm, held")}`},
+
+ {id:"circle", c:"--partner", title:"My circle of support", html:()=>`
+   <p class="intro">Ray Castellino taught that a mother and baby each need at least two layers of support, and that everyone who gives support needs support too. Your partner, or your closest person, is the first layer. Around them are at least three main supporters, and around them, the wider circle: family, friends, a doula, your care team. Fill in as many as you like.</p>
+   <figure class="circlefig"><svg viewBox="-112 -112 224 224" role="img" aria-label="My circle of support">
+     <g stroke="var(--surface)" stroke-width="5"><circle r="110" fill="var(--circle)"/><circle r="81" fill="var(--partner)"/><circle r="53" fill="var(--mother)"/><circle r="26" fill="var(--baby)"/></g>
+     <text y="-95.5" id="fig-circle" style="fill:var(--on-dark)">My circle</text><text y="-67" id="fig-partner">Partner</text><text y="-39.5" id="fig-me">Me</text><text y="1" id="fig-baby">Baby</text></svg>
+     <figcaption>The circle fills in with the names you write here. Each layer holds the one inside it, so no one carries it all alone.</figcaption></figure>
+   <h3>My partner, or my number one support</h3>
+   <div class="card" style="--c:var(--partner)"><div class="grid">${txt("p.name","Name")}${txt("p.rel","Who they are to me","Partner, husband, wife, mother, friend")}${txt("p.phone","Phone","","tel")}${txt("p.when","When they will be with me","For example: the first two weeks at home")}</div></div>
+   <h3>My main supporters</h3>
+   <p class="hint">At least three people who can be counted on in the first weeks.</p>
+   ${rep("main",3,i=>"Supporter "+(i+1),k=>`<div class="grid">${txt(k+".name","Name")}${txt(k+".rel","Who they are to me")}${txt(k+".phone","Phone","","tel")}${txt(k+".when","When they are free")}</div>${txt(k+".help","How they will help","For example: meals on Mondays, holding the baby while I nap")}`)}
+   <h3>The wider circle</h3>
+   <p class="hint">Family, friends, a birth or postpartum doula, a lactation consultant, neighbors, a faith or parent community, a therapist.</p>
+   ${rep("wider",2,i=>"Layer "+(i+1),k=>`<div class="grid">${txt(k+".who","Who","Family, doula, neighbors")}${txt(k+".names","Names")}${txt(k+".contact","How to reach them")}</div>${txt(k+".role","Their part in my plan")}`)}`},
+
+ {id:"partner", c:"--partner", title:"For my partner", html:()=>`
+   <p class="intro">You are my first layer. Bergman describes the partner's role simply: the mother is the baby's habitat, and the partner protects and supports them both, so they can stay together. Here is what would help me most.</p>
+   <h3>What I would love from you</h3>
+   ${checks("p.req",[["Keep the baby with me, skin to skin, as much as we can","On my chest her temperature, heart, and breathing steady."],["Guard the door: visitors, calls, and announcements wait until I am ready",""],["Bring water and a snack every time I feed",""],["Take night shifts for changing, settling, and bringing the baby to me",""],["Hold the baby skin to skin on your own chest when I need to rest or shower",""],["Listen to my birth story without fixing or correcting it",""],["Watch my mood with me, and help me reach support if I need it",""],["Tell me what I am doing well, often",""],["Take care of yourself too, and tell me when you need support",""]])}
+   ${area("p.hour","In the first hour, I would love you to…","Speak to the baby first, stay by my head, keep the room dim and quiet")}
+   ${area("p.days","In the first days, please…")}
+   ${area("p.nights","At night, I would like…")}
+   ${area("p.feeds","When I am feeding, please…")}
+   ${area("p.hard","When I am overwhelmed or in tears, what helps most is…")}
+   ${area("p.protect","Please protect me from…","Advice I did not ask for, long visits, phone calls")}
+   ${area("p.words","Words I would love to hear from you")}
+   ${area("p.share","How I would like us to share caring for the baby")}
+   ${area("p.you","What you need, and who supports you","Partners need holding too")}`},
+
+ {id:"requests", c:"--circle", title:"Requests for my circle", html:()=>`
+   <p class="intro">A card for each person or group, so everyone knows what would help, and what would not, right now. Kind, clear requests make it easier for people to say yes.</p>
+   ${rep("req",3,i=>"Request "+(i+1),k=>`${txt(k+".to","To","For example: my mother, my sister, my doula, friends from work")}${area(k+".yes","What I would love from you")}${area(k+".no","What would not help right now","Gentle boundaries, such as unannounced visits")}`)}`},
+
+ {id:"hour", c:"--baby", title:"My first hour plan", html:()=>`
+   <p class="intro">Placed skin to skin and left undisturbed, a newborn moves through nine instinctive stages, from her first cry to finding the breast and falling into her first deep sleep (Widström). Check what you would like, and share this page with your care team before the birth.</p>
+   ${checks("hour",[["My baby placed straight on my bare chest, dried there, with a warm blanket over us both",""],["Unbroken skin to skin for at least the first hour, until after the first feed",""],["Let my baby find the breast herself, with no one placing her on the nipple","The breast crawl can take most of an hour; pauses are a stage of their own."],["Weighing, measuring, the bath, and routine procedures wait until after the first feed",""],["Newborn checks done on my chest, where possible",""],["Waiting before the cord is clamped",""],["Dim lights, quiet voices, and a calm room",""],["Visitors, calls, and announcements wait",""],["If I am drowsy or need care, my partner holds the baby skin to skin, or someone stays awake and watches her",""],["If I have a cesarean: skin to skin in the operating room if possible, or on my partner's chest until I am ready",""],["If my baby needs special care: my partner goes with her and keeps a hand and a voice with her",""],["Someone tells my baby what is happening, in a calm voice",""]])}
+   ${area("hour.words","The first words I would like my baby to hear","You are out now. You made it. We are here.")}
+   ${area("hour.notes","Notes for my care team")}`},
+
+ {id:"feeding", c:"--mother", title:"My feeding plan", html:()=>`
+   <p class="intro">Feeding is food and relationship at once. Whatever path you choose, every feed can be close and calm, and skilled help early makes a real difference.</p>
+   <h3>How I plan to feed</h3>
+   ${radio("feed.how",["Breastfeeding","Pumping","Breast and bottle","Formula","Not sure yet"])}
+   ${checks("feed.want",[["Skin to skin during feeds",""],["Feed on cue, day and night, rather than by the clock","Rooting, hands to mouth, and stirring come before crying."],["A visit from a lactation consultant (IBCLC) in the first days",""],["Help with latch and positioning before we leave the hospital or birth center",""],["A calm minute before each feed: slow breaths, warmth, or music","Calm helps the milk let down."],["A breastfeeding group or La Leche League meeting",""],["Ask me before offering the baby a bottle or a pacifier",""],["If bottles are used: hold her close, let her set the pace, and switch sides",""]])}
+   <div class="grid">${txt("feed.ibclc","My lactation contact")}${txt("feed.ibclcphone","Their phone","","tel")}</div>
+   ${area("feed.help","What I would like from others while I am feeding")}
+   ${area("feed.know","What I would like everyone to know about how I feed my baby","Please support me, whatever I choose")}`},
+
+ {id:"home", c:"--circle", title:"Ways to help me", html:()=>`
+   <p class="intro">In these weeks, the mother's work is to rest, heal, feed, and be with her baby. Everything else can be shared. Check anything you would like help with, then choose who you would like to ask: anyone you have named in your circle, or anyone who can help. Each person's tasks are gathered for them in the next part. The baby stays close to her mother; helpers take care of everything around them.</p>
+   <div class="cats">${CATS.map(([k,name,color,items])=>`<div class="cat" style="--c:var(${color})"><h3><i></i>${name}</h3>${tasks("home."+k,items)}${rep("x"+k,0,i=>"My own task",kk=>`<div class="grid">${txt(kk+".task","Task")}<label class="f">Who<select class="who" name="${kk}.who"></select></label></div>`,"Add my own")}</div>`).join("")}</div>
+   ${area("home.food","Food notes for anyone cooking","Favorite meals, allergies, foods I would rather avoid, warm comfort foods")}`},
+
+ {id:"assign", c:"--partner", title:"Who is doing what", html:()=>`
+   <p class="intro">Each person in your circle, with the help you have asked of them. When printed, each person gets a page of their own, ready to hand over. Tasks marked "Anyone who can help" are gathered at the end, so a visitor or helper can simply pick one.</p>
+   <div id="assign-list" class="assign"></div>`},
+
+ {id:"rest", c:"--edu", title:"Rest, recovery, and visitors", html:()=>`
+   <p class="intro">Kimberly Ann Johnson names five needs of every new mother: an extended rest, nourishing food, loving touch, the company of wise women, and time in nature. Many cultures keep a lying-in of about forty days. Write what each means for you.</p>
+   <label class="f">How long I would like to rest and be cared for<select name="rest.long"><option value="">Choose</option><option>Two weeks</option><option>Four weeks</option><option>Six weeks</option><option>Forty days</option><option>As long as I need</option></select></label>
+   ${area("rest.rest","Extended rest, for me, means…","Staying in bed or on the couch with the baby, a nap every afternoon")}
+   ${area("rest.food","Nourishing food, for me, means…")}
+   ${area("rest.touch","Loving touch, for me, means…","A foot rub, a hand on my back, being held")}
+   ${area("rest.wise","My wise women: people who have walked this road, who I would like near me")}
+   ${area("rest.nature","Time in nature, for me, means…","A few minutes in the sun, a short walk, the window open")}
+   <h3>Visitors</h3>
+   ${checks("visit",[["Please text before you come",""],["Please keep visits short, about an hour or less",""],["Please wash your hands when you arrive",""],["Please stay home if you are unwell",""],["Please help with a task rather than hold the baby",""],["Please do not kiss the baby's face",""]])}
+   ${area("visit.who","Who is welcome in the first days, and when")}
+   ${area("visit.news","How and when we will share the news, and who will share it")}`},
+
+ {id:"watch", c:"--best", title:"Watching over me", html:()=>`
+   <p class="intro">The baby blues are common in the first two weeks and usually pass. When sadness, worry, frightening thoughts, rage, or numbness last longer or deepen, it may be postpartum depression or anxiety, which are common, treatable, and not her fault. Partners can feel this too. These notes help the people closest to me notice early, and know what to do.</p>
+   ${area("watch.signs","Signs that I am struggling","For me this might look like…")}
+   ${area("watch.helps","What helps me come back","Moving, a walk outside, being held, talking it through, someone else taking the baby for an hour")}
+   ${area("watch.call","Who I would like you to call if you are worried about me")}
+   <div class="urgent"><b>When to call right away</b>
+     <p><b>For the mother:</b> heavy bleeding (soaking a pad in an hour or less, or large clots), a fever, a severe headache or changes in vision, chest pain or trouble breathing, a swollen, painful leg, or thoughts of harming herself or the baby.</p>
+     <p><b>For the baby:</b> a fever (under three months, 100.4°F or 38°C or higher), trouble breathing or a bluish color, being very hard to wake, refusing feeds, far fewer wet diapers, or yellow skin that is spreading or deepening.</p>
+     <p>Call her care provider or emergency services. In the United States, the National Maternal Mental Health Hotline is free and open all day and night: call or text 1-833-TLC-MAMA (1-833-852-6262). Postpartum Support International: postpartum.net.</p></div>`},
+
+ {id:"story", c:"--mother", title:"My birth story", html:()=>`
+   <p class="intro">Telling the story of a birth, and being heard, is part of healing (Kendall-Tackett). Write as much or as little as you like, whenever you are ready, even months later. There is no right way for a birth to have gone.</p>
+   <p class="private"><label style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="story.print" id="storyprint" style="width:18px;height:18px;accent-color:var(--best)"> Include my birth story when I print or share this workbook</label></p>
+   ${area("story.began","How it began")}
+   ${area("story.born","How my baby was born")}
+   ${area("story.with","Who was with me, and what they did")}
+   ${area("story.hard","What was hard")}
+   ${area("story.proud","What I am proud of")}
+   ${area("story.know","What I would like my circle to know about my birth","What happened, and how it might still be affecting me")}
+   ${area("story.baby","What I would like to tell my baby about her birth","That was a long journey, and you made it. I am here now.")}
+   ${area("story.partner","My partner's story: what it was like for me")}`},
+
+ {id:"learn", c:"--edu", title:"For my supporters: why this matters", html:()=>`
+   <p class="intro">For anyone helping in these weeks, including anyone who may care for the baby. These are the key ideas behind the requests in this workbook, so you know why closeness and quiet matter so much right now. There is more in <a href="../">The Fourth Trimester Mandala</a>.</p>
+   <div class="learn">
+   <article style="--c:var(--baby)"><h3>Her chest is the baby's habitat</h3><p>A newborn's brain is only about a quarter developed at birth, and to her there are two places: mother, or other (Bergman). On her mother's bare chest, her heart rate and breathing settle within minutes, and her mother's chest warms by up to about 2°C to warm her or cools by about 1°C to cool her. Only the mother's chest adjusts this way. Apart, the baby's body moves into defense: protest, then despair, with stress hormones high. This is why we ask you to keep them together, and to help with everything else.</p></article>
+   <article style="--c:var(--baby)"><h3>The first hour</h3><p>Left skin to skin, a newborn moves through nine stages on her own: her birth cry, relaxation, awakening, rooting, rest, the crawl to the breast, licking and familiarizing, latching, and a deep sleep (Widström). She knows the way. Please wait, keep the room quiet, and let routines and visitors wait.</p></article>
+   <article style="--c:var(--mother)"><h3>Milk, and why calm matters</h3><p>Human milk is light, the milk of a baby meant to be carried and fed often, about every two hours or whenever she asks (Bergman). Stress hormones can slow the milk; calm, warmth, and support help it flow (Jayamala; Feher). Protecting the mother's rest and peace is protecting the baby's food.</p></article>
+   <article style="--c:var(--edu)"><h3>Hormones and co-regulation</h3><p>Oxytocin, the hormone of love and calm, flows with skin to skin, touch, and feeding, and it is held back by fear, pain, cold, and feeling watched or rushed (Uvnäs Moberg; Buckley). A newborn borrows her mother's nervous system to settle, and a mother settles more easily when she is held. Your calm counts: you steady the mother, and she steadies the baby. No one is meant to be the calm one alone.</p></article>
+   <article style="--c:var(--partner)"><h3>Her language</h3><p>Crying is a baby's first spoken language, and around it is a language of the body. Feeding cues come early: stirring, rooting, hands to mouth. Looking away, yawning, hiccups, or splayed fingers mean she needs a pause. Some crying is about needs now, hunger, cold, tiredness; some may be about her birth. Meet her needs first, then hold her, stay calm, and say what you see (Appleton).</p></article>
+   <article style="--c:var(--circle)"><h3>How to support</h3><ul><li>Do the tasks so the mother can hold the baby, rather than holding the baby so the mother can do the tasks.</li><li>Keep visits short, quiet, and helpful.</li><li>Listen to her birth story without correcting or comparing.</li><li>Tell her what she is doing well.</li><li>Watch for signs she is struggling, and help her reach care early.</li></ul></article>
+   <article style="--c:var(--best)"><h3>If you are caring for the baby</h3><ul><li>Hold her close, skin to skin on your bare chest if you can, with her face visible and her nose and mouth clear.</li><li>Tell her who you are and what you are doing, in a calm, low voice.</li><li>Watch her cues, and bring her to her mother at the first signs of hunger.</li><li>If you give a bottle, do it as her mother has asked: hold her close and upright, let her set the pace, and switch sides.</li><li>For sleep: on her back, on a firm, flat surface of her own, with no pillows, blankets, or toys, in the room where her parents sleep.</li><li>Return her to her mother as soon as she can be together with her, and let her mother know how the time apart went.</li></ul></article>
+   </div>`},
+
+ {id:"contacts", c:"--center", title:"Important contacts", html:()=>`
+   <div class="grid">${[["c.provider","My midwife or doctor"],["c.babydoc","My baby's care provider"],["c.hosp","Hospital or birth center"],["c.ibclc","Lactation consultant"],["c.doula","Birth doula"],["c.ppdoula","Postpartum doula"],["c.therapist","Therapist or counselor"],["c.other","Someone I trust"]].map(([k,l])=>txt(k,l,"Name and phone")).join("")}</div>
+   <p class="hint">In the United States: emergency 911 · crisis line 988 · National Maternal Mental Health Hotline 1-833-TLC-MAMA · Postpartum Support International postpartum.net</p>`}
+];
+// the help a mother can choose from, gathered by kind, with the mandala's ring colors.
+// The aim of every item: to free her to rest, heal, feed, and be with her baby (Johnson; Bergman).
+const CATS=[["baby", "Care for the baby, close by", "--baby", ["Change diapers, then bring the baby back to me", "Burp and settle the baby after feeds", "Hold the baby skin to skin while I sleep or shower", "Carry the baby in a wrap or carrier for a short walk", "Bathe the baby, when we are ready", "Restock diapers, wipes, and clothes by the bed and the changing area", "Keep a simple log of feeds and diapers in the first week", "Learn the baby's early hunger cues, so you can bring her to me before she cries", "Drive us to the baby's checkups"]], ["feed", "Feeding", "--mother", ["Set up a feeding nest: pillows, water, snacks, a phone charger, a burp cloth", "Bring me water and a snack at every feed", "Wash and dry pump parts and bottles", "Bring the baby to me for night feeds", "Help me reach a lactation consultant or a breastfeeding group", "Prepare bottles, if we use them, the way I have asked"]], ["meals", "Meals and nutrition", "--center", ["Organize a meal train", "Fill the freezer with meals before the birth", "Cook warm, nourishing meals: soups, stews, broths", "Make breakfast I can eat with one hand", "Keep a snack basket stocked: nuts, fruit, cheese, crackers", "Keep my water bottle filled beside me", "Plan the week's meals with my food notes in mind", "Wash up after meals"]], ["shop", "Groceries", "--partner", ["Make the grocery list with me", "Do the weekly shop, or order a delivery", "Pick up top-ups: milk, bread, fruit", "Put the groceries away", "Pick up pads, nipple cream, and other recovery supplies"]], ["house", "Household and cleaning", "--partner", ["Tidy the main rooms", "Clean the kitchen", "Clean the bathroom", "Vacuum or sweep", "Change the bed sheets", "Take out the trash and recycling", "Water the plants", "Keep the house warm, and open a window for fresh air"]], ["laundry", "Laundry", "--circle", ["Wash, dry, and fold laundry", "Wash the baby's clothes and blankets", "Put clean clothes away", "Keep clean towels and burp cloths stocked"]], ["errands", "Errands", "--circle", ["Pharmacy pickups", "Post office, packages, and returns", "Bills and banking", "Fuel the car and check the car seat", "Pick up anything else I need"]], ["kids", "Older children", "--mother", ["School or daycare drop-offs and pick-ups", "Playdates and outings", "Meals and snacks for them", "Help with homework", "Help at bedtime", "Special one-on-one time with each child"]], ["pets", "Pets", "--partner", ["Feeding", "Walks", "Litter or cleaning", "Vet visits"]], ["body", "Care for my body", "--baby", ["Hold the baby while I shower or bathe", "Run a warm bath or a sitz bath", "Restock pads, ice packs, and comfort supplies", "Help me get up and to the bathroom in the first days", "Remind me to take any medication or vitamins", "A foot rub, a massage, or a hand on my back", "Help with my hair", "Drive me to my postpartum checkup", "Help me book a pelvic floor physiotherapist, if I need one"]], ["sleep", "Rest and sleep", "--edu", ["Protect one long stretch of sleep for me each day", "Take a night shift", "Keep the bedroom dark and quiet", "Hold the baby skin to skin so I can nap", "Turn visitors away kindly when I am resting"]], ["heart", "Emotional care and connection", "--edu", ["A daily check-in: how are you, really?", "Listen to my birth story without fixing it", "Sit with me on hard nights", "Remind me that I am doing well", "Watch for signs I am struggling, and help me reach support", "Bring me outside for fresh air or sun", "Keep me company, without needing me to host"]], ["visits", "Visitors and messages", "--best", ["Share the news and updates for us", "Answer messages and calls", "Schedule visits and keep them short", "Remind visitors to wash their hands, and to stay home if unwell", "Keep track of gifts and thank-you notes"]], ["admin", "Paperwork", "--best", ["Register the birth and order the birth certificate", "Add the baby to our health insurance", "Parental leave and work forms", "Keep a calendar of appointments and bills"]]];
+
+/* ---------- draw ---------- */
+document.getElementById("toc").innerHTML=PARTS.map(p=>`<a class="chip" href="#${p.id}" style="--c:var(${p.c})"><i></i>${p.title}</a>`).join("");
+form.innerHTML=PARTS.map((p,n)=>`<section class="part" id="${p.id}" style="--c:var(${p.c})"><h2><span class="num">${String(n+1).padStart(2,"0")}</span>${p.title}</h2>${p.html()}</section>`).join("");
+
+/* ---------- saving, on this device only ---------- */
+const KEY="ftw-plan";
+let data={v:{}, rep:{}};
+try{ const saved=JSON.parse(localStorage.getItem(KEY)||"null"); if(saved&&saved.v) data=saved; }catch(e){}
+function counts(){ Object.keys(REP).forEach(id=>{ const n=Math.max(REP[id].min, data.rep[id]||0); data.rep[id]=n; drawRep(id,n); }); }
+function fill(){
+  form.querySelectorAll("input,textarea,select").forEach(el=>{
+    const v=data.v[el.name]; if(v==null) return;
+    if(el.type==="checkbox") el.checked=!!v; else if(el.type==="radio") el.checked=(el.value===v); else el.value=v;
+  });
+  whoOptions(); grow(); figure(); storyToggle(); summary();
+}
+let timer=null;
+function save(){
+  try{ localStorage.setItem(KEY,JSON.stringify(data)); const s=document.getElementById("saved"); s.textContent="Saved on this device"; clearTimeout(timer); timer=setTimeout(()=>s.textContent="",1800); }catch(e){}
+}
+form.addEventListener("input",e=>{
+  const el=e.target; if(!el.name) return;
+  if(el.type==="checkbox") data.v[el.name]=el.checked; else if(el.type==="radio"){ if(el.checked) data.v[el.name]=el.value; } else data.v[el.name]=el.value;
+  if(el.tagName==="TEXTAREA") growOne(el);
+  if(el.name.startsWith("me.")||el.name==="p.name") figure();
+  if(/^(p|main|wider)\./.test(el.name)) whoOptions();
+  // choosing someone for a task also marks it as needed
+  if(el.classList.contains("who") && el.value && el.name.startsWith("home.")){ const box=form.querySelector(`[name="${el.name.replace(/\.who$/,"")}"]`); if(box&&!box.checked){ box.checked=true; data.v[box.name]=true; } }
+  summary();
+  if(el.name==="story.print") storyToggle();
+  save();
+});
+form.addEventListener("click",e=>{
+  const add=e.target.closest("[data-add]"), rm=e.target.closest("[data-remove]");
+  if(add){ const id=add.dataset.add; data.rep[id]=(data.rep[id]||REP[id].min)+1; drawRep(id,data.rep[id]); fill(); save(); }
+  if(rm){ const id=rm.dataset.remove, i=+rm.dataset.i, n=data.rep[id];
+    // shift the later cards up into the removed one's place, then drop the last
+    const of=j=>Object.keys(data.v).filter(k=>k.startsWith(`${id}.${j}.`));
+    for(let j=i;j<n-1;j++){ of(j).forEach(k=>delete data.v[k]); of(j+1).forEach(k=>{ data.v[k.replace(`${id}.${j+1}.`,`${id}.${j}.`)]=data.v[k]; }); }
+    of(n-1).forEach(k=>delete data.v[k]);
+    if(id==="main"||id==="wider") Object.keys(data.v).filter(k=>k.endsWith(".who")).forEach(k=>{ const m=String(data.v[k]).match(new RegExp(`^${id}\\.(\\d+)$`)); if(!m) return; const j=+m[1]; if(j===i) data.v[k]="anyone"; else if(j>i) data.v[k]=`${id}.${j-1}`; });
+    data.rep[id]=n-1; drawRep(id,n-1); fill(); save(); }
+});
+
+/* textareas grow to fit what is written, so nothing is hidden on screen or in print */
+function growOne(t){ t.style.height="auto"; t.style.height=Math.max(84,t.scrollHeight+2)+"px"; }
+function grow(){ form.querySelectorAll("textarea").forEach(growOne); }
+
+/* ---------- the people she names, and the help assigned to each ---------- */
+function people(){
+  const v=data.v, out=[];
+  out.push({id:"p", name:v["p.name"]||"My partner", rel:v["p.rel"]||"My first layer of support", phone:v["p.phone"]||"", c:"--partner"});
+  for(let i=0;i<(data.rep.main||3);i++) out.push({id:"main."+i, name:v[`main.${i}.name`]||`Supporter ${i+1}`, rel:v[`main.${i}.rel`]||"", phone:v[`main.${i}.phone`]||"", c:"--circle"});
+  for(let i=0;i<(data.rep.wider||2);i++) out.push({id:"wider."+i, name:v[`wider.${i}.names`]||v[`wider.${i}.who`]||`Layer ${i+1}`, rel:v[`wider.${i}.who`]||"", phone:v[`wider.${i}.contact`]||"", c:"--edu"});
+  return out;
+}
+function whoOptions(){
+  const ps=people();
+  form.querySelectorAll("select.who").forEach(sel=>{
+    const cur=data.v[sel.name]||"";
+    sel.innerHTML=`<option value="">Who?</option><option value="anyone">Anyone who can help</option>`+ps.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join("");
+    // an older free-text answer stays as it was written
+    if(cur && ![...sel.options].some(o=>o.value===cur)) sel.insertAdjacentHTML("beforeend",`<option value="${esc(cur)}">${esc(cur)}</option>`);
+    sel.value=cur;
+  });
+}
+function assigned(){
+  const list=[], v=data.v;
+  CATS.forEach(([k,name,,items])=>{
+    items.forEach((t,i)=>{ const who=v[`home.${k}.${i}.who`]; if(who||v[`home.${k}.${i}`]) list.push({cat:name, task:t, who:who||""}); });
+    for(let i=0;i<(data.rep["x"+k]||0);i++){ const t=v[`x${k}.${i}.task`]; if(t) list.push({cat:name, task:t, who:v[`x${k}.${i}.who`]||""}); }
+  });
+  return list;
+}
+function summary(){
+  const box=document.getElementById("assign-list"); if(!box) return;
+  const ps=people(), list=assigned(), v=data.v;
+  const byCat=items=>{ const g={}; items.forEach(x=>(g[x.cat]=g[x.cat]||[]).push(x.task));
+    return Object.keys(g).map(c=>`<div class="cat-l">${esc(c)}</div><ul>${g[c].map(t=>`<li>${esc(t)}</li>`).join("")}</ul>`).join(""); };
+  const reqFor=p=>{ if(p.id==="p") return ""; const first=(p.name||"").trim().split(/\s+/)[0].toLowerCase(); if(!first) return "";
+    const out=[]; for(let i=0;i<(data.rep.req||3);i++){ const to=(v[`req.${i}.to`]||"").toLowerCase(); if(to && to.includes(first) && v[`req.${i}.yes`]) out.push(v[`req.${i}.yes`]); }
+    return out.length?`<div class="cat-l">What I would love from you</div>${out.map(r=>`<p class="req">${esc(r)}</p>`).join("")}`:""; };
+  const cards=ps.map(p=>{ const mine=list.filter(x=>x.who===p.id), req=reqFor(p);
+    if(!mine.length && !req) return "";
+    return `<div class="person" style="--c:var(${p.c})"><h3>${esc(p.name)}${p.rel?`<span>${esc(p.rel)}</span>`:""}${p.phone?`<span>${esc(p.phone)}</span>`:""}</h3>${mine.length?byCat(mine):""}${req}${p.id==="p"?`<p class="empty">Your requests from me are in "For my partner".</p>`:""}</div>`; }).filter(Boolean);
+  const open=list.filter(x=>x.who==="anyone"||(!x.who));
+  const openCard=open.length?`<div class="person" style="--c:var(--baby)"><h3>Anyone who can help<span>Pick any of these, and tell me which</span></h3>${byCat(open)}</div>`:"";
+  // free-text names from an older version
+  const others=list.filter(x=>x.who && x.who!=="anyone" && !ps.some(p=>p.id===x.who));
+  const otherCard=others.length?`<div class="person" style="--c:var(--mother)"><h3>Others</h3><ul>${others.map(x=>`<li>${esc(x.task)}: ${esc(x.who)}</li>`).join("")}</ul></div>`:"";
+  box.innerHTML = (cards.join("")+openCard+otherCard) || `<p class="empty">As you check tasks in "Ways to help me" and choose who to ask, each person's list appears here.</p>`;
+}
+
+/* the circle figure carries the names she writes */
+function figure(){
+  const v=data.v, set=(id,t,f)=>{ const e=document.getElementById(id); if(e) e.textContent=(t||"").trim().split(/\s+/)[0]||f; };
+  set("fig-baby",v["me.baby"],"Baby"); set("fig-me",v["me.name"],"Me"); set("fig-partner",v["p.name"],"Partner");
+}
+/* the birth story prints only when she chooses */
+function storyToggle(){ document.getElementById("story").classList.toggle("skip", !data.v["story.print"]); }
+
+/* ---------- printing ---------- */
+document.getElementById("print").addEventListener("click",()=>{ grow(); markBlanks(); window.print(); });
+document.getElementById("printblank").addEventListener("click",()=>{
+  // a blank copy for writing by hand: clear the page for a moment, print, then put everything back
+  const keep=JSON.parse(JSON.stringify(data));
+  data={v:{"story.print":true},rep:{}}; counts();
+  form.querySelectorAll("input,textarea,select").forEach(el=>{ if(el.type==="checkbox"||el.type==="radio") el.checked=false; else el.value=""; });
+  form.querySelectorAll("textarea").forEach(t=>t.style.height="96px");
+  whoOptions(); summary(); figure(); markBlanks(); document.getElementById("story").classList.remove("skip");
+  const restore=()=>{ data=keep; counts(); fill(); window.removeEventListener("afterprint",restore); };
+  window.addEventListener("afterprint",restore);
+  window.print();
+  setTimeout(()=>{ if(data!==keep) restore(); },1500);
+});
+document.getElementById("clear").addEventListener("click",()=>{
+  if(!confirm("Clear everything you have written in this workbook on this device? This cannot be undone.")) return;
+  data={v:{},rep:{}}; try{ localStorage.removeItem(KEY); }catch(e){}
+  counts(); form.querySelectorAll("input,textarea,select").forEach(el=>{ if(el.type==="checkbox"||el.type==="radio") el.checked=false; else el.value=""; }); fill();
+});
+// empty dropdowns and dates print as clean lines to write on
+function markBlanks(){ form.querySelectorAll("select,input[type=date]").forEach(el=>el.classList.toggle("blankfield", !el.value)); }
+window.addEventListener("beforeprint",()=>{ grow(); markBlanks(); });
+
+/* light and dark, shared with the mandala */
+const root=document.documentElement, tbtn=document.getElementById("themebtn"), sysDark=matchMedia("(prefers-color-scheme: dark)");
+const isDark=()=>{ const t=root.getAttribute("data-theme"); return t ? t==="dark" : sysDark.matches; };
+function syncTheme(){ const d=isDark(); root.classList.toggle("is-dark",d); tbtn.setAttribute("aria-label", d?"Switch to light mode":"Switch to dark mode"); }
+tbtn.addEventListener("click",()=>{ const next=isDark()?"light":"dark"; root.setAttribute("data-theme",next); try{ localStorage.setItem("ft-theme",next); }catch(e){} syncTheme(); });
+sysDark.addEventListener("change",syncTheme); syncTheme();
+
+counts(); fill();
+})();
+</script>
+</body></html>
