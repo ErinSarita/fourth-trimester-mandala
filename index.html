@@ -115,7 +115,16 @@ svg.dimming .cell.off{opacity:.28}
 
 /* the reading panel */
 .panel{display:grid;gap:18px;min-width:0}
+.nav{display:grid;gap:14px}
+.navgroup{display:grid;gap:7px}
+.navlbl{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
 .tabs{display:flex;flex-wrap:wrap;gap:6px}
+.jump{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:2px 0 0 4px;padding-left:12px;border-left:2px solid var(--line)}
+.jump span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-right:2px}
+.sub{font:inherit;font-size:13px;font-weight:600;padding:4px 11px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.sub:hover{background:var(--surface)}
+.sub[aria-current="true"]{background:color-mix(in srgb, var(--mother) 55%, var(--surface));border-color:var(--mother)}
+.sub:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .tab{font:inherit;font-size:14px;font-weight:600;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
 .tab[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 #panel{display:grid;gap:18px}
@@ -211,7 +220,7 @@ try{ var t=localStorage.getItem("ft-theme"); if(t==="light"||t==="dark") documen
     </div>
 
     <div class="panel">
-      <div class="tabs" role="tablist" id="tabs"></div>
+      <nav class="nav" id="nav" aria-label="Sections of the mandala"></nav>
       <div id="panel" aria-live="polite"></div>
     </div>
   </div>
@@ -1059,12 +1068,12 @@ function setStatus(){
 }
 
 /* ---------- The reading panel ---------- */
-const panel=document.getElementById("panel"), tabs=document.getElementById("tabs");
+const panel=document.getElementById("panel"), nav=document.getElementById("nav");
 let sel={q:null,ring:null,idx:null};
 function sw(v){ return `<span class="sw" style="background:var(${v})"></span>`; }
 function ul(items){ return "<ul>"+items.map(i=>`<li>${i}</li>`).join("")+"</ul>"; }
 
-const CENTER_HTML=`<div class="center-msg">
+const CENTER_HTML=`<div class="center-msg" id="intro-center">
     <div class="eyebrow">Begin here</div>
     <h2>The dyad at the center</h2>
     <p>After birth, a mother and her baby are not so much two separate people as one unit, the gestation continuing outside the womb. In medicine the pair is called a dyad (Bergman). What the placenta and cord once did, her chest, her warmth, and her milk now do, and the baby's own instincts help lead the way.</p>
@@ -1079,7 +1088,7 @@ function showCenter(user){
 }
 function showIntro(){
   sel={q:null,ring:null,idx:null}; applySel(); markTabs();
-  panel.innerHTML=CENTER_HTML+`<div class="intro">
+  panel.innerHTML=CENTER_HTML+`<div class="intro" id="intro-read">
     <h2>Reading from the center out</h2>
     <p>Begin at the center with the dyad and move outward. Each ring is a layer within the same moment, so reading straight out from any slice shows how the baby, the mother, the partner, the circle, and the best practices meet then. The rings are also layers of support: each one holds the one inside it. There is no right pace for reading it. Take what is useful now, and return to the rest when it fits.</p>
     <ul class="legend">
@@ -1120,12 +1129,12 @@ function showLanguage(user){
   sel={q:null,ring:null,idx:null,page:"lang"}; applySel(); markTabs();
   panel.innerHTML=`<div class="phasehead"><h2>Her language</h2><div class="meta">States · cues · crying</div>
       <p>Long before words, a baby is talking with us. Crying is her first spoken language, her voice, and around it is a whole language of the body: her eyes, her hands, her color, her breath, the way she turns toward you or away. Learning it takes time, and no parent reads every cue. Watching with curiosity, and answering, is how a family comes to understand each other.</p></div>
-    <article class="scard lang"><h3>Her six states</h3>
+    <article class="scard lang" id="lang-states"><h3>Her six states</h3>
       <p class="hint">A newborn moves through six states of consciousness, each with its own look and its own needs (Klaus; Brazelton). Knowing which one she is in helps you know what she can take in.</p>
       ${STATES.map(([n,look,help])=>`<div class="state"><b class="nm">${n}</b><p>${look}</p><p class="help">${help}</p></div>`).join("")}</article>
-    <article class="scard lang"><h3>The cues of her body</h3>
+    <article class="scard lang" id="lang-cues"><h3>The cues of her body</h3>
       ${CUES.map(([n,t])=>`<div class="state"><b class="nm">${n}</b><p>${t}</p></div>`).join("")}</article>
-    <article class="scard lang"><h3>Crying, her first spoken language</h3>${ul(CRYING)}
+    <article class="scard lang" id="lang-crying"><h3>Crying, her first spoken language</h3>${ul(CRYING)}
       <p class="src">Klaus; Brazelton &amp; Nugent; Appleton (2017); Dunstan; Bergman</p></article>
     <article class="scard lang" id="deeper"><h3>Going deeper: birth in the body</h3>
       <p class="hint">For parents, educators, and practitioners who want to understand how birth can be held in a baby's body, and how it is gently met. Readings marked Module 10 come from the APPPAH course.</p>
@@ -1137,12 +1146,12 @@ function showCalm(user){
   sel={q:null,ring:null,idx:null,page:"calm"}; applySel(); markTabs();
   panel.innerHTML=`<div class="phasehead"><h2>Bonding hormones and co-regulation</h2><div class="meta">Hormones · the nervous system · ways back</div>
       <p>The hormones that bond a mother and baby flow most easily when she feels safe, warm, and supported, and they are held back by fear, pain, and stress. Her nervous system and her baby's are in constant conversation: when she settles, her baby can settle, and her baby's warmth helps settle her. None of this asks a mother to be calm all the time. Regulation is not a state she has to hold. It is a way back she can find, again and again, with help.</p></div>
-    <article class="scard lang"><h3>The hormones of bonding</h3>
+    <article class="scard lang" id="calm-hormones"><h3>The hormones of bonding</h3>
       ${HORMONES.map(([n,role,what,block])=>`<div class="state"><b class="nm">${n}</b><p><i>${role}</i> ${what}</p><p class="help"><b>What gets in the way:</b> ${block}</p></div>`).join("")}
       <p class="hint">Partners' bodies change too: in fathers who are close and hands-on, oxytocin and prolactin rise and testosterone falls, readying them for care (Gordon et al., 2010; Gettler et al., 2011).</p></article>
-    <article class="scard lang"><h3>Regulation and co-regulation</h3>${ul(COREG)}
+    <article class="scard lang" id="calm-coreg"><h3>Regulation and co-regulation</h3>${ul(COREG)}
       <p class="hint">The <a class="go" href="https://erinsarita.github.io/window-mandala/">Window Mandala</a> maps these states of the nervous system, and the ways back to the center, in depth.</p></article>
-    <article class="scard lang"><h3>Ways back to a receptive state</h3>
+    <article class="scard lang" id="calm-ways"><h3>Ways back to a receptive state</h3>
       <p class="hint">Practices work best when they match where she is. These are offerings, not tasks. On many days, the most regulating thing is food, rest, and someone else holding the baby for a while.</p>
       ${WAYS.map(g=>`<div class="state"><b class="nm">${g.h}</b>${ul(g.items)}</div>`).join("")}
       <p class="src">Uvnäs Moberg; Buckley (2015); Strathearn et al. (2008); Gordon et al. (2010); Gettler et al. (2011); Feldman et al. (2011); Tronick (1989); Porges; Appleton (2017); Bergman; Jayamala et al. (2015)</p></article>
@@ -1153,7 +1162,7 @@ function showSupport(focus){
   sel={q:null,ring:null,idx:null,page:"support"}; applySel(); markTabs();
   panel.innerHTML=`<div class="phasehead"><h2>Support</h2><div class="meta">Who can help · signs it may help · how to find them</div>
       <p>Asking for help is part of caring for a baby, not a sign of falling short. Most families need more than one kind of support in these weeks, and what is needed can change from one week to the next. Here are the people who can help, the signs that a particular kind of support may be worth reaching for, and where to find them.</p></div>
-    <div class="support urgent"><h3>When to call right away</h3>
+    <div class="support urgent" id="sup-urgent"><h3>When to call right away</h3>
       <p><b>For the mother.</b> ${URGENT.mother}</p><p><b>For the baby.</b> ${URGENT.baby}</p><p>${URGENT.note}</p></div>
     ${SUPPORT.map(x=>`<article class="scard lang" id="sup-${x.id}"><h3>${x.name}</h3>
       <div class="state"><b class="nm">Signs it may help</b>${ul(x.when)}</div>
@@ -1163,9 +1172,32 @@ function showSupport(focus){
   const t=focus?document.getElementById("sup-"+focus):panel;
   if(focus||window.matchMedia("(max-width:900px)").matches) t.scrollIntoView({behavior:"smooth",block:"start"});
 }
+// The guides beside the mandala, each with an index of its sections
+const GUIDES = [
+  {id:"intro", tab:"How to read", open:()=>showIntro(), subs:[["intro-center","The dyad at the center"],["intro-read","Reading the rings"]]},
+  {id:"lang", tab:"Her language", open:()=>showLanguage(false), subs:[["lang-states","Six states"],["lang-cues","Body cues"],["lang-crying","Crying"],["deeper","Going deeper"]]},
+  {id:"calm", tab:"Co-regulation", open:()=>showCalm(false), subs:[["calm-hormones","Hormones"],["calm-coreg","Co-regulation"],["calm-ways","Ways back"]]},
+  {id:"support", tab:"Support", open:()=>showSupport(null), subs:[["sup-urgent","Call right away"]].concat(SUPPORT.map(x=>["sup-"+x.id,x.tag]))}];
+let jumped=null;   // the section last jumped to, marked in the index
 function markTabs(){
-  [...tabs.children].forEach((b,i)=>b.setAttribute("aria-selected", (i===0 && sel.q==null && !sel.page) || (i>0 && i<=QUARTERS.length && sel.q===i-1) || (i===QUARTERS.length+1 && sel.page==="lang") || (i===QUARTERS.length+2 && sel.page==="calm") || (i===QUARTERS.length+3 && sel.page==="support") ? "true":"false"));
+  const guide = sel.q!=null ? null : (sel.page||"intro");
+  const sub=(target,label,on)=>`<button class="sub" type="button" data-jump="${target}" aria-current="${on?"true":"false"}">${label}</button>`;
+  nav.innerHTML=`<div class="navgroup"><div class="navlbl">The mandala, in four quarters</div>
+      <div class="tabs" role="tablist">${QUARTERS.map((qq,q)=>`<button class="tab" type="button" role="tab" data-q="${q}" aria-selected="${sel.q===q}">${qq.tab}</button>`).join("")}</div>
+      ${sel.q!=null?`<div class="jump"><span>Jump to</span>${[0,1,2].map(k=>{ const i=sel.q*3+k; return sub("sl-"+i,SLICES[i].t,sel.idx===i); }).join("")}</div>`:""}</div>
+    <div class="navgroup"><div class="navlbl">Guides and resources</div>
+      <div class="tabs" role="tablist">${GUIDES.map(g=>`<button class="tab" type="button" role="tab" data-guide="${g.id}" aria-selected="${guide===g.id}">${g.tab}</button>`).join("")}</div>
+      ${guide?`<div class="jump"><span>Jump to</span>${GUIDES.find(g=>g.id===guide).subs.map(([t,l])=>sub(t,l,jumped===t)).join("")}</div>`:""}</div>`;
 }
+nav.addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  if(b.dataset.q!=null){ jumped=null; select(+b.dataset.q,null,null,false); return; }
+  if(b.dataset.guide){ jumped=null; GUIDES.find(g=>g.id===b.dataset.guide).open(); return; }
+  const t=b.dataset.jump; if(!t) return;
+  if(t.startsWith("sl-")){ const i=+t.slice(3); select(Math.floor(i/3),null,i,false); }
+  else { jumped=t; markTabs(); }
+  const el=document.getElementById(t); if(el) el.scrollIntoView({behavior:"smooth",block:"start"});
+});
 // links inside the panel that open Her language
 panel.addEventListener("click",e=>{ const a=e.target.closest("[data-go]"); if(!a) return; e.preventDefault();
   const go=a.dataset.go;
@@ -1188,13 +1220,8 @@ function hover(idx){
   cells.forEach(c=>c.classList.toggle("off", +c.dataset.idx!==idx));
 }
 
-/* tabs */
-const ab=document.createElement("button"); ab.className="tab"; ab.type="button"; ab.setAttribute("role","tab"); ab.textContent="How to read"; ab.addEventListener("click",()=>showIntro()); tabs.appendChild(ab);
-QUARTERS.forEach((qq,q)=>{ const b=document.createElement("button"); b.className="tab"; b.type="button"; b.setAttribute("role","tab"); b.textContent=qq.tab;
-  b.addEventListener("click",()=>select(q,null,null,false)); tabs.appendChild(b); });
-const lb=document.createElement("button"); lb.className="tab"; lb.type="button"; lb.setAttribute("role","tab"); lb.textContent="Her language"; lb.addEventListener("click",()=>showLanguage(false)); tabs.appendChild(lb);
-const cb=document.createElement("button"); cb.className="tab"; cb.type="button"; cb.setAttribute("role","tab"); cb.textContent="Co-regulation"; cb.addEventListener("click",()=>showCalm(false)); tabs.appendChild(cb);
-const sb=document.createElement("button"); sb.className="tab"; sb.type="button"; sb.setAttribute("role","tab"); sb.textContent="Support"; sb.addEventListener("click",()=>showSupport(null)); tabs.appendChild(sb);
+/* navigation */
+markTabs();
 
 /* light and dark switch */
 const root=document.documentElement, tbtn=document.getElementById("themebtn");
