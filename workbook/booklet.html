@@ -77,8 +77,8 @@ ul.ck .why{display:block;font-size:11px;color:var(--muted)}
 .stages{display:grid;grid-template-columns:repeat(9,1fr);gap:6px;margin:4px 0 14px;text-align:center}
 .stages b{display:block;font-size:9.5px;line-height:1.2}
 .stages span{font-size:9px;color:var(--muted)}
-.menu{columns:3;column-gap:18px;font-size:10px;line-height:1.22}
-.menu .grp{break-inside:avoid;margin:0 0 8px}
+.menu{columns:3;column-gap:18px;font-size:9.8px;line-height:1.19}
+.menu .grp{break-inside:avoid;margin:0 0 7px}
 .menu h3{font-family:var(--display);font-weight:400;font-size:13px;margin:0 0 3px;display:flex;align-items:center;gap:7px;padding-bottom:3px;border-bottom:1.5px solid var(--c)}
 .menu h3 i{width:9px;height:9px;border-radius:50%;background:var(--c)}
 .menu ul{list-style:none;margin:0;padding:0;display:grid;gap:1.5px}
@@ -129,6 +129,9 @@ table.plan td.w{width:150px} table.plan td.n{width:110px}
   #book{display:block!important}
   .pg{break-after:page;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
+
+.grp.own li{grid-template-columns:12px 1fr auto}
+.grp.own .blank{border-bottom:1px solid var(--lineink);height:14px}
 </style>
 </head>
 <body>
@@ -260,10 +263,14 @@ page(`${head("06","My feeding plan","Whatever path you choose, every feed can be
   ${sec("--edu","Visitors")}<p class="small muted" style="margin:0">Short, quiet, helpful visits protect your rest and your time with your baby.</p>
   <div class="two"><div>${ckItems("visit",VISIT)}</div><div>${q("visit.who","Who is welcome in the first days, and when",4)}${q("visit.news","How and when we will share the news",3)}</div></div>`,{c:"--mother",toc:["My feeding plan","Visitors"]});
 
+
+// my own requests: anything she added online, then blank lines to write on, five in all
+const OWN=(()=>{ const out=[]; CATS.forEach(([k])=>{ for(let i=0;i<(rep["x"+k]||0);i++){ const t=v[`x${k}.${i}.task`]; if(t) out.push([t,+(v[`x${k}.${i}.pri`]||0)]); } }); return out; })();
+const ownGrp=()=>`<div class="grp own" style="--c:var(--best)"><h3><i></i>My own requests</h3><ul>${Array.from({length:Math.max(5,OWN.length)},(_,i)=>{ const o=OWN[i]; return `<li><span class="o${o?" on":""}"></span>${o?`<span>${esc(o[0])}</span>`:`<span class="blank"></span>`}${petals(o?o[1]:0)}</li>`; }).join("")}</ul></div>`;
 // 9 · ways to help, on one page
 const legend=`<div class="legend"><span><span class="o"></span>Circle what you would like</span><span>${petals(1)} nice to have</span><span>${petals(2)} would love</span><span>${petals(3)} most important</span></div>`;
 const grp=([k,name,c,items])=>`<div class="grp" style="--c:var(${c})"><h3><i></i>${name}</h3><ul>${items.map((t,i)=>`<li><span class="o${v[`home.${k}.${i}`]?" on":""}"></span><span>${t}</span>${petals(+(v[`home.${k}.${i}.pri`]||0))}</li>`).join("")}</ul></div>`;
-page(`${head("07","Ways to help","A new mother's work is to rest, heal, feed, and be with her baby. Everything else can be shared.")}${legend}<div class="menu">${CATS.map(grp).join("")}</div>`,{c:"--circle",toc:"Ways to help"});
+page(`${head("07","Ways to help","A new mother's work is to rest, heal, feed, and be with her baby. Everything else can be shared.")}${legend}<div class="menu">${CATS.map(grp).join("")}${ownGrp()}</div>`,{c:"--circle",toc:"Ways to help"});
 
 // 10 · our help plan
 const rows=assigned().filter(x=>x.who||x.pri);

@@ -30,8 +30,8 @@ h1{font-family:Marcellus,Georgia,serif;font-weight:400;font-size:38px;line-heigh
 .ln{height:22px;border-bottom:1px solid var(--lineink);font-style:italic;color:var(--ink);font-size:12.5px;line-height:22px}
 .legend{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;font-size:10.5px;color:var(--muted);padding:8px 12px;border:1px solid var(--rule);border-radius:999px;background:#fff;margin:2px 0 10px;justify-content:center}
 .legend span{display:inline-flex;gap:6px;align-items:center}
-.cols{columns:3;column-gap:18px;font-size:10px;line-height:1.24}
-.grp{break-inside:avoid;margin:0 0 8px}
+.cols{columns:3;column-gap:18px;font-size:10px;line-height:1.21}
+.grp{break-inside:avoid;margin:0 0 7px}
 .grp h3{font-family:Marcellus,Georgia,serif;font-weight:400;font-size:13px;margin:0 0 3px;display:flex;gap:7px;align-items:center;padding-bottom:3px;border-bottom:1.5px solid var(--c)}
 .grp h3 i{width:9px;height:9px;border-radius:50%;background:var(--c)}
 .grp ul{list-style:none;margin:0;padding:0;display:grid;gap:1.5px}
@@ -50,6 +50,9 @@ h1{font-family:Marcellus,Georgia,serif;font-weight:400;font-size:38px;line-heigh
   .sheet{box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 @media (max-width:840px){ .wrap{zoom:.45} }
+
+.grp.own li{grid-template-columns:12px 1fr auto}
+.grp.own .blank{border-bottom:1px solid var(--lineink);height:14px}
 </style>
 </head>
 <body>
@@ -60,18 +63,22 @@ h1{font-family:Marcellus,Georgia,serif;font-weight:400;font-size:38px;line-heigh
 (function(){
 "use strict";
 const MINE=new URLSearchParams(location.search).has("mine");
-let v={}; if(MINE){ try{ const d=JSON.parse(localStorage.getItem("ftw-plan")||"null"); if(d) v=d.v||{}; }catch(e){} }
+let v={}, rep={}; if(MINE){ try{ const d=JSON.parse(localStorage.getItem("ftw-plan")||"null"); if(d){ v=d.v||{}; rep=d.rep||{}; } }catch(e){} }
 const esc=t=>String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;");
 const petal=on=>`<svg viewBox="0 0 10 14"><path class="${on?"on":""}" d="M5 1C8 4 8.6 9 5 13C1.4 9 2 4 5 1Z"/></svg>`;
 const petals=n=>`<span class="petals">${[1,2,3].map(i=>petal(i<=n)).join("")}</span>`;
 const ornament=w=>{ const cols=["--center","--baby","--mother","--partner","--circle","--edu","--best"], g=w/cols.length;
   return `<svg width="${w}" height="16" viewBox="0 0 ${w} 16">${cols.map((c,i)=>{ const x=(i+.5)*g; return `<path d="M${x} 1C${x+4} 5 ${x+4.6} 10 ${x} 15C${x-4.6} 10 ${x-4} 5 ${x} 1Z" fill="var(${c})"/>`; }).join("")}</svg>`; };
+
+// my own requests: anything she added online, then blank lines to write on, five in all
+const OWN=(()=>{ const out=[]; CATS.forEach(([k])=>{ for(let i=0;i<(rep["x"+k]||0);i++){ const t=v[`x${k}.${i}.task`]; if(t) out.push([t,+(v[`x${k}.${i}.pri`]||0)]); } }); return out; })();
+const ownGrp=()=>`<div class="grp own" style="--c:var(--best)"><h3><i></i>My own requests</h3><ul>${Array.from({length:Math.max(5,OWN.length)},(_,i)=>{ const o=OWN[i]; return `<li><span class="o${o?" on":""}"></span>${o?`<span>${esc(o[0])}</span>`:`<span class="blank"></span>`}${petals(o?o[1]:0)}</li>`; }).join("")}</ul></div>`;
 document.getElementById("sheet").innerHTML=`
   <div class="top"><div><div class="eb">From My Fourth Trimester Plan</div><h1>Ways to help</h1>
     <p class="lede">In these weeks a new mother's work is to rest, heal, feed, and be with her baby. Everything else can be shared. Choose any task, let her know, and do it in your own way.</p></div>
     <div class="for"><span>For</span><div class="ln">${esc(v["me.name"])}</div><span>and baby</span><div class="ln">${esc(v["me.baby"])}</div><span>Call or text</span><div class="ln">${esc(v["p.phone"]||"")}</div></div></div>
   <div class="legend"><span><span class="o" style="--c:var(--best)"></span>Circled: help I would love</span><span>${petals(1)} nice to have</span><span>${petals(2)} would love</span><span>${petals(3)} most important</span></div>
-  <div class="cols">${CATS.map(([k,name,c,items])=>`<div class="grp" style="--c:var(${c})"><h3><i></i>${name}</h3><ul>${items.map((t,i)=>`<li><span class="o${v[`home.${k}.${i}`]?" on":""}"></span><span>${t}</span>${petals(+(v[`home.${k}.${i}.pri`]||0))}</li>`).join("")}</ul></div>`).join("")}</div>
+  <div class="cols">${CATS.map(([k,name,c,items])=>`<div class="grp" style="--c:var(${c})"><h3><i></i>${name}</h3><ul>${items.map((t,i)=>`<li><span class="o${v[`home.${k}.${i}`]?" on":""}"></span><span>${t}</span>${petals(+(v[`home.${k}.${i}.pri`]||0))}</li>`).join("")}</ul></div>`).join("")}${ownGrp()}</div>
   <div class="foot"><span>${ornament(84)}</span><b>Thank you for holding us, so we can hold our baby.</b><span>The Fourth Trimester Mandala</span></div>`;
 if(new URLSearchParams(location.search).has("print")) window.addEventListener("load",()=>setTimeout(()=>print(),400));
 })();
