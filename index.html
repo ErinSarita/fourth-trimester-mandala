@@ -1,0 +1,1013 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Fourth Trimester Mandala</title>
+<meta name="description" content="A teaching map of the fourth trimester, read from the center out: the baby, the mother, the partner, the wider circle of support, and best practices for each moment, from the foundations of kangaroo care through the first hour, the first days, and the first months.">
+<link rel="icon" href="favicon.svg?v=1" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Mulish:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+/* Layout: the mandala holds the left (sticky on wide screens); the reading panel sits to the right. Center-out order everywhere. */
+:root{
+  --bg:#F4F8F2; --surface:#FFFFFF; --ink:#22402F; --muted:#5B7A67; --line:#D3E3D4;
+  --baby:#E3F0DC; --mother:#B9D9BC; --partner:#8FC09F; --circle:#69A585; --best:#4B8B6E; --time:#C9DFCB; --time2:#DCEBDB;
+  --on-dark:#FFFFFF; --on-light:#22402F; --gold:#C9993A; --seed:#FFFDF6; --center:#CFE6CB; --unit:#B6D3BA;
+  --display:"Marcellus", "Cormorant Garamond", Georgia, serif;
+  --body:"Mulish", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#14211A; --surface:#1B2B22; --ink:#E2EEE5; --muted:#9BB9A6; --line:#2C4437;
+  --baby:#D3E8CF; --mother:#A7CFAF; --partner:#82B895; --circle:#5F9D7D; --best:#468668; --time:#4B6B57; --time2:#5B7D67;
+  --on-dark:#FFFFFF; --on-light:#173024; --gold:#E0B65E; --seed:#F7FBF2; --center:#B3D6B2; --unit:#3C5A48; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#14211A; --surface:#1B2B22; --ink:#E2EEE5; --muted:#9BB9A6; --line:#2C4437;
+  --baby:#D3E8CF; --mother:#A7CFAF; --partner:#82B895; --circle:#5F9D7D; --best:#468668; --time:#4B6B57; --time2:#5B7D67;
+  --on-dark:#FFFFFF; --on-light:#173024; --gold:#E0B65E; --seed:#F7FBF2; --center:#B3D6B2; --unit:#3C5A48; color-scheme:dark }
+:root[data-theme="light"]{color-scheme:light}
+
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:28px 64px}
+header.top{display:grid;gap:6px;margin-bottom:22px;position:relative;padding-right:52px}
+.themebtn{position:absolute;top:-4px;right:0;width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--ink);cursor:pointer;padding:0}
+.themebtn:hover{background:var(--bg)}
+.themebtn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.themebtn svg{width:20px;height:20px;overflow:visible}
+.themebtn .sun{display:none}
+.is-dark .themebtn .moon{display:none}
+.is-dark .themebtn .sun{display:block}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(34px,5vw,54px);line-height:1.05;margin:0;text-wrap:balance}
+.lede{max-width:64ch;color:var(--muted);margin:4px 0 0}
+
+.main{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:36px;align-items:start}
+@media (max-width:900px){.main{grid-template-columns:1fr}}
+.stage{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);display:grid;gap:14px}
+@media (max-width:900px){.stage{position:static}}
+.svgbox{width:100%;max-width:640px;margin:0 auto;aspect-ratio:1/1;position:relative}
+svg{width:100%;height:100%;display:block;overflow:visible}
+
+/* hover cards */
+.coretip{position:absolute;left:50%;top:50%;transform:translate(-50%,calc(-100% - 9%));width:min(250px,70%);color:var(--ink);border:1px solid var(--line);border-top:5px solid var(--center);border-radius:12px;padding:10px 12px;font-size:13.5px;line-height:1.45;text-align:center;background:color-mix(in srgb, var(--center) 18%, var(--surface));box-shadow:0 6px 20px color-mix(in srgb, var(--ink) 16%, transparent);pointer-events:none;opacity:0;transition:opacity .2s ease;z-index:2}
+.coretip.on{opacity:1}
+.coretip .coreicon{width:44px;height:44px;display:block;margin:2px auto 6px;overflow:visible}
+.coretip span{display:block;color:var(--muted);font-size:12.5px;margin-top:4px}
+.coretip b{font-family:var(--display);font-weight:400;font-size:16px;display:block;margin-bottom:2px}
+.tip{position:absolute;left:0;top:0;z-index:2;width:max-content;max-width:min(260px,72%);background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13.5px;line-height:1.4;text-align:center;box-shadow:0 6px 20px color-mix(in srgb, var(--ink) 16%, transparent);pointer-events:none;opacity:0;transition:opacity .15s ease}
+.tip.on{opacity:1}
+.tip.ringed{border-top:5px solid var(--tipc);background:color-mix(in srgb, var(--tipc) 14%, var(--surface))}
+.tip .ringtag{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.tip .ringtag i{width:10px;height:10px;border-radius:50%;background:var(--tipc);box-shadow:0 0 0 1px color-mix(in srgb, var(--ink) 25%, transparent)}
+.tip b{font-family:var(--display);font-weight:400;font-size:16px;display:block}
+.tip span{color:var(--muted);font-size:12.5px;display:block}
+
+/* the wheel */
+.cell{cursor:pointer;transition:opacity .25s ease;stroke:var(--bg);stroke-width:2.5}
+.cell:focus{outline:none}
+.cell:focus-visible{stroke:var(--ink);stroke-width:3}
+svg.dimming .cell.off{opacity:.28}
+#selOutline path{fill:none;stroke:var(--gold);stroke-width:2;stroke-linejoin:round;pointer-events:none}
+.lbl{pointer-events:none;font-family:var(--display)}
+.lbl-light{fill:var(--on-dark)}
+.lbl-dark{fill:var(--on-light)}
+.seclbl{fill:var(--ink);font-family:var(--display);font-size:21px;letter-spacing:.06em;cursor:pointer}
+.secsub{fill:var(--muted);font-family:var(--body);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;pointer-events:none}
+.sspan{fill:var(--time);cursor:pointer}
+.sspan.alt{fill:var(--time2)}
+.sspan:focus{outline:none}
+.sspan:hover,.sspan:focus-visible,.sspan.open{fill:var(--mother)}
+.slbl{fill:var(--on-light);font-family:var(--body);font-weight:700;pointer-events:none}
+.is-dark .slbl{fill:var(--ink)}
+.units{fill:var(--unit);opacity:.6;stroke:var(--bg);stroke-width:1.2;transition:fill .15s ease,opacity .15s ease}
+.units.hov{fill:var(--mother);opacity:1}
+.units.now{fill:var(--gold);opacity:1}
+.ulbl{fill:var(--muted);font-family:var(--body);font-size:9.5px;font-weight:700;pointer-events:none}
+.ulbl.word{font-size:8.5px;letter-spacing:.1em}
+.ulbl.now{fill:var(--on-light)}
+.uhit{fill:transparent;cursor:pointer}
+.uhit:focus{outline:none}
+.base{fill:none;stroke:var(--muted);stroke-width:1.2;opacity:.7}
+.gem{fill:var(--gold);stroke:var(--bg);stroke-width:1.5;pointer-events:none}
+.qmark{stroke:var(--ink);stroke-width:2.5;stroke-linecap:round;pointer-events:none}
+.timering{fill:transparent;cursor:pointer}
+.timering:focus{outline:none}
+.braidhit{fill:transparent;cursor:pointer}
+.braidhit:focus{outline:none}
+
+/* the birth date */
+.datebar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;max-width:640px;margin:0 auto;width:100%}
+.datebar label{font-size:14px;font-weight:600}
+.datebar input{font:inherit;font-size:15px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.btn{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer}
+.btn:hover{background:var(--bg)}
+.btn:focus-visible,.tab:focus-visible,.ringkey button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.status{flex-basis:100%;text-align:center;font-size:14px;color:var(--muted);margin:0}
+.status b{color:var(--ink)}
+
+.ringkey{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:640px;margin:0 auto}
+.ringkey button{display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:13.5px;font-weight:600;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 12px 5px 8px;cursor:pointer}
+.sw{width:14px;height:14px;border-radius:50%;flex:none;display:inline-block;box-shadow:0 0 0 1px color-mix(in srgb, var(--ink) 12%, transparent)}
+
+/* the reading panel */
+.panel{display:grid;gap:18px;min-width:0}
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.tab{font:inherit;font-size:14px;font-weight:600;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+#panel{display:grid;gap:18px}
+.phasehead h2{font-family:var(--display);font-weight:400;font-size:32px;line-height:1.1;margin:0}
+.phasehead .meta{color:var(--muted);font-size:14px;margin-top:4px}
+.phasehead p{margin:10px 0 0;max-width:62ch}
+.scard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:14px;scroll-margin-top:16px}
+.scard.cur{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+.st{font-family:var(--display);font-size:24px;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;line-height:1.2}
+.st span{font-family:var(--body);font-size:13.5px;color:var(--muted)}
+.st b{font-family:var(--body);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--best)}
+.lane{display:grid;gap:6px;padding:2px 0 2px 14px;border-left:3px solid var(--line)}
+.lane p{margin:0}
+.lane h4{display:flex;align-items:center;gap:8px;margin:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lane h4 .sw{width:12px;height:12px}
+.l-baby{border-left-color:var(--baby)} .l-mother{border-left-color:var(--mother)} .l-partner{border-left-color:var(--partner)} .l-circle{border-left-color:var(--circle)} .l-best{border-left-color:var(--best)}
+.lane.hl{background:color-mix(in srgb, var(--ink) 6%, transparent);border-radius:0 8px 8px 0;padding-block:8px}
+.lane ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.take{font-style:italic}
+.herq{font-family:var(--display);font-size:20px;line-height:1.3;color:var(--ink);margin:4px 0 4px;padding:12px 14px;text-align:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.herq small{display:block;font-family:var(--body);font-size:13.5px;line-height:1.45;color:var(--muted);margin-top:3px}
+.herq span{display:block;font-family:var(--body);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.repair{background:color-mix(in srgb, var(--mother) 22%, transparent);border-radius:10px;padding:10px 12px;font-size:14.5px;margin:0}
+.src{font-size:12.5px;color:var(--muted)}
+.support{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:10px}
+.support h3{margin:0;font-family:var(--display);font-weight:400;font-size:22px}
+.support p{margin:0}
+.support ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.center-msg,.intro{display:grid;gap:12px}
+.center-msg h2,.intro h2{font-family:var(--display);font-weight:400;font-size:30px;margin:0;line-height:1.15}
+.center-msg p,.intro p{margin:0;max-width:62ch}
+.center-msg .sym{font-size:14.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+.center-msg + .intro{margin-top:16px;padding-top:24px;border-top:1px solid var(--line)}
+.legend{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+.legend li{display:grid;grid-template-columns:18px 1fr;gap:12px;align-items:start}
+.legend .sw{margin-top:5px;width:18px;height:18px}
+.legend b{font-family:var(--display);font-weight:400;font-size:19px;display:block}
+.legend .more{margin:10px 0 0}
+.layers{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;margin:12px 0 0}
+.layers svg{width:168px;height:168px;flex:none;overflow:visible}
+.layers text{font-family:var(--body);font-size:12px;font-weight:700;fill:var(--on-light);text-anchor:middle;dominant-baseline:central}
+.layers text.lt{fill:var(--on-dark)}
+.layers figcaption{flex:1 1 180px;font-size:14px;color:var(--muted)}
+.hint{font-size:14px;color:var(--muted)}
+
+section.about{margin-top:56px;display:grid;gap:18px;max-width:880px}
+section.about h2{font-family:var(--display);font-weight:400;font-size:30px;margin:0}
+section.about h3{font-family:var(--display);font-weight:400;font-size:21px;margin:8px 0 0}
+section.about p{margin:0;max-width:68ch}
+section.about a{color:var(--ink)}
+.refs{margin:0;padding-left:20px;display:grid;gap:6px;font-size:14.5px}
+.foot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin-top:10px}
+@media (prefers-reduced-motion: reduce){.cell{transition:none}}
+</style>
+<script>
+try{ var t=localStorage.getItem("ft-theme"); if(t==="light"||t==="dark") document.documentElement.setAttribute("data-theme",t); }catch(e){}
+</script>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <button class="themebtn" type="button" id="themebtn" aria-label="Switch to dark mode">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+    </button>
+    <div class="eyebrow">Prenatal &amp; Perinatal Education</div>
+    <h1>The Fourth Trimester Mandala</h1>
+    <p class="lede">A teaching map of the first twelve weeks after birth, read from the center out. At the center is the dyad, mother and baby, still one unit as the gestation continues outside the womb. Around them are the baby and the mother, then the partner, the one steady person who protects them, then the wider circle who hold them all. On the outer petals are the best practices for each moment: what to do, and why.</p>
+  </header>
+
+  <div class="main">
+    <div class="stage">
+      <div class="svgbox"><div class="tip" id="tip" role="status"></div><div class="coretip" id="coretip" aria-hidden="true"><svg class="coreicon" viewBox="-68 -68 136 136" aria-hidden="true"><circle r="66" fill="var(--center)"/><path d="M0 -24.25A28 28 0 0 1 0 24.25A28 28 0 0 1 0 -24.25Z" fill="var(--seed)"/><g fill="none" stroke="var(--seed)" stroke-width="5"><circle cx="-14" r="28"/><circle cx="14" r="28"/><circle r="56"/></g></svg><b>The dyad at the center</b>Mother and baby, one unit, continuing the gestation outside the womb.<span>Tap to read more.</span></div><svg id="m" viewBox="-540 -540 1080 1080" role="group" aria-label="Fourth trimester mandala"></svg></div>
+      <form class="datebar" id="dateform" autocomplete="off">
+        <label for="born">Baby's birth date</label>
+        <input type="date" id="born" name="born">
+        <button class="btn" type="submit">Show where we are</button>
+        <button class="btn" type="button" id="clear" hidden>Clear</button>
+        <p class="status" id="status">Enter the baby's birth date, actual or expected, to see where you are in the fourth trimester.</p>
+      </form>
+      <div class="ringkey" id="ringkey" aria-label="Rings"></div>
+    </div>
+
+    <div class="panel">
+      <div class="tabs" role="tablist" id="tabs"></div>
+      <div id="panel" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <section class="about" id="about">
+    <h2>About this mandala</h2>
+    <p>A mandala is a circle organized around a center. This one maps the fourth trimester, the twelve or so weeks after birth, through the lens of pre- and perinatal education, where the baby is understood as aware, feeling, and remembering from the very beginning. It continues where <a href="https://erinsarita.github.io/prenatal-mandala/">The Pregnancy and Birth Mandala</a> ends, and goes deeper into the first hour.</p>
+    <h3>Why a fourth trimester</h3>
+    <p>A human baby is born very immature. Nils Bergman notes that her brain is only about a quarter developed at birth, and the first weeks are a critical window for its wiring. Human milk is low in protein and fat, the milk of a species whose young are carried and fed often, not left in a nest or a hiding place between feeds. In this sense the gestation continues after birth, on the mother's body instead of inside it. As Bergman puts it, the mother's body is the newborn's habitat, and breastfeeding, sleep, and connection are her niche: what that habitat makes possible.</p>
+    <h3>How it is built</h3>
+    <p>The circle begins at the top with the foundations: warmth, milk, and love, which hold true for the whole fourth trimester and are best learned before the birth. The doctors in Bogotá who first described kangaroo mother care in the late 1970s, Edgar Rey and Héctor Martínez, summed it up as <i>calor, leche, y amor</i>. From there the wheel moves clockwise in time: the first hour, with the nine stages a newborn moves through when she is left skin to skin, then the first two weeks, then weeks three to twelve, returning to the top where the foundations began.</p>
+    <p>The rings line up slice by slice, so reading straight out from any slice shows, at the same moment, the baby, the mother, the partner, the wider circle, and the best practices. Hover over a slice to light it from the center out.</p>
+    <p>The rings are also layers of support: each one holds the one inside it. Ray Castellino taught that everyone who gives support needs support too, and that the mother and baby each need at least two layers (Castellino, in White, 2013). Here the first layer is the partner: one solid, consistent person around the mother. Families take many shapes, so that person may be the baby's father, another parent, a grandmother, or a close friend. What matters is that there is at least one, and that someone holds them too.</p>
+    <p>Around the petals, the time wheel holds the markers of time: Bergman's four needs of every newborn in the foundations, Widström's nine stages in the first hour, the first fourteen days, and the weeks from three to twelve. Entering a birth date marks today. At the edge, a braid of three strands, the baby, the mother, and the support around them, holds the mandala together.</p>
+    <h3>When to share it</h3>
+    <p>Families often plan carefully for the birth and much less for what comes after, and many live far from their own parents. Planning for the postpartum is as important as planning for the birth. Share the foundations and the first hour in the third trimester, around weeks 28 to 34, alongside the birth quarter of the Pregnancy and Birth Mandala, so the family can line up their circle and practice before the birth. Return to the first days and first months in the last weeks of pregnancy, and again as each arrives.</p>
+    <h3>When it was hard</h3>
+    <p>Stress becomes trauma when it overwhelms the ability to cope, and Matthew Appleton argues that what turns a hard birth into lasting trauma for a baby is less the birth itself than whether anyone understood what she went through. Babies tell their stories through crying and through their bodies. When the adults around them listen, name what happened, and stay, babies can release it and become relaxed and resilient (Appleton, 2017). The same is true for the mother: being heard is part of healing (Kendall-Tackett). So each slice ends with a repair: a way back, with words to say. It is not too late.</p>
+    <h3>A note on language</h3>
+    <p>The baby is called she, following the Pregnancy and Birth Mandala. The partner is the first layer of support, whoever fills that role. Breastfeeding is described in depth because the module's research centers on it. When breastfeeding is not possible, or not chosen, the habitat stays the same: skin to skin, feeding close and on cue, and being held. Every family and every baby is its own, and this is an educational map, not medical advice. A mother or baby who seems unwell needs prompt care from their provider.</p>
+    <h3>References</h3>
+    <ol class="refs">
+      <li>American College of Obstetricians and Gynecologists. (2018). Committee Opinion No. 736: Optimizing postpartum care. <i>Obstetrics &amp; Gynecology, 131</i>(5), e140–e150.</li>
+      <li>Appleton, M. (2017). The influence of birth trauma on the physical and emotional well-being of the baby. <i>Journal of Prenatal and Perinatal Psychology and Health, 31</i>(3).</li>
+      <li>Barr, R. G. (1990). The normal crying curve: What do we really know? <i>Developmental Medicine &amp; Child Neurology, 32</i>(4), 356–362.</li>
+      <li>Bergman, N. Kangaroo Mother Care (lecture videos). kangaroomothercare.com. Bergman, N., &amp; Bergman, L. (2011). <i>Hold Your Preemie</i>.</li>
+      <li>Buckley, S. J. (2003). Undisturbed birth: Nature's blueprint for ease and ecstasy. <i>Journal of Prenatal &amp; Perinatal Psychology &amp; Health, 17</i>(4), 261–288.</li>
+      <li>Dunstan, P. <i>Dunstan Baby Language</i>.</li>
+      <li>Erlandsson, K., Dsilna, A., Fagerberg, I., &amp; Christensson, K. (2007). Skin-to-skin care with the father after cesarean birth and its effect on newborn crying and prefeeding behavior. <i>Birth, 34</i>(2), 105–114.</li>
+      <li>Feher, S. D., Berger, L. R., Johnson, J. D., &amp; Wilde, J. B. (1989). Increasing breast milk production for premature infants with a relaxation/imagery audiotape. <i>Pediatrics, 83</i>(1), 57–60.</li>
+      <li>Goertz-Schroth, A., Schroth, G., &amp; Phillips, R. (2023). Prenatal Bonding (BA) as a breakthrough in improving pregnancy, birth, and postpartum outcomes. <i>Journal of Prenatal and Perinatal Psychology and Health, 37</i>(1).</li>
+      <li>Hazelbaker, A. Infant trauma: Impact on breastfeeding (lecture).</li>
+      <li>Hunziker, U. A., &amp; Barr, R. G. (1986). Increased carrying reduces infant crying: A randomized controlled trial. <i>Pediatrics, 77</i>(5), 641–648.</li>
+      <li>Jayamala, A. K., Lakshmanagowda, P. B., Pradeep, G. C. M., &amp; Goturu, J. (2015). Impact of music therapy on breast milk secretion in mothers of premature newborns. <i>Journal of Clinical and Diagnostic Research, 9</i>(4).</li>
+      <li>Johnson, K. A. (2017). <i>The Fourth Trimester</i>. Shambhala.</li>
+      <li>Kendall-Tackett, K. (2013). How birth trauma affects breastfeeding. Kindred Media. Kendall-Tackett, K. (2022). <i>Breastfeeding Doesn't Need to Suck</i>. APA LifeTools.</li>
+      <li>Klaus, M. <i>The Amazing Newborn</i> (film).</li>
+      <li>Moore, E. R., Bergman, N., Anderson, G. C., &amp; Medley, N. (2016). Early skin-to-skin contact for mothers and their healthy newborn infants. <i>Cochrane Database of Systematic Reviews</i>, CD003519.</li>
+      <li>Paulson, J. F., &amp; Bazemore, S. D. (2010). Prenatal and postpartum depression in fathers and its association with maternal depression: A meta-analysis. <i>JAMA, 303</i>(19), 1961–1969.</li>
+      <li>Rempel, L. A., Rempel, J. K., &amp; Moore, K. C. J. (2017). Relationships between types of father breastfeeding support and breastfeeding outcomes. <i>Maternal &amp; Child Nutrition, 13</i>(3), e12337.</li>
+      <li>Strange, K. Simple Tools for Mothers.</li>
+      <li>White, K. (2013). Interview with Ray Castellino: The Principles. <i>Journal of Prenatal and Perinatal Psychology and Health, 27</i>(3), 263–275.</li>
+      <li>Widström, A.-M., Lilja, G., Aaltomaa-Michalias, P., Dahllöf, A., Lintula, M., &amp; Nissen, E. (2011). Newborn behaviour to locate the breast when skin-to-skin: A possible method for enabling early self-regulation. <i>Acta Paediatrica, 100</i>(1), 79–85.</li>
+      <li>Wilks, J. (Ed.). <i>An Integrative Approach to Treating Babies and Children</i>. Singing Dragon. Menzam-Sills, C. (2025). <i>The Prenatal Shadow</i>. Park Street Press.</li>
+      <li>World Health Organization. (2003). <i>Kangaroo Mother Care: A Practical Guide</i>. The Coalition for Improving Maternity Services, The Mother-Friendly Childbirth Initiative (MFCI).</li>
+    </ol>
+    <p class="foot">Created by Erin Singleton, a student in APPPAH's Prenatal &amp; Perinatal Educator certification, as a project for Module Ten, on the fourth trimester. An educational map, not medical advice.</p>
+  </section>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- Content ---------- */
+const RINGS = {
+  baby:    {name:"The baby", color:"--baby", about:"The first ring around the dyad: what the newborn is doing, sensing, and needing in each moment, and a question she may be asking."},
+  mother:  {name:"The mother", color:"--mother", about:"Her body as it recovers and makes milk, her emotional life, and how she can care for herself. Her body is the baby's habitat, so caring for her is caring for the baby."},
+  partner: {name:"The partner", color:"--partner", about:"The first layer of support: one steady, consistent person around the mother, often the baby's father. Bergman describes this role as protecting mother and baby so they can stay together. Each slice shows how the partner can protect the dyad, support the mother, and be supported too."},
+  circle:  {name:"The circle", color:"--circle", about:"The wider layers: family, friends, a doula, a midwife or doctor, a lactation consultant, and the community. They hold the partner as well as the mother, because everyone who gives support needs support too (Castellino, in White, 2013).",
+   more:`<figure class="layers">
+      <svg viewBox="-112 -112 224 224" role="img" aria-label="Nested circles: the circle holds the partner, the partner holds the mother, the mother holds the baby">
+        <g stroke="var(--bg)" stroke-width="5"><circle r="110" fill="var(--circle)"/><circle r="81" fill="var(--partner)"/><circle r="53" fill="var(--mother)"/><circle r="26" fill="var(--baby)"/></g>
+        <text y="-95.5" class="lt">Circle</text><text y="-67">Partner</text><text y="-39.5">Mother</text><text y="1">Baby</text>
+      </svg>
+      <figcaption>Two layers of support around the mother and baby: the partner, and the circle who holds them all.</figcaption>
+    </figure>
+    <p class="more">The circle can be grandparents, friends, neighbors, a postpartum doula, a lactation consultant (IBCLC), a midwife or doctor, a parent group, a PPN educator, or a therapist.</p>`},
+  best:    {name:"Best practices", color:"--best", about:"The actions for each moment, each paired with the reason behind it: ways of putting the knowledge into practice while the vital connections are being made."}
+};
+const RING_ORDER=["baby","mother","partner","circle","best"];
+const RING_TAG={baby:"Baby ring", mother:"Mother ring", partner:"Partner ring", circle:"Circle ring", best:"Best practices ring"};
+
+const QUARTERS = [
+  {id:"found", name:"The foundations", tab:"Foundations", sub:"Warmth · milk · love",
+   intro:"What every newborn needs, from the first minute through the whole fourth trimester: oxygen, warmth, nutrition, and protection. Bergman calls the mother's body the newborn's habitat and feeding her niche, and the two belong together. The doctors who first described kangaroo care named its three parts calor, leche, y amor: warmth, milk, and love. Learned before birth, these three hold everything that follows."},
+  {id:"hour", name:"The first hour", tab:"First hour", sub:"The nine stages",
+   intro:"The sacred hour: the baby's transition from womb to air, and the start of feeding. Placed skin to skin and left undisturbed, a newborn moves through nine instinctive stages, from her birth cry to finding the breast and falling into her first deep sleep (Widström et al., 2011). Bergman's point is that she carries the program; the adults' work is to protect the space, wait, and keep her close."},
+  {id:"days", name:"The first days", tab:"First days", sub:"Day 1 to two weeks",
+   intro:"Colostrum becomes milk, both bodies recover from birth, and the family learns each other's rhythms. The mother's hormones shift quickly, the baby is sorting out her new world and may begin telling the story of her birth, and the support around them matters most."},
+  {id:"months", name:"The first months", tab:"First months", sub:"Weeks 3 to 12",
+   intro:"The relationship deepens. Crying often peaks around six weeks, the first social smiles arrive, and sleeping and waking begin to organize. The baby's brain is still wiring quickly, so closeness, carrying, and being understood remain her habitat, as the family begins to turn back toward the wider world."}
+];
+
+// Twelve slices, three per quarter. Every ring shares these slices, so reading straight out shows one moment.
+const SLICES = [
+  // ---------- The foundations ----------
+  {t:"Warmth", es:"Calor", w:"The habitat: skin to skin", span:"WARMTH · CALOR",
+   baby:{tip:"On her mother's bare chest, her heart, breathing, and temperature steady. This is where she belongs.",
+     body:"Her brain is only about a quarter developed at birth, so she depends completely on being in the right place (Bergman). On her mother's chest, within minutes, her heart rate steadies, irregular breathing smooths out, and pauses in breathing become rare. Her mother's chest even adjusts its warmth to her, rising about two degrees to warm a cool baby and falling about one degree to cool a warm one: thermal synchrony.",
+     feel:"To a newborn there are only two places: mother, or other. Skin to skin, her brain runs its program for growth. Apart, it switches to defense: protest first, crying to restore contact, and then despair, with stress hormones high, temperature and heart rate falling, and energy saved for survival (Bergman).",
+     q:"Am I in the right place?", why:"Even asleep, her brain keeps checking whether she is in her habitat."},
+   mother:{tip:"Her chest is the baby's habitat, and holding her baby skin to skin feeds her own body and confidence too.",
+     body:"Skin to skin raises her oxytocin, which helps the uterus contract and the milk let down. Bergman describes more milk, fewer breast problems such as engorgement and mastitis, and sleep that falls into step with her baby's.",
+     heart:"Many mothers describe feeling connected and capable, sure that they are the ones caring for their baby. After a premature or difficult birth, kangaroo care can bring a sense of completion.",
+     self:"A front-opening top, a warm room, and a reclined, well-supported seat or bed where she can hold the baby for long stretches. Her body is enough: it is the warmth, the food, and the comfort."},
+   partner:{tip:"Protect the dyad: keep them warm and together, and hold the baby skin to skin when the mother cannot.",
+     dyad:"Bergman puts it simply: the mother is the habitat, the baby is the niche, and the father's role, like the nurse's, is to protect and support them both. The partner keeps the room warm and calm, brings blankets and water, and watches the baby's face and breathing whenever the mother is drowsy.",
+     mother:"Settling pillows, helping her shift position, and handling the practical things, so she can stay still with the baby for as long as she likes.",
+     self:"The partner's own skin to skin. A baby on the partner's bare chest also warms and settles, and after a cesarean, babies held skin to skin by their fathers cried less and calmed sooner (Erlandsson et al., 2007). It is a way for the partner to bond, too."},
+   circle:{tip:"Care providers and family keep mother and baby together, so the long hours of holding can happen.",
+     who:"Midwife, nurse, or doctor; a doula; close family.",
+     how:"Staff who offer kangaroo care from birth, do checks on the chest, and support it for premature babies too. Family who take on meals and older children, so the holding can be long and unhurried. Someone who shows the parents how to use a wrap or carrier safely.",
+     partner:"Someone who checks in on the partner, brings them food, and gives them a turn to rest."},
+   best:{tip:"Skin to skin from birth and often after: bare chest to bare chest, her face visible, a blanket over you both.",
+     items:[["Skin to skin from birth, as continuous as you can.","The first part of Bergman's definition of kangaroo mother care. Within minutes her heart rate and breathing settle."],
+       ["Upright on the chest, head turned to one side.","Nose and mouth visible and clear, chin slightly lifted, chest to chest, with a blanket over both of you rather than between you."],
+       ["A watchful second adult.","When the mother is sleepy or medicated, someone stays awake and watches the baby, or the baby is moved to her own safe sleep space."],
+       ["Long sessions rather than short ones.","Each move in and out is a disruption for a small baby, so WHO guidance suggests sessions of at least an hour."],
+       ["Carry her through the day.","A wrap or soft carrier keeps her in her habitat while you move. Humans are a carrying species."]],
+     src:"Bergman; Erlandsson et al. (2007); WHO (2003); Moore et al. (2016)"},
+   repair:["If you were apart", "Begin skin to skin as soon as you are together, and stay as long as you can. It is not too late. Tell her: “We were apart, and I missed you. You are with me now. This is where you belong.”"]},
+
+  {t:"Milk", es:"Leche", w:"The niche: feeding close", span:"MILK · LECHE",
+   baby:{tip:"Her mother's milk is made for her immature body: protection first, then food, changing with her needs.",
+     body:"Colostrum, her first milk, is rich in whey proteins that protect rather than feed: antibodies against infection and factors that guard against allergy. Human milk is low in protein and fat, the milk of a species that is carried and fed often, roughly every two hours or whenever she asks (Bergman). It changes from feed to feed and day to day to match her.",
+     feel:"Suckling at the breast keeps her oxygen steady, and the nipple pressing on the back of her palate stimulates the vagus nerve, switching on digestion and calm. Near the end of a feed she keeps suckling without swallowing: comfort sucking, which matters too (Bergman).",
+     q:"Will I be fed when I need it?", why:"Her small stomach and light milk mean she needs to feed often, day and night."},
+   mother:{tip:"Her milk flows best when she is calm. Stress can slow the letdown; support and rest help it flow.",
+     body:"Prolactin builds the milk and oxytocin lets it down. Frequent feeding, especially skin to skin, increases supply: Bergman describes about half again as much milk with kangaroo care. Stress hormones can block the letdown, and a hard birth can delay the milk coming in by several days (Kendall-Tackett).",
+     heart:"Feeding can bring deep closeness, and also doubt, pain, or grief when it is hard. Kendall-Tackett found that when mothers are supported, breastfeeding can help heal a hard birth: proof that her body works, and a source of connection.",
+     self:"A few calm minutes before feeding: slow breaths, warmth, or music she loves. Mothers of premature babies who listened to relaxing music or a guided relaxation before pumping made more milk (Jayamala et al., 2015; Feher et al., 1989)."},
+   partner:{tip:"Make feeding easy: water, snacks, pillows, burping, and a shield from doubting voices.",
+     dyad:"Building the nest for every feed: water and a snack within reach, pillows, a quiet room, and burping or settling the baby afterward. Bringing the baby to the mother at night and taking her back after.",
+     mother:"Encouragement. Fathers' support is linked with longer breastfeeding (Rempel et al., 2017). Protecting her from comments that undermine her confidence, and helping her reach skilled help early if it hurts.",
+     self:"Learning the feeding basics too: what a good latch looks like, how to tell the baby is getting enough, and who to call. Knowing what to look for helps the partner stay steady."},
+   circle:{tip:"Skilled lactation help early, before small problems grow, and people who have fed babies themselves.",
+     who:"An IBCLC (a board-certified lactation consultant), La Leche League, a breastfeeding peer group, a postpartum doula.",
+     how:"Help with latch and positioning in the first days. A referral if suckling seems hard, such as an assessment for tongue-tie by someone skilled in oral function (Hazelbaker). Meals and housework handled, so feeding can be the mother's main work.",
+     partner:"A place for the partner to ask questions too, so they can support without taking over."},
+   best:{tip:"Feed on cue, often and close, skin to skin when you can, and get skilled help early.",
+     items:[["Feed on cue, day and night.","Rooting, hands to mouth, and stirring come before crying. A carried baby feeds often, about every two hours or sooner."],
+       ["Skin to skin during feeds.","It keeps the vagus nerve and the nutrition program switched on for both of them."],
+       ["Calm before the letdown.","Slow breaths, warmth, or music she loves, for a few minutes before feeding or pumping."],
+       ["Colostrum first.","Even small amounts in the first days carry the most protection."],
+       ["If bottles are used, keep it close.","Hold her skin to skin, let her set the pace, and switch sides, so every feed is still contact."],
+       ["Get skilled help early.","Pain, a shallow latch, or worry about weight are reasons to see an IBCLC in the first days, not weeks later."]],
+     src:"Bergman; Jayamala et al. (2015); Feher et al. (1989); Kendall-Tackett (2013); Hazelbaker"},
+   repair:["If feeding began apart, or got off to a hard start", "Return to skin to skin, lie back, and let her find the breast in her own time, as in the first hour. Many babies keep these feeding instincts for weeks (La Leche League, laid-back nursing). Tell her: “We are learning this together.”"]},
+
+  {t:"Love", es:"Amor", w:"The connection: being met", span:"LOVE · AMOR",
+   baby:{tip:"She is a feeling, remembering person. She needs to be understood, not only fed and warmed.",
+     body:"Within hours of birth newborns can recognize their parents' voices, prefer faces and their mother's smell, and imitate expressions such as sticking out the tongue (Klaus). She learns best in the quiet alert state, eyes wide and bright, body still, looking at you.",
+     feel:"Her mother's heart. When the mother feels calm and loving, her coherent heart rhythm can draw her baby's into step, most strongly within about three feet (Appleton). Each time a need is met, she relaxes, and trust grows.",
+     q:"Do you understand me?", why:"She tells her story through her crying and her body, and needs someone to listen."},
+   mother:{tip:"Her calm, loving presence steadies her baby, and she needs to feel loved and held herself.",
+     body:"Oxytocin flows with touch, gazing, and feeding, and it calms her as well as her baby. Long stress and lack of sleep can make that calm harder to reach.",
+     heart:"Love may arrive in a rush or grow slowly over weeks; both are normal. For mothers who connected with the baby during pregnancy, the postpartum becomes a new phase of a relationship that already exists (Goertz-Schroth et al., 2023).",
+     self:"Johnson names five needs of every new mother: an extended rest, nourishing food, loving touch, the company of wise women, and time in nature. A moment of heart-focused calm, a slow breath while recalling something she loves, with the baby on her chest."},
+   partner:{tip:"Love the mother and the baby both: the baby is held inside the parents' relationship.",
+     dyad:"Talking and singing to the baby in the voice she heard from the womb, meeting her face to face in her quiet alert times, and holding her skin to skin.",
+     mother:"Loving touch, appreciation, and patience. Brief, frequent eye contact between the parents keeps their bond warm through the tired weeks (Castellino, in White, 2013).",
+     self:"Partners need connection too. Feeling left out is common as the baby's world centers on the mother; naming it, and finding their own ways to care for the baby, helps."},
+   circle:{tip:"A circle that holds the parents, so they have love to give: wise women, friends, and family.",
+     who:"Grandparents, friends who have had babies, a doula, a parent group, a PPN educator.",
+     how:"Mothering the mother: company, listening, and care rather than advice. Visitors who come to help, not to hold the baby. Johnson's wise women can be mothers, grandmothers, doulas, or friends who have walked this road.",
+     partner:"Friends or family who ask the partner how they are, and a parent group where they can talk with others."},
+   best:{tip:"Read her, talk to her, and say what you see. Being understood is a need, like milk.",
+     items:[["Watch for the quiet alert state.","Eyes open and bright, body still: her best time to look, listen, and learn. Meet her face to face, close enough to see you clearly, about eight to twelve inches away."],
+       ["Talk to her as a person.","Tell her who you are, what is happening, and what you are about to do."],
+       ["Complete the trust cycle.","Need, then arousal, then the need met, then relaxation, then trust. Each time it completes, she learns the world is safe (Appleton)."],
+       ["Let your calm come first.","Before you pick her up, take one slow breath into your heart. A calm, coherent heart rhythm can steady hers (Appleton)."],
+       ["Mirror and wait.","Copy her expressions and sounds, then wait for her reply. Conversation begins here (Klaus)."]],
+     src:"Klaus; Appleton (2017); Goertz-Schroth et al. (2023); Johnson (2017); Castellino, in White (2013)"},
+   repair:["If you misread her", "Every relationship has misses. Come back and say so: “I did not understand. I am listening now.” A repaired rupture can build stronger trust than if it had not happened (Strange)."]},
+
+  // ---------- The first hour ----------
+  {t:"Arrival", w:"Stages 1 to 3 · birth to about 4 minutes", span:"STAGES 1–3",
+   baby:{tip:"Birth cry, then stillness, then her eyes open: she is arriving.",
+     body:"Stage 1, the birth cry, expands her lungs. Stage 2, relaxation: her body goes limp, her hands relax, her mouth is still. Stage 3, awakening, at about two to four minutes: her eyes open and she makes small movements of her head and shoulders (Widström et al., 2011).",
+     feel:"Light, air, sound, and gravity all at once, then her mother's warmth, heartbeat, and voice, now from the outside. A newborn may not know yet that she is out, or that she made it (Strange).",
+     q:"Did I make it?", why:"Everything is new, and the one thing still familiar is her mother."},
+   mother:{tip:"Relief and wonder. Her hands meet her baby, and oxytocin surges to protect them both.",
+     body:"With the baby on her skin, oxytocin peaks, helping the placenta release and the uterus contract to protect against heavy bleeding (Buckley, 2003). Shaking and shivering after birth are common.",
+     heart:"Awe, relief, exhaustion, and sometimes shock. Her first words and touch are part of her baby's welcome.",
+     self:"Asking for the baby straight onto her chest, and taking her time. There is nothing she needs to do yet."},
+   partner:{tip:"Stay close and speak: the familiar voice from the womb now welcomes her.",
+     dyad:"Keeping the room warm, dim, and quiet, and asking that mother and baby be left together. Speaking the words rehearsed in pregnancy: “You are out now. You made it. We are here.”",
+     mother:"A hand on her shoulder, words of love and pride, and a warm blanket over both of them.",
+     self:"Many partners feel a wave of emotion, or shock if the birth was hard. A few breaths, and letting themselves feel it, steady them for the baby."},
+   circle:{tip:"Care providers wait: checks happen on the mother's chest, and routines can wait.",
+     who:"Midwife, nurse, or doctor; a doula.",
+     how:"Drying the baby on the mother's chest with a warm blanket over both, and assessing her there. Waiting before clamping the cord. Speaking softly, and to the baby too.",
+     partner:"A doula who keeps the partner informed, and supports them if things move fast."},
+   best:{tip:"Straight onto the chest, dried and covered, and left undisturbed.",
+     items:[["Baby straight to the mother's chest.","Dried there, with a warm blanket over both, and a hat if the room is cool."],
+       ["Unbroken skin to skin.","Keep the first hour continuous, at least until after the first feed."],
+       ["Save the routines.","Weighing, measuring, and bathing can wait until after the first feed; checks can be done on the chest."],
+       ["Dim and quiet.","Soft voices and low light protect the hormones that bond them."],
+       ["Welcome her with words.","“You are out now. You made it. You are safe.” (Strange)"]],
+     src:"Widström et al. (2011); Buckley (2003); Strange; MFCI"},
+   repair:["If she had to be taken for care", "Someone goes with her and keeps a hand and a voice with her. When you are together again, hold her skin to skin and tell her what happened: “You had to go, and you were not alone. You are back with me now.”"]},
+
+  {t:"The breast crawl", w:"Stages 4 to 6 · about 4 to 54 minutes", span:"STAGES 4–6",
+   baby:{tip:"Rooting, then resting, then pushing with her legs: she finds her own way to the breast.",
+     body:"Stage 4, activity, from about 4 to 12 minutes: rooting, mouthing, hand to mouth, tongue out, and salivating. Stage 5, rest, comes between every stage. Stage 6, crawling, around 18 to 54 minutes: she slides, leaps, and pushes with her legs toward the breast (Widström et al., 2011).",
+     feel:"The scent of her mother's breast draws her. Bergman's point is that it is the newborn who carries the program that starts breastfeeding: left undisturbed, a baby can arch, move her hands, latch, and suckle without help, and help often makes it harder.",
+     q:"Will you let me find my way?", why:"Her body knows the way to the breast, if she is given time."},
+   mother:{tip:"Reclined and relaxed, she becomes the landscape her baby crosses.",
+     body:"The baby's hands massaging the breast and her feet pushing on the belly raise oxytocin, help the uterus contract, and help the placenta release.",
+     heart:"Watching her baby's purpose and strength can be astonishing. Waiting without helping may feel strange at first; trust grows by watching.",
+     self:"Semi-reclined and well supported, with the baby on her belly or chest, and help close by so she does not need to move."},
+   partner:{tip:"Watch, wait, and protect the time: the baby is doing the work.",
+     dyad:"Holding back the urge to help, and kindly asking others to wait too. Keeping an eye on her face and breathing.",
+     mother:"Pillows, warmth, water to sip, and quiet reassurance.",
+     self:"Witnessing the crawl is a gift. For some partners it is the moment the baby first becomes real to them."},
+   circle:{tip:"Staff who know the nine stages and protect them, rather than rushing the latch.",
+     who:"Midwife, nurse, or doctor; a doula.",
+     how:"Keeping the hour free: no weighing or bathing yet, and no hands placing the baby on the nipple. Watching quietly for safety.",
+     partner:"Telling the partner what the baby is doing, so they can enjoy it and protect it."},
+   best:{tip:"Hands off: give her time and let her find the breast herself.",
+     items:[["Let her lead.","Do not place her on the nipple. Help tends to make it harder (Bergman)."],
+       ["Recline the mother.","Semi-reclined, with gravity holding the baby, so her legs can push and her hands can find the way."],
+       ["Leave the breast as it is.","Its natural scent helps guide her, so washing can wait."],
+       ["Expect pauses.","Rest is a stage of its own. A still baby is not a stuck baby."],
+       ["Watch, and do not hurry.","The crawl can take most of an hour. Check her color and breathing, and otherwise wait."]],
+     src:"Widström et al. (2011); Bergman; Moore et al. (2016)"},
+   repair:["If the first hour was interrupted", "The crawl can still happen later. Lie back with her skin to skin and give her time; many babies keep these instincts for weeks. Tell her: “We missed this at first. Take your time now. I am here.”"]},
+
+  {t:"First feed, first sleep", w:"Stages 7 to 9 · about 30 minutes to 2 hours", span:"STAGES 7–9",
+   baby:{tip:"She licks and explores the nipple, latches on her own, then falls into a deep sleep.",
+     body:"Stage 7, familiarization, from about 29 to 62 minutes: she licks, touches, and massages the nipple, often for 20 minutes or more. Stage 8, suckling, around 49 to 90 minutes: she latches on by herself. Stage 9, sleeping, around 90 to 120 minutes: a deep sleep on her mother's chest (Widström et al., 2011).",
+     feel:"Colostrum, warm and familiar in taste. Her first feed is also her first need met outside the womb: hunger, then food and closeness, then rest.",
+     q:"Is it safe to rest now?", why:"Sleep comes when she feels she is in the right place."},
+   mother:{tip:"Prolactin rises with the first feed, and both may sink into a deep, satisfied rest.",
+     body:"The baby's licking and suckling release oxytocin and prolactin, and she may feel strong afterpains as the uterus contracts. Early skin to skin is linked with breastfeeding for longer (Moore et al., 2016).",
+     heart:"Elation and fatigue together. She may want to tell the story of the birth right away, or simply rest with her baby.",
+     self:"Eating and drinking soon after the first feed, then resting with the baby close. The bath, the phone, and announcements can wait."},
+   partner:{tip:"Guard the golden hours: visitors, calls, and announcements wait.",
+     dyad:"Keeping visitors and announcements away until after the first feed and sleep. Staying awake and watching if the mother falls asleep with the baby on her, or moving the baby to her own safe space.",
+     mother:"Food and drink, warm blankets, a quiet room, and listening if she wants to talk about the birth.",
+     self:"Their own food and rest too, and their turn for skin to skin while she showers or sleeps."},
+   circle:{tip:"Routines wait until after the first feed and sleep, then gentle checks with the parents there.",
+     who:"Midwife, nurse, or doctor; lactation support.",
+     how:"Doing newborn checks, weighing, and any medications after the first feed, with the parents present. Supporting rooming in from here on.",
+     partner:"Food, a place to sleep, and time to call their own people."},
+   best:{tip:"Give familiarization time: twenty minutes of licking is normal. Then let them rest together, safely.",
+     items:[["Do not rush familiarization.","Licking and touching the nipple often take 20 minutes or more. It is part of feeding, not a delay."],
+       ["First feed before procedures.","Checks, weighing, and the bath come after."],
+       ["Safe rest on the chest.","If the mother is drowsy, another adult stays awake and watching, or the baby moves to her own safe sleep space."],
+       ["Room in.","Keep the baby with her parents from here on, day and night."]],
+     src:"Widström et al. (2011); Moore et al. (2016); MFCI"},
+   repair:["If the first feed happened apart", "The first feed together can still be a gentle meeting: skin to skin, reclined, and unhurried, whenever you are reunited. Tell her: “Here you are. This is yours.”"]},
+
+  // ---------- The first days ----------
+  {t:"Day 1", w:"The first day", span:"DAY 1",
+   baby:{tip:"Her first day outside: much sleep, waking to feed often, settling best on a chest.",
+     body:"She moves through six states: quiet sleep, active sleep, drowsy, quiet alert, active alert, and crying (Klaus). Many babies sleep deeply after the first hours, then wake to feed often. Her tiny stomach needs only small amounts of colostrum, and she passes her first dark stools, called meconium.",
+     feel:"Whether she is with her mother or apart. Separated babies show more stress hormones; kept close, her program for feeding and growth stays on (Bergman).",
+     q:"Will you stay?", why:"To a newborn, being apart signals danger; staying close tells her she is safe."},
+   mother:{tip:"Her body begins to recover: afterpains, bleeding, deep tiredness, and a mind replaying the birth.",
+     body:"Afterpains during feeds, bleeding called lochia, and soreness, stitches, or an incision to heal. The hormones of pregnancy fall quickly once the placenta is born. Her breasts make small amounts of colostrum, enough for the baby's small stomach.",
+     heart:"Many mothers replay the birth, sometimes over and over. Feeling invisible, out of control, or detached from the baby can be signs that the birth was hard for her (Kendall-Tackett).",
+     self:"Rest and real food. Telling her birth story to someone who listens, when she is ready. Asking for pain relief she needs, so she can hold her baby comfortably."},
+   partner:{tip:"Be the gatekeeper: limit visitors, handle the logistics, and keep watch at night.",
+     dyad:"Rooming in: the baby stays with the parents day and night. Changing diapers, settling her skin to skin, and bringing her to the mother for every feed.",
+     mother:"Listening to her birth story without correcting or fixing it. Helping her to the bathroom, bringing food, and asking the staff her questions.",
+     self:"Sleeping when they can. Partners go through the birth too, and if it was frightening, telling their own story helps."},
+   circle:{tip:"Visitors come briefly, if at all, and only to help. Staff support feeding and rooming in.",
+     who:"Midwife or nurse, lactation support, close family.",
+     how:"Newborn checks in the room with the parents. Help with positioning and latch. Family who bring meals and keep visits short.",
+     partner:"Someone who takes over the home front: pets, older children, and messages."},
+   best:{tip:"Room in, feed on cue, keep visits short, and listen to the birth story.",
+     items:[["Stay together.","Day and night, so the baby stays in her habitat and can feed on cue."],
+       ["Feed often.","Eight or more feeds in 24 hours is typical in the first days."],
+       ["Keep skin to skin going.","Not only in the first hour: all through the first days it helps with warmth, feeding, and calm."],
+       ["Listen to the birth story.","Ask how it was for her and listen, without correcting or comparing (Kendall-Tackett)."],
+       ["Narrate to the baby.","Tell her who is here and what is happening as she is examined, changed, or moved."]],
+     src:"Klaus; Bergman; Kendall-Tackett (2013)"},
+   repair:["If she spent time in a nursery or NICU", "As soon as you can, hold her skin to skin and tell her what happened. Pumping, with music or a guided relaxation to ease stress, keeps the milk coming while you are apart (Jayamala et al., 2015)."]},
+
+  {t:"Milk comes in", w:"Days 2 to 4", span:"DAYS 2–4",
+   baby:{tip:"The second night is often wakeful. As the milk comes in she feeds often, and her body may begin telling her birth story.",
+     body:"Many babies are wakeful and want to feed constantly on the second night, which helps bring in the milk. By day two the milk holds more casein, as she starts taking bigger amounts, and by about day three the protective proteins settle to a lower, steady level (Bergman). Losing a little weight in the first days is expected.",
+     feel:"Her birth, held in her body. Appleton describes baby body language that shows where birth pressed on her: areas of compression on her head, the side that lay against her mother's spine, and repeated movements such as touching the same spot.",
+     q:"Will someone know what happened to me?", why:"Her birth lives in her body, not in words."},
+   mother:{tip:"The milk comes in with full, tender breasts, and tears may come too as hormones shift.",
+     body:"Somewhere between about day two and day five the milk comes in, and the breasts feel full, warm, or engorged. Stress in labor can delay it (Kendall-Tackett). Night sweats and frequent urination clear the extra fluid of pregnancy.",
+     heart:"The baby blues often begin around day three: tearfulness, mood swings, and feeling overwhelmed, alongside joy. They are common and usually pass within two weeks.",
+     self:"Feeding often to ease the fullness, cool compresses after feeds, and rest. Letting tears come without judging them."},
+   partner:{tip:"The second night is long: share it. Take over everything but the feeding.",
+     dyad:"Taking night shifts for settling, changing, and burping, and bringing the baby to the mother to feed. Walking, rocking, and skin to skin on the partner's chest between feeds.",
+     mother:"Reassurance when the tears come: this is common, and it passes. Noticing with her if it feels like more than the blues.",
+     self:"Napping in the day, and asking a friend or relative to cover so they can rest."},
+   circle:{tip:"A feeding check as the milk comes in, meals at the door, and help at home.",
+     who:"IBCLC or lactation nurse, a midwife's home visit, a postpartum doula, family.",
+     how:"A feeding check around days three to five: latch, wet diapers, and weight. A postpartum doula or relative to cook, clean, and hold the baby while the parents sleep.",
+     partner:"Someone who brings food and takes over the partner's tasks for a few hours so they can sleep."},
+   best:{tip:"Feed often to bring in the milk, count diapers, and read her body with curiosity.",
+     items:[["Feed through the second night.","Frequent feeding is how she brings in the milk. It is normal, not a sign of too little."],
+       ["Count wet and dirty diapers.","They are the simplest sign she is getting enough. Ask your provider what to expect each day."],
+       ["Ease engorgement.","Feed often, soften the areola with gentle pressure before latching, and use cool compresses afterward."],
+       ["Watch her body with curiosity.","Notice where she touches or turns, and say what you see without inventing a story for her (Appleton)."],
+       ["Name the baby blues.","Common, temporary, and usually gone by two weeks. Tell someone if it lasts longer or feels heavy."]],
+     src:"Bergman; Kendall-Tackett (2013); Appleton (2017)"},
+   repair:["If you see the hard birth in her body", "Acknowledge it out loud: “That was hard for you, wasn't it? I see it now.” Babies often settle when they feel known (Appleton)."]},
+
+  {t:"The lying-in", w:"Days 5 to 14", span:"DAYS 5–14",
+   baby:{tip:"She is regaining her birth weight, learning to feed well, and starting to cry for different reasons.",
+     body:"Most babies are back to their birth weight by about two weeks. She sleeps in short cycles, and the quiet sleep within them matters for wiring her brain (Bergman). Moving smoothly between sleeping and waking, called state organization, is a skill she is building, and skin to skin supports it.",
+     feel:"Needs, and memory. Needs crying is about the present: hunger, cold, tiredness, a wet diaper. Memory crying relives part of her birth, with tones of anger, anxiety, or grief (Appleton).",
+     q:"When I cry, will you listen?", why:"Crying is her voice, and some of her cries are telling a story."},
+   mother:{tip:"A time for lying in: rest, nourishing food, loving touch, wise women, and nature (Johnson).",
+     body:"The uterus shrinks back, bleeding lightens, and stitches or an incision heal. Her body needs real rest to recover, and many cultures keep a lying-in of about forty days.",
+     heart:"The baby blues usually lift by about two weeks. If sadness, anxiety, intrusive thoughts, or numbness continue or deepen, it may be postpartum depression or anxiety, which are common and treatable.",
+     self:"Staying in bed or on the couch with the baby as much as she can, with warm, nourishing food brought to her. Short walks outside when she feels ready. Asking herself: am I being mothered too?"},
+   partner:{tip:"Run the household so the mother can rest and feed, and learn the baby's cues yourself.",
+     dyad:"Settling, carrying, bathing, and changing, and walks with the baby in a carrier so the mother can sleep.",
+     mother:"Protecting her rest. Keeping an eye on her mood with her, and helping her reach support if she needs it.",
+     self:"Many partners go back to work in this window. Planning ahead, and naming how hard the switch is, helps everyone."},
+   circle:{tip:"Meal trains, a postpartum doula, and a check on the mother as well as the baby.",
+     who:"Postpartum doula, family, friends, midwife or doctor, the baby's care provider.",
+     how:"A meal train, and help with laundry and older children. Visitors who come to help, then leave. Contact with her own care provider within the first three weeks, not only the baby's checks (ACOG, 2018).",
+     partner:"Leave from work, or family help planned for when the partner goes back."},
+   best:{tip:"Lie in and be cared for. Learn her cries: meet needs first, then listen for memory.",
+     items:[["Plan a real rest.","Johnson's five needs: extended rest, nourishing food, loving touch, the company of wise women, and nature."],
+       ["Meet needs first.","Feed, warm, change, and hold. If she is still crying, she may be telling you something else."],
+       ["Listen to memory crying.","Hold her, stay calm, and say what you see. The crying may grow louder before it settles: that is release, not distress (Appleton)."],
+       ["Not every cry needs stopping.","When memory crying is always met with a breast, a bottle, or a shush, a baby may give up and become quiet and resigned: Appleton's Good Baby Syndrome."],
+       ["Protect her sleep.","Let her finish a sleep on a chest or close to you, rather than moving or waking her often."]],
+     src:"Johnson (2017); Appleton (2017); Bergman; ACOG (2018)"},
+   repair:["If you missed what her crying meant", "Come back to it. Hold her and tell her: “I did not understand before. I am listening now.” Being heard late is still being heard."]},
+
+  // ---------- The first months ----------
+  {t:"The crying weeks", w:"Weeks 3 to 6", span:"WEEKS 3–6",
+   baby:{tip:"Crying often peaks around six weeks. Being carried, and being understood, help.",
+     body:"In healthy babies, crying tends to rise from about two weeks and peak around six to eight weeks, then ease (Barr, 1990). Babies who were carried more through the day cried less in one well-known trial (Hunziker & Barr, 1986).",
+     feel:"Whether her cries are answered. Each time she reaches out and is met, trust grows. When cries are often unanswered, a baby protests, and may then give up (Appleton).",
+     q:"Will you stay with me when I cry?", why:"Crying is at its height, and she is learning what happens when she does."},
+   mother:{tip:"Tiredness builds. A check-up for her own health is due in these weeks.",
+     body:"Bleeding usually ends, and feeding often becomes easier. A full postpartum check for the mother is recommended within the first twelve weeks, and often happens around six weeks (ACOG, 2018).",
+     heart:"Long nights and crying can wear anyone down. Postpartum depression and anxiety are common: sadness that will not lift, racing worry, intrusive thoughts, rage, or numbness are signs to reach out, and help works.",
+     self:"Taking turns with sleep, getting outside every day, and telling someone honestly how she is."},
+   partner:{tip:"Take crying shifts, carry the baby, and watch both parents' moods, your own included.",
+     dyad:"Carrying and walking with the baby through the fussy evening hours. Learning what settles her: rhythm, warmth, skin to skin, a quiet room.",
+     mother:"Real time off for her: a nap, a shower, a walk alone. Noticing changes in her mood and helping her reach care.",
+     self:"About one in ten fathers experiences depression around the birth, most often three to six months after (Paulson & Bazemore, 2010). Irritability, withdrawal, or working all the time can be signs. Postpartum Support International supports dads too."},
+   circle:{tip:"Someone to call on hard nights, and support that keeps coming after the first weeks.",
+     who:"Family, friends, a parent group, La Leche League, Postpartum Support International, a PPN practitioner.",
+     how:"Help that continues after the first rush of visitors fades. If the baby cries a great deal, a check with her care provider, and gentle therapies for babies holding a hard birth, such as craniosacral therapy or Integrative Baby Therapy (Wilks; Appleton).",
+     partner:"A friend who checks in on the partner, and a group for fathers and partners."},
+   best:{tip:"Carry her more, answer her cries, and take turns. At your limit, lay her down safely and breathe.",
+     items:[["Carry her more.","More carrying through the day meant less crying in healthy babies (Hunziker & Barr, 1986)."],
+       ["Answer her cries whenever you can.","Needs first, then listening. Being met is what builds trust."],
+       ["Try her reflex sounds.","Some parents find Dunstan's five sounds helpful: “neh” hungry, “owh” sleepy, “heh” discomfort, “eairh” lower gas, “eh” a burp."],
+       ["At your limit, pause.","Lay her down somewhere safe, step away for a few minutes, breathe, and call for help. Shaking a baby can cause serious brain injury."],
+       ["Check in on both parents.","Ask each other honestly how you are, and reach out early."]],
+     src:"Barr (1990); Hunziker & Barr (1986); Dunstan; Appleton (2017); Paulson & Bazemore (2010)"},
+   repair:["After a hard night", "If someone snapped, or cried too, repair with her: hold her, soften, and say, “That was a hard night. It was not your fault. I am here.”"]},
+
+  {t:"First smiles", w:"Weeks 7 to 9", span:"WEEKS 7–9",
+   baby:{tip:"Social smiles arrive, eye contact lengthens, and conversation begins.",
+     body:"The first social smiles usually appear around six to eight weeks. She stays longer in quiet alert, follows faces, and begins to coo. Bergman describes the first eight weeks or so as a critical window for wiring her brain, through closeness and sleep.",
+     feel:"Your face answering hers. When she smiles and you smile back, and she coos and you answer, she learns that she can reach someone.",
+     q:"When I smile, will you smile back?", why:"Her first smiles are her first invitations."},
+   mother:{tip:"Many mothers begin to feel more themselves; for others, hard feelings about the birth surface now.",
+     body:"Energy returns slowly. Her body is still healing inside even when it looks recovered, and the pelvic floor and belly muscles benefit from gentle rebuilding, with a pelvic floor physiotherapist if needed.",
+     heart:"The baby's smiles can feel like a reward for the hard weeks. As the fog lifts, some mothers feel grief or anger about the birth, which deserves to be heard. Birth trauma can surface as posttraumatic symptoms, and therapies such as EMDR help (Kendall-Tackett).",
+     self:"Gentle movement, time outdoors, and one thing each day that is just for her."},
+   partner:{tip:"Face-to-face play, songs, and the partner's own rituals with the baby.",
+     dyad:"Their own rituals: bath time, an evening walk, a song. Talking with her face to face and waiting for her reply.",
+     mother:"Making room for her healing, and taking the baby so she has time to herself.",
+     self:"For many partners the smiles are when the bond clicks into place. Partners who still feel distant can deepen it through skin to skin and hands-on care."},
+   circle:{tip:"Support for the mother's healing and the parents' relationship, and community for the long run.",
+     who:"Pelvic floor physiotherapist, therapist, parent groups, friends.",
+     how:"Childcare for an hour so the parents can be together. A referral for the mother if the birth still feels raw. Encouragement to keep carrying and feeding responsively.",
+     partner:"Friends who include the partner, and a workplace that supports family time."},
+   best:{tip:"Smile back, wait for her reply, and keep her close. These weeks still shape her brain.",
+     items:[["Take turns in conversation.","Smile or coo, then wait. Her reply may take a few seconds."],
+       ["Face time in quiet alert.","Short, frequent moments of eye contact and play when she is calm and alert."],
+       ["Keep closeness the default.","Carrying, skin to skin, and responsive feeding still support her brain's wiring (Bergman)."],
+       ["Tend the mother's healing.","Pelvic floor care, rest, and support for any lingering birth trauma."],
+       ["Protect the couple.","A few minutes each day of looking at each other, not only at the baby (Castellino, in White, 2013)."]],
+     src:"Bergman; Kendall-Tackett (2013); Castellino, in White (2013)"},
+   repair:["If the early weeks were hard", "The smiling weeks are a fresh chance. Each moment of being met adds to her trust, and relationships keep building over time."]},
+
+  {t:"Closing the fourth trimester", w:"Weeks 10 to 12", span:"WEEKS 10–12",
+   baby:{tip:"More awake, more social, more organized, and still a carried, often-fed baby.",
+     body:"Her sleeping and waking are more organized, and some longer stretches of sleep may appear. She reaches toward faces, may laugh aloud, and holds her head more steadily. Her brain keeps growing fast, reaching about 80 percent of its development by about 21 months (Bergman), so her need for closeness continues well past these weeks.",
+     feel:"Changes in her world: a parent going back to work, new caregivers, new places. She does best with familiar people who know her signals.",
+     q:"Will you still be here?", why:"As her world widens, she needs to know her people stay."},
+   mother:{tip:"The fourth trimester closes, and many mothers begin turning back toward work and the wider world.",
+     body:"Most physical healing is complete, though tiredness, hair shedding, and hormonal shifts continue. Feeding, if it continues, is usually well established.",
+     heart:"Becoming a mother, called matrescence, changes her identity as deeply as adolescence does. Going back to work can bring relief, guilt, and grief, often all at once.",
+     self:"Planning the return to work, or other changes, with feeding and childcare in mind. Asking what she needs now, and who can provide it."},
+   partner:{tip:"Plan the transitions together: work, childcare, feeding, and keeping the baby close.",
+     dyad:"An equal share of care, nights included, as a familiar, steady caregiver she knows.",
+     mother:"Supporting her feeding plan, and her return to work or home life as she chooses it.",
+     self:"Noticing how they have changed too. Partners' own early stories can surface in these months, and their healing matters as well."},
+   circle:{tip:"Caregivers who keep her close and respond to her, and a circle that stays.",
+     who:"Family, childcare providers, workplaces, community.",
+     how:"Caregivers who respond to her cues, carry her, and feed her the way the family does. A workplace with time and a place to pump. Continued check-ins with the mother.",
+     partner:"Family-friendly work for both parents."},
+   best:{tip:"Keep her habitat as her world widens: closeness, responsive feeding, and familiar people.",
+     items:[["Gentle transitions.","Introduce new caregivers gradually, with a parent there at first."],
+       ["Keep the milk going.","If breastfeeding, plan pumping or feeding at work with the employer ahead of time."],
+       ["Reconnect after time apart.","A feed or skin to skin, a slow hello, and telling her you are back."],
+       ["Keep carrying.","She is still a carried baby. Closeness remains her habitat long after twelve weeks."],
+       ["Look back together.","Tell the story of these months to each other, and to her."]],
+     src:"Bergman"},
+   repair:["After every separation", "Each time apart can end in a reunion. When you come back, slow down, hold her, and tell her: “I was away, and I came back. I am here now.”"]}
+];
+
+// Where to turn when more is needed: the same note closes each quarter (Module 10, Objective 4)
+const MORE_SUPPORT = [
+  "<b>For babies.</b> Integrative Baby Therapy (Appleton), biodynamic craniosacral therapy, cranial osteopathy, the Bowen Technique, and infant massage (Wilks). An IBCLC skilled in suck problems and oral function (Hazelbaker).",
+  "<b>For mothers.</b> Postpartum Support International, perinatal mental health specialists, and trauma therapists using Somatic Experiencing or EMDR. La Leche League and an IBCLC for feeding.",
+  "<b>For partners.</b> Postpartum Support International's support for dads, and a partner's own therapist or group.",
+  "<b>For the whole family.</b> The APPPAH practitioner directory, Prenatal Bonding (BA) facilitators for a next pregnancy, Baby-Friendly USA to find designated hospitals, and kangaroomothercare.com."];
+
+// The marks on the time wheel. Foundations: Bergman's four needs. First hour: Widström's nine stages.
+const NEEDS = [
+  ["Oxygen","On her mother's chest, heart rate and breathing steady within minutes."],
+  ["Warmth","Her mother's chest warms or cools to match her: thermal synchrony."],
+  ["Nutrition","Milk on cue, with digestion switched on by skin contact and suckling."],
+  ["Protection","From infection through milk, from stress through closeness, and from harm by being held."]];
+const STAGES = [
+  ["Birth cry","At birth","Her lungs expand."],
+  ["Relaxation","Right after","Her body and hands go limp, her mouth still."],
+  ["Awakening","About 2 to 4 minutes","Eyes open; small movements of head and shoulders."],
+  ["Activity","About 4 to 12 minutes","Rooting, mouthing, hand to mouth, tongue out."],
+  ["Rest","Throughout","Pauses come between every stage."],
+  ["Crawling","About 18 to 54 minutes","She slides, leaps, and pushes toward the breast."],
+  ["Familiarization","About 29 to 62 minutes","She licks and touches the nipple, often 20 minutes or more."],
+  ["Suckling","About 49 to 90 minutes","She latches on by herself."],
+  ["Sleeping","About 90 to 120 minutes","A deep sleep on her mother's chest."]];
+const DAY_NOTE = {1:"Rest after birth, colostrum, and rooming in.", 2:"Often a wakeful, hungry second night: frequent feeds help bring in the milk.",
+  3:"The milk may begin to come in, and the baby blues may begin.", 4:"Breasts may feel full or engorged; feeding often brings relief.",
+  5:"The milk is usually in by now, though a hard birth can delay it.", 14:"Most babies are back to their birth weight by about now, and the baby blues usually lift."};
+const WEEK_NOTE = {3:"Crying often begins to rise from about two weeks.", 6:"Crying often peaks around six to eight weeks, and the first social smiles may appear.",
+  8:"About the end of the eight-week window Bergman describes for early brain wiring.", 12:"Three months: the fourth trimester closes."};
+
+/* ---------- Geometry ---------- */
+const R = {core:[0,66], baby:[72,137], mother:[143,211], partner:[217,275], circle:[281,331], best:[337,399], span:[404,419], unit:[421,446], braid:[500,524]};
+const VB = 540;
+const LBL = {unit:434, sub:462, name:484};
+const GAP = 1.2;
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.getElementById("m");
+const rad = d => (d-90)*Math.PI/180;
+const P = (r,a) => [r*Math.cos(rad(a)), r*Math.sin(rad(a))];
+const f = n => n.toFixed(2);
+function el(tag, attrs, parent){ const e=document.createElementNS(NS,tag); for(const k in attrs) e.setAttribute(k,attrs[k]); (parent||svg).appendChild(e); return e; }
+function arc(r,a0,a1,sweep){ const [x,y]=P(r,a1); const large=Math.abs(a1-a0)>180?1:0; return `A${f(r)} ${f(r)} 0 ${large} ${sweep} ${f(x)} ${f(y)}`; }
+const CURVE=23;   // how far each petal edge swells outward
+function sector(r0,r1,a0,a1,n,bulge,bulgeIn){
+  const s0=P(r0,a0); let d=`M${f(s0[0])} ${f(s0[1])}`;
+  const e0=P(r1,a0); d+=` L${f(e0[0])} ${f(e0[1])}`;
+  const step=(a1-a0)/n;
+  for(let i=0;i<n;i++){ const b0=a0+i*step, b1=b0+step, m=(b0+b1)/2;
+    if(bulge){ const c=P(r1+bulge,m), e=P(r1,b1); d+=` Q${f(c[0])} ${f(c[1])} ${f(e[0])} ${f(e[1])}`; }
+    else d+=" "+arc(r1,b0,b1,1);
+  }
+  d+=` L${f(P(r0,a1)[0])} ${f(P(r0,a1)[1])} `;
+  if(bulgeIn){ const c=P(r0+bulgeIn,(a0+a1)/2), e=P(r0,a0); d+=`Q${f(c[0])} ${f(c[1])} ${f(e[0])} ${f(e[1])}Z`; }
+  else d+=arc(r0,a1,a0,0)+"Z";
+  return d;
+}
+function petal(r0,r1,a0,a1,bulgeIn){
+  const m=(a0+a1)/2, w=(a1-a0);
+  const b0=P(r0,a0), b1=P(r0,a1), tip=P(r1,m);
+  const c0=P(r0+(r1-r0)*.62,a0-w*.08), c1=P(r0+(r1-r0)*.62,a1+w*.08);
+  return `M${f(b0[0])} ${f(b0[1])} Q${f(c0[0])} ${f(c0[1])} ${f(tip[0])} ${f(tip[1])} Q${f(c1[0])} ${f(c1[1])} ${f(b1[0])} ${f(b1[1])} `+(bulgeIn ? `Q${f(P(r0+bulgeIn,m)[0])} ${f(P(r0+bulgeIn,m)[1])} ${f(b0[0])} ${f(b0[1])}` : arc(r0,a1,a0,0))+"Z";
+}
+// a small petal on the time wheel: it rises from the ring, swells, and meets in a soft point at its middle
+function unitPetal(a0,a1){
+  const r0=R.unit[0], sh=R.unit[0]+16, tip=R.unit[1], w=a1-a0, m=(a0+a1)/2, p=(r,a)=>`${f(P(r,a)[0])} ${f(P(r,a)[1])}`;
+  return `M${p(r0,a0)} C${p(sh,a0)} ${p(tip-3,m-w*.2)} ${p(tip,m)} C${p(tip-3,m+w*.2)} ${p(sh,a1)} ${p(r0,a1)} `+arc(r0,a1,a0,0)+"Z";
+}
+// text path along an arc that reads upright
+let tpId=0;
+function arcText(r,a0,a1,text,cls,size,ls,parent){
+  const m=((a0+a1)/2+360)%360, flip = m>95 && m<265;
+  const id="tp"+(tpId++);
+  const rr = flip ? r+size*0.35 : r-size*0.35;
+  const [sx,sy]=P(rr, flip?a1:a0);
+  el("path",{id, d:`M${f(sx)} ${f(sy)} `+arc(rr, flip?a1:a0, flip?a0:a1, flip?0:1), fill:"none"}, parent);
+  const t=el("text",{class:cls, "font-size":size, "text-anchor":"middle", "letter-spacing":ls||0}, parent);
+  const tp=el("textPath",{href:"#"+id, startOffset:"50%"}, t); tp.textContent=text; return t;
+}
+
+/* The units of time around the wheel, each with its angles and its card */
+const UNITS=[];
+(function(){
+  NEEDS.forEach(([n,line],k)=>UNITS.push({id:"n"+k, a0:k*22.5, a1:(k+1)*22.5, lbl:n.toUpperCase(), word:true,
+    html:`<b>${n}</b>${line}<span>One of Bergman's four needs of every newborn, all met on her mother's chest.</span>`}));
+  STAGES.forEach(([n,when,line],k)=>UNITS.push({id:"s"+(k+1), a0:90+k*10, a1:100+k*10, lbl:String(k+1),
+    html:`<b>Stage ${k+1}: ${n}</b>${line}<span>${when}</span>`}));
+  const dayA=d=> d===1 ? [180,210] : d<=4 ? [210+(d-2)*10, 220+(d-2)*10] : [240+(d-5)*3, 243+(d-5)*3];
+  for(let d=1;d<=14;d++){ const [a0,a1]=dayA(d), s=d===1?6:d<=4?7:8;
+    UNITS.push({id:"d"+d, a0, a1, lbl:String(d), html:`<b>Day ${d}</b>${DAY_NOTE[d]||SLICES[s].baby.tip}<span>${SLICES[s].t} · ${SLICES[s].w}</span>`}); }
+  const wkA=w=> w<=6 ? [270+(w-3)*7.5, 277.5+(w-3)*7.5] : w<=9 ? [300+(w-7)*10, 310+(w-7)*10] : [330+(w-10)*10, 340+(w-10)*10];
+  for(let w=3;w<=12;w++){ const [a0,a1]=wkA(w), s=w<=6?9:w<=9?10:11;
+    UNITS.push({id:"w"+w, a0, a1, lbl:String(w), html:`<b>Week ${w}</b>${WEEK_NOTE[w]||SLICES[s].baby.tip}<span>${SLICES[s].t} · ${SLICES[s].w}</span>`}); }
+})();
+
+/* ---------- Hover cards ---------- */
+const tipEl=document.getElementById("tip");
+let openTip=null;
+function showTip(node, info, hoverOnly){
+  if(openTip) openTip.classList.remove("open");
+  openTip=null;
+  if(!node){ tipEl.classList.remove("on"); return; }
+  if(!hoverOnly){ openTip=node; node.classList.add("open"); }
+  tipEl.innerHTML=info.html;
+  tipEl.classList.toggle("ringed",!!info.color);
+  if(info.color) tipEl.style.setProperty("--tipc",`var(${info.color})`);
+  const box=tipEl.parentElement, W=box.clientWidth, scale=W/(2*VB);
+  const px=(info.x+VB)*scale, py=(info.y+VB)*scale, w=tipEl.offsetWidth, h=tipEl.offsetHeight;
+  const left=Math.min(Math.max(px-w/2, 0), W-w);
+  const above=py-h-22*scale-6;
+  tipEl.style.left=left+"px"; tipEl.style.top=(above>=0 ? above : py+22*scale+6)+"px";
+  tipEl.classList.add("on");
+}
+// tap or click pins a card open; a mouse hover shows it while over; keyboard focus opens it too
+function tipOn(node, info){
+  node.addEventListener("click",e=>{ e.stopPropagation(); showTip(node.classList.contains("open")?null:node,info()); });
+  node.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); showTip(node,info()); } });
+  node.addEventListener("mouseenter",()=>{ if(!openTip) showTip(node,info(),true); });
+  node.addEventListener("mouseleave",()=>{ if(!openTip) showTip(null); });
+  node.addEventListener("focus",()=>{ if(node.matches(":focus-visible")) showTip(node,info()); });
+  node.addEventListener("blur",()=>{ if(openTip===node) showTip(null); });
+}
+document.addEventListener("click",()=>{ if(openTip) showTip(null); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape" && openTip) showTip(null); });
+window.addEventListener("resize",()=>showTip(null));
+
+function cellTip(ring, idx){
+  const s=SLICES[idx], tag=`<span class="ringtag"><i></i>${RING_TAG[ring]}</span>`;
+  return `${tag}<b>${s.t}</b>${s[ring].tip}<span>${s.w}<br>Tap to read more.</span>`;
+}
+
+/* ---------- Draw ---------- */
+const cells=[];
+function addCell(d, ring, idx, label, at){
+  const q=Math.floor(idx/3);
+  const c=el("path",{d, class:"cell", fill:`var(${RINGS[ring].color})`, tabindex:"0", role:"button", "aria-label":label});
+  c.dataset.ring=ring; c.dataset.q=q; c.dataset.idx=idx;
+  c.addEventListener("click",()=>select(q, ring, idx, true));
+  c.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); select(q, ring, idx, true);} });
+  c.addEventListener("mouseenter",()=>hover(idx)); c.addEventListener("mouseleave",()=>hover(null));
+  c.addEventListener("focus",()=>hover(idx)); c.addEventListener("blur",()=>hover(null));
+  const info=()=>{ const [x,y]=P(at.r,at.a); return {x,y,html:cellTip(ring,idx),color:RINGS[ring].color}; };
+  c.addEventListener("mouseenter",()=>{ if(!openTip) showTip(c,info(),true); });
+  c.addEventListener("mouseleave",()=>{ if(!openTip) showTip(null); });
+  c.addEventListener("focus",()=>{ if(!openTip && c.matches(":focus-visible")) showTip(c,info(),true); });
+  c.addEventListener("blur",()=>{ if(!openTip) showTip(null); });
+  cells.push(c); return c;
+}
+
+/* The braid: three strands, the baby, the mother and the support around them, plaited around the whole wheel.
+   Each strand is cut where it changes from lying underneath to lying on top; the lower pieces are drawn
+   first and the upper pieces over them, so each crossing shows who is on top. */
+function drawBraid(){
+  const r0=R.braid[0], r1=R.braid[1];
+  const hit=el("path",{d:`M0 ${-r1-4} A${r1+4} ${r1+4} 0 1 1 0 ${r1+4} A${r1+4} ${r1+4} 0 1 1 0 ${-r1-4} M0 ${-r0+4} A${r0-4} ${r0-4} 0 1 0 0 ${r0-4} A${r0-4} ${r0-4} 0 1 0 0 ${-r0+4}Z`,
+    class:"braidhit","fill-rule":"evenodd",tabindex:"0",role:"button","aria-label":"The sacred braid. Read what it means"});
+  const html=`<b>The sacred braid</b>Three strands woven together: the baby, the mother, and the support around them. Their relationships hold this mandala in place.`;
+  hit.addEventListener("click",e=>{ e.stopPropagation();
+    if(hit.classList.contains("open")){ showTip(null); return; }
+    const pt=new DOMPoint(e.clientX,e.clientY).matrixTransform(svg.getScreenCTM().inverse());
+    showTip(hit,{x:pt.x,y:pt.y,html}); });
+  hit.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); showTip(hit,{x:0,y:-(r0+r1)/2,html}); } });
+  hit.addEventListener("blur",()=>{ if(openTip===hit) showTip(null); });
+  const g=el("g",{class:"braid","pointer-events":"none","aria-hidden":"true"});
+  const rc=(r0+r1)/2, A=8.5, N=53, SUB=8;   // N plaits round the circle
+  const strands=[["--baby",0],["--mother",2*Math.PI/3],["--circle",4*Math.PI/3]];
+  const pieces=[[],[]];   // [under, over]
+  strands.forEach(([color,ph])=>{
+    for(let m=0;m<N*4;m++){
+      const t0=m*Math.PI/2-ph, pts=[];
+      for(let j=0;j<=SUB;j++){ const t=t0+j*Math.PI/(2*SUB), [x,y]=P(rc+A*Math.sin(t+ph), t*180/(Math.PI*N)); pts.push((j?"L":"M")+f(x)+" "+f(y)); }
+      pieces[m%2===0?1:0].push([pts.join(" "),color]);
+    }
+  });
+  pieces.forEach(list=>list.forEach(([d,color])=>{
+    el("path",{d,fill:"none",stroke:"var(--bg)","stroke-width":10,"stroke-linecap":"butt"},g);
+    el("path",{d,fill:"none",stroke:`var(${color})`,"stroke-width":6.5,"stroke-linecap":"round"},g);
+  }));
+}
+
+function draw(){
+  svg.innerHTML=""; cells.length=0; tpId=0;
+  drawBraid();
+  // the time wheel: a hit area for the ring as a whole, under the spans and petals that answer for themselves
+  const tr=el("path",{d:`M0 ${-R.unit[1]} A${R.unit[1]} ${R.unit[1]} 0 1 1 0 ${R.unit[1]} A${R.unit[1]} ${R.unit[1]} 0 1 1 0 ${-R.unit[1]} M0 ${-R.span[0]} A${R.span[0]} ${R.span[0]} 0 1 0 0 ${R.span[0]} A${R.span[0]} ${R.span[0]} 0 1 0 0 ${-R.span[0]}Z`,
+    class:"timering","fill-rule":"evenodd",tabindex:"0",role:"button","aria-label":"The time wheel. Read what it shows"});
+  const trHtml=`<b>The time wheel</b>The foundations hold Bergman's four needs of every newborn. Then the nine stages of the first hour, the first fourteen days, and weeks three to twelve.<span>Tap any mark for more, or enter a birth date to see today.</span>`;
+  tr.addEventListener("click",e=>{ e.stopPropagation();
+    if(tr.classList.contains("open")){ showTip(null); return; }
+    const pt=new DOMPoint(e.clientX,e.clientY).matrixTransform(svg.getScreenCTM().inverse());
+    showTip(tr,{x:pt.x,y:pt.y,html:trHtml}); });
+  tr.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); showTip(tr,{x:0,y:-R.unit[1],html:trHtml}); } });
+  tr.addEventListener("blur",()=>{ if(openTip===tr) showTip(null); });
+
+  // a span of color for each slice, named, the same twelve as the rings
+  SLICES.forEach((s,i)=>{
+    const a0=i*30, a1=a0+30, q=Math.floor(i/3);
+    const sp=el("path",{d:sector(R.span[0],R.span[1],a0+0.4,a1-0.4,1,0),class:i%2?"sspan alt":"sspan",tabindex:"0",role:"button","aria-label":`${s.t}, ${s.w}. Open this slice`});
+    const info=()=>{ const [x,y]=P(R.span[1],a0+15); return {x,y,html:`<b>${s.t}${s.es?` · <i>${s.es}</i>`:""}</b>${s.w}<span>Tap to open.</span>`}; };
+    sp.addEventListener("mouseenter",()=>{ if(!openTip) showTip(sp,info(),true); hover(i); });
+    sp.addEventListener("mouseleave",()=>{ if(!openTip) showTip(null); hover(null); });
+    sp.addEventListener("focus",()=>{ if(sp.matches(":focus-visible")) showTip(sp,info(),true); });
+    sp.addEventListener("blur",()=>showTip(null));
+    sp.addEventListener("click",e=>{ e.stopPropagation(); showTip(null); select(q,null,i,true); });
+    sp.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); select(q,null,i,true); } });
+    arcText((R.span[0]+R.span[1])/2,a0+1,a1-1,s.span,"slbl",10,1.3);
+  });
+  // the small petals of time, numbered, and a hit area over each that answers with its card
+  const gu=el("g",{"pointer-events":"none"});
+  UNITS.forEach(u=>el("path",{d:unitPetal(u.a0+0.2,u.a1-0.2),class:"units",id:"u-"+u.id},gu));
+  el("path",{d:`M0 ${-R.unit[0]} A${R.unit[0]} ${R.unit[0]} 0 1 1 0 ${R.unit[0]} A${R.unit[0]} ${R.unit[0]} 0 1 1 0 ${-R.unit[0]}`,class:"base"},gu);
+  UNITS.forEach(u=>{
+    if(u.word) arcText(LBL.unit,u.a0,u.a1,u.lbl,"ulbl word",8.5,1);
+    else { const [tx,ty]=P(LBL.unit,(u.a0+u.a1)/2);
+      const t=el("text",{x:f(tx),y:f(ty),class:"ulbl","text-anchor":"middle","dominant-baseline":"central",id:"ul-"+u.id},gu); t.textContent=u.lbl; }
+    const hit=el("path",{d:sector(R.unit[0]-2,R.unit[1]+4,u.a0,u.a1,1,0),class:"uhit",tabindex:"0",role:"button","aria-label":u.html.replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim()});
+    const pt=document.getElementById("u-"+u.id), warm=on=>pt.classList.toggle("hov",on);
+    hit.addEventListener("mouseenter",()=>warm(true)); hit.addEventListener("mouseleave",()=>warm(false));
+    hit.addEventListener("focus",()=>warm(true)); hit.addEventListener("blur",()=>warm(false));
+    tipOn(hit,()=>{ const [x,y]=P(R.unit[1],(u.a0+u.a1)/2); return {x,y,html:u.html+(u.id===todayUnit()?`<span><b>Today</b></span>`:"")}; });
+  });
+  // gold marks where each quarter begins: the foundations, birth, the first days, the first months
+  [0,90,180,270].forEach(a=>{ const [x0,y0]=P(R.span[0]-2,a), [x1,y1]=P(R.unit[1]+2,a), [gx,gy]=P(R.unit[0],a);
+    el("line",{x1:f(x0),y1:f(y0),x2:f(x1),y2:f(y1),class:"qmark"});
+    el("circle",{cx:f(gx),cy:f(gy),r:5,class:"gem"}); });
+
+  // best practices petals (outermost ring), one per slice
+  SLICES.forEach((s,i)=>addCell(petal(R.best[0],R.best[1],i*30+GAP,(i+1)*30-GAP,CURVE),"best",i,`${RINGS.best.name}, ${s.t}`,{a:i*30+15,r:R.best[0]+24}));
+  // circle, partner, and mother rings: scalloped segments aligned with the slices
+  ["circle","partner","mother"].forEach(k=>SLICES.forEach((s,i)=>
+    addCell(sector(R[k][0],R[k][1],i*30+GAP,(i+1)*30-GAP,1,CURVE,CURVE),k,i,`${RINGS[k].name}, ${s.t}`,{a:i*30+15,r:(R[k][0]+R[k][1])/2})));
+  // baby ring
+  SLICES.forEach((s,i)=>addCell(sector(R.baby[0],R.baby[1],i*30+GAP,(i+1)*30-GAP,1,CURVE),"baby",i,`${RINGS.baby.name}, ${s.t}`,{a:i*30+15,r:(R.baby[0]+R.baby[1])/2}));
+  // ring labels, on the middle slice of each quarter; quarter names outside
+  QUARTERS.forEach((qq,q)=>{
+    const a0=q*90, a1=a0+90;
+    arcText((R.baby[0]+R.baby[1])/2+4,a0+31,a1-31,"BABY","lbl lbl-dark",14,2.5);
+    arcText((R.mother[0]+R.mother[1])/2-6,a0+31,a1-31,"MOTHER","lbl lbl-dark",14,2.5);
+    arcText((R.partner[0]+R.partner[1])/2+4,a0+31,a1-31,"PARTNER","lbl lbl-light",14,2.5);
+    arcText((R.circle[0]+R.circle[1])/2,a0+31,a1-31,"CIRCLE","lbl lbl-light",14,2.5);
+    arcText(R.best[0]+22,a0+31,a1-31,"BEST PRACTICES","lbl lbl-light",11.5,1.6);
+    const t=arcText(LBL.name,a0+3,a1-3,qq.name,"seclbl",22,1.5);
+    t.addEventListener("click",()=>select(q,null,null,true));
+    arcText(LBL.sub,a0+3,a1-3,qq.sub,"secsub",12.5,1.6);
+  });
+  // the center: the dyad, two circles overlapping, the shared space between them filled
+  const core=el("g",{class:"cell", tabindex:"0", role:"button","aria-label":"The dyad at the center. Read more about the center of this mandala"});
+  el("circle",{cx:0,cy:0,r:R.core[1],fill:"var(--center)"},core);
+  const sr=28, h=Math.sqrt(sr*sr-14*14);
+  const g=el("g",{fill:"none",stroke:"var(--seed)","stroke-width":3.3,"pointer-events":"none"},core);
+  el("path",{d:`M0 ${f(-h)} A${sr} ${sr} 0 0 1 0 ${f(h)} A${sr} ${sr} 0 0 1 0 ${f(-h)}Z`,fill:"var(--seed)",stroke:"none",opacity:.95},g);
+  el("circle",{cx:-14,cy:0,r:sr},g); el("circle",{cx:14,cy:0,r:sr},g);
+  el("circle",{cx:0,cy:0,r:sr*2,"stroke-width":2.8,opacity:.9},g);
+  core.addEventListener("click",()=>showCenter(true)); core.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();showCenter(true);}});
+  const ct=document.getElementById("coretip");
+  ["mouseenter","focus"].forEach(ev=>core.addEventListener(ev,()=>ct.classList.add("on")));
+  ["mouseleave","blur","click"].forEach(ev=>core.addEventListener(ev,()=>ct.classList.remove("on")));
+  el("g",{id:"selOutline"});
+  markToday(); applySel();
+}
+
+/* ---------- The birth date ---------- */
+const DAY=86400000;
+let BORN=null;
+function todayMid(){ const n=new Date(); return new Date(n.getFullYear(),n.getMonth(),n.getDate()); }
+function dayNum(){ return BORN ? Math.round((todayMid()-BORN)/DAY)+1 : null; }   // the birth date is day 1
+function todaySlice(){ const d=dayNum(); if(d==null||d<1) return null;
+  if(d===1) return 6; if(d<=4) return 7; if(d<=14) return 8;
+  const w=Math.ceil(d/7); return w<=6?9 : w<=9?10 : w<=12?11 : null; }
+function todayUnit(){ const d=dayNum(); if(d==null||d<1) return null;
+  if(d<=14) return "d"+d; const w=Math.ceil(d/7); return w<=12 ? "w"+w : null; }
+function markToday(){
+  document.querySelectorAll(".units.now,.ulbl.now").forEach(n=>n.classList.remove("now"));
+  const u=todayUnit(); if(!u) return;
+  const p=document.getElementById("u-"+u), l=document.getElementById("ul-"+u);
+  if(p) p.classList.add("now"); if(l) l.classList.add("now");
+}
+const fmt=d=>d.toLocaleDateString(undefined,{month:"long",day:"numeric",year:"numeric"});
+function setStatus(){
+  const st=document.getElementById("status"); document.getElementById("clear").hidden=!BORN;
+  if(!BORN){ st.textContent="Enter the baby's birth date, actual or expected, to see where you are in the fourth trimester."; return; }
+  const d=dayNum(), s=todaySlice();
+  if(d<1){ const n=1-d; st.innerHTML=`Birth expected ${fmt(BORN)}, <b>${n} day${n===1?"":"s"} from now</b>. A good time to learn the foundations, plan the first hour, and line up the circle.`; return; }
+  if(s==null){ st.innerHTML=`Born ${fmt(BORN)}. <b>The fourth trimester is complete.</b> The foundations still hold: closeness, responsive feeding, and being understood.`; return; }
+  const where = d<=14 ? `day ${d}` : `week ${Math.ceil(d/7)}, day ${d}`;
+  st.innerHTML=`Born ${fmt(BORN)}. Today is <b>${where}</b>: ${SLICES[s].t}, ${SLICES[s].w.toLowerCase()}.`;
+}
+
+/* ---------- The reading panel ---------- */
+const panel=document.getElementById("panel"), tabs=document.getElementById("tabs");
+let sel={q:null,ring:null,idx:null};
+function sw(v){ return `<span class="sw" style="background:var(${v})"></span>`; }
+function ul(items){ return "<ul>"+items.map(i=>`<li>${i}</li>`).join("")+"</ul>"; }
+
+const CENTER_HTML=`<div class="center-msg">
+    <div class="eyebrow">Begin here</div>
+    <h2>The dyad at the center</h2>
+    <p>After birth, mother and baby are not so much two separate people as one unit, continuing the gestation outside the womb. In medicine the pair is called a dyad (Bergman). The womb did the work of the placenta and the cord; now her chest and her milk do it, and the baby's own instincts lead the way.</p>
+    <p>Pre- and perinatal education adds that the baby is aware: she is feeling, remembering, and taking in how she is met, and she tells her story through her crying and her body. A mother who is held can hold her baby, and a baby who is understood can settle and trust.</p>
+    <p>Every ring around the dyad exists to keep them together and to hold them: the partner who protects them, the circle who holds them all, and the best practices that turn this knowledge into what people actually do, hour by hour and day by day.</p>
+    <p class="sym">At the center are two circles overlapping, the oldest picture of two becoming one. The shared space between them is the dyad: neither one alone, both at once.</p>
+  </div>`;
+function showCenter(user){
+  showIntro();
+  if(user && window.matchMedia("(max-width:900px)").matches) panel.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function showIntro(){
+  sel={q:null,ring:null,idx:null}; applySel(); markTabs();
+  panel.innerHTML=CENTER_HTML+`<div class="intro">
+    <h2>Reading from the center out</h2>
+    <p>Begin at the center with the dyad and move outward. Each ring is a layer within the same moment, so reading straight out from any slice shows how the baby, the mother, the partner, the circle, and the best practices meet then. The rings are also layers of support: each one holds the one inside it.</p>
+    <ul class="legend">
+      ${RING_ORDER.map(k=>`<li>${sw(RINGS[k].color)}<div><b>${RINGS[k].name}</b>${RINGS[k].about}${RINGS[k].more||""}</div></li>`).join("")}
+      <li>${sw("--time")}<div><b>The time wheel</b>The timekeeper. Its inner band names each slice, lined up with the rings. Its small petals hold Bergman's four needs in the foundations, Widström's nine stages in the first hour, the first fourteen days, and weeks three to twelve. Enter a birth date and today turns gold.</div></li>
+    </ul>
+    <p>The wheel begins at the top with the foundations, warmth, milk, and love, which hold for the whole fourth trimester. Then it moves clockwise through time: the first hour, the first days, and the first months, closing at twelve weeks where the foundations began.</p>
+    <p class="hint">Choose any petal or ring on the mandala, or a quarter above, to open it.</p>
+  </div>`;
+}
+
+function select(q, ring, idx, user){
+  sel={q,ring,idx}; applySel(); markTabs();
+  const qq=QUARTERS[q], ts=todaySlice();
+  const hl=(k,i)=> (ring===k && (idx==null||idx===i))?" hl":"";
+  const cards=[q*3,q*3+1,q*3+2].map(i=>{
+    const s=SLICES[i], isNow=(ts===i);
+    return `<article class="scard${idx===i?" cur":""}" id="sl-${i}">
+      <div class="st">${s.t}${s.es?` <b>${s.es}</b>`:""}<span>${s.w}${isNow?" · <b>today</b>":""}</span></div>
+      <div class="lane l-baby${hl("baby",i)}"><h4>${sw("--baby")}The baby</h4><p>${s.baby.body}</p><p class="take">${s.baby.feel}</p>
+        <p class="herq"><span>Baby's question</span>${s.baby.q}<small>${s.baby.why}</small></p></div>
+      <div class="lane l-mother${hl("mother",i)}"><h4>${sw("--mother")}The mother</h4><p><b>Her body.</b> ${s.mother.body}</p><p><b>Her emotional life.</b> ${s.mother.heart}</p><p><b>Caring for herself.</b> ${s.mother.self}</p></div>
+      <div class="lane l-partner${hl("partner",i)}"><h4>${sw("--partner")}The partner</h4><p><b>Protecting the dyad.</b> ${s.partner.dyad}</p><p><b>Supporting the mother.</b> ${s.partner.mother}</p><p><b>For the partner.</b> ${s.partner.self}</p></div>
+      <div class="lane l-circle${hl("circle",i)}"><h4>${sw("--circle")}The circle</h4><p><b>Who.</b> ${s.circle.who}</p><p><b>How they help.</b> ${s.circle.how}</p><p><b>Holding the partner.</b> ${s.circle.partner}</p></div>
+      <div class="lane l-best${hl("best",i)}"><h4>${sw("--best")}Best practices</h4>${ul(s.best.items.map(([h,w])=>`<b>${h}</b> ${w}`))}<p class="src">${s.best.src}</p></div>
+      <p class="repair"><b>Repair. ${s.repair[0]}.</b> ${s.repair[1]}</p>
+    </article>`;
+  }).join("");
+  panel.innerHTML=`<div class="phasehead"><h2>${qq.name}</h2><div class="meta">${qq.sub}${ts!=null&&Math.floor(ts/3)===q?" · you are here":""}</div><p>${qq.intro}</p></div>
+    ${cards}
+    <div class="support"><h3>If more support is needed</h3><p>When feelings or symptoms feel too big to hold alone, for the baby, the mother, or the partner, these are places to turn.</p>${ul(MORE_SUPPORT)}</div>`;
+  const target = idx!=null ? document.getElementById("sl-"+idx) : null;
+  if(!user) return;
+  if(window.matchMedia("(max-width:900px)").matches) (target||panel).scrollIntoView({behavior:"smooth",block:"start"});
+  else if(target){ const r=target.getBoundingClientRect(); if(r.top<0||r.top>window.innerHeight*0.7) target.scrollIntoView({behavior:"smooth",block:"start"}); }
+}
+function markTabs(){
+  [...tabs.children].forEach((b,i)=>b.setAttribute("aria-selected", (i===0 && sel.q==null) || (i>0 && sel.q===i-1) ? "true":"false"));
+}
+function applySel(){
+  const so=document.getElementById("selOutline");
+  if(!so) return; so.innerHTML="";
+  // a slice: one thin line around it, from the baby out through the circle
+  if(sel.idx!=null){ const a0=sel.idx*30+GAP/2, a1=(sel.idx+1)*30-GAP/2;
+    el("path",{d:sector(R.baby[0]-3,R.circle[1]+3,a0,a1,1,CURVE)},so); return; }
+  if(sel.ring!=null) cells.forEach(c=>{ if(+c.dataset.q===sel.q && c.dataset.ring===sel.ring) el("path",{d:c.getAttribute("d")},so); });
+}
+// hovering any cell lights its whole slice, from the baby out to its best practices petal
+function hover(idx){
+  if(idx==null){ svg.classList.remove("dimming"); cells.forEach(c=>c.classList.remove("off")); return; }
+  svg.classList.add("dimming");
+  cells.forEach(c=>c.classList.toggle("off", +c.dataset.idx!==idx));
+}
+
+/* tabs */
+const ab=document.createElement("button"); ab.className="tab"; ab.type="button"; ab.setAttribute("role","tab"); ab.textContent="How to read"; ab.addEventListener("click",()=>showIntro()); tabs.appendChild(ab);
+QUARTERS.forEach((qq,q)=>{ const b=document.createElement("button"); b.className="tab"; b.type="button"; b.setAttribute("role","tab"); b.textContent=qq.tab;
+  b.addEventListener("click",()=>select(q,null,null,false)); tabs.appendChild(b); });
+
+/* light and dark switch */
+const root=document.documentElement, tbtn=document.getElementById("themebtn");
+const sysDark=window.matchMedia("(prefers-color-scheme: dark)");
+function isDark(){ const t=root.getAttribute("data-theme"); return t ? t==="dark" : sysDark.matches; }
+function syncTheme(){ const d=isDark(); root.classList.toggle("is-dark",d); tbtn.setAttribute("aria-label", d?"Switch to light mode":"Switch to dark mode"); tbtn.title=d?"Light mode":"Dark mode"; }
+tbtn.addEventListener("click",()=>{ const next=isDark()?"light":"dark"; root.setAttribute("data-theme",next); try{ localStorage.setItem("ft-theme",next); }catch(e){} syncTheme(); });
+sysDark.addEventListener("change",syncTheme);
+syncTheme();
+
+/* ring key */
+const rk=document.getElementById("ringkey");
+RING_ORDER.forEach(k=>{
+  const b=document.createElement("button"); b.type="button"; b.innerHTML=sw(RINGS[k].color)+RINGS[k].name;
+  b.addEventListener("click",()=>{ const ts=todaySlice(); const q = sel.q!=null?sel.q:(ts!=null?Math.floor(ts/3):0); select(q,k,null,true); });
+  rk.appendChild(b);
+});
+
+/* date form */
+const form=document.getElementById("dateform"), inp=document.getElementById("born");
+const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+function setBorn(v, save){
+  if(v){ const [y,mo,d]=v.split("-").map(Number); BORN=new Date(y,mo-1,d); } else BORN=null;
+  if(save){ try{ v?localStorage.setItem("ft-born",v):localStorage.removeItem("ft-born"); }catch(e){} }
+  inp.value = BORN ? iso(BORN) : "";
+  markToday(); setStatus();
+  const ts=todaySlice();
+  if(ts!=null) select(Math.floor(ts/3),null,ts,save);
+  else if(BORN && dayNum()<1) select(0,null,null,save);
+  else if(sel.q!=null) select(sel.q,sel.ring,sel.idx);
+}
+form.addEventListener("submit",e=>{ e.preventDefault(); if(inp.value) setBorn(inp.value,true); });
+document.getElementById("clear").addEventListener("click",()=>setBorn(null,true));
+
+draw();
+let saved=null; try{ saved=localStorage.getItem("ft-born"); }catch(e){}
+if(saved) setBorn(saved,false); else { setStatus(); showIntro(); }
+
+})();
+</script>
+
+</body></html>

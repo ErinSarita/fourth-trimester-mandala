@@ -1,0 +1,9 @@
+# The Fourth Trimester Mandala
+
+A teaching map of the first twelve weeks after birth, read from the center out: the dyad (mother and baby) at the center, then the baby, the mother, the partner, the wider circle of support, and best practices for each moment.
+
+The wheel begins at the top with the foundations (warmth, milk, and love: Bergman's habitat and niche, and the *calor, leche, y amor* of kangaroo mother care), then moves clockwise through the first hour (Widström's nine stages), the first days (day 1 to two weeks), and the first months (weeks 3 to 12).
+
+Created by Erin Singleton, a student in APPPAH's Prenatal & Perinatal Educator certification, as a project for Module Ten, on the fourth trimester. It continues from The Pregnancy and Birth Mandala. An educational map, not medical advice.
+
+The mandala is the single file `index.html`. Its content lives in the `SLICES` array (twelve slices, each with the baby, mother, partner, circle, best practices, and a repair), plus `QUARTERS`, `NEEDS`, `STAGES`, and `MORE_SUPPORT`. Settings saved in the browser use the `ft-` prefix (`ft-theme`, `ft-born`).
