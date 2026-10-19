@@ -1160,9 +1160,8 @@ function select(q, ring, idx, user){
       <p class="repair"><b>Repair. ${s.repair[0]}.</b> ${s.repair[1]}</p>
     </article>`;
   }).join("");
-  const head = idx!=null
-    ? `<div class="phasehead slim"><div class="eyebrow">${qq.name} · ${idx%3+1} of 3</div></div>`
-    : `<div class="phasehead"><h2>${qq.name}</h2><div class="meta">${qq.sub}${ts!=null&&Math.floor(ts/3)===q?" · you are here":""}</div><p>${qq.intro}</p></div>`;
+  // the quarter's intro stays at the top, whether its three slices are open or just one
+  const head = `<div class="phasehead"><h2>${qq.name}</h2><div class="meta">${qq.sub}${idx!=null?` · ${SLICES[idx].t}, ${idx%3+1} of 3`:""}${ts!=null&&Math.floor(ts/3)===q?" · you are here":""}</div><p>${qq.intro}</p></div>`;
   panel.innerHTML=`${head}
     ${cards}
     <div class="support"><h3>If more support is needed</h3><p>No one is meant to carry these weeks alone. When something feels too big to hold, for the baby, the mother, or the partner, help is out there: someone for feeding, for rest, for the birth story, for her mind and her body, and for the baby's body too.</p><p><a class="go" href="#support" data-go="sup">See who can help, the signs that support may help, and how to find it.</a></p></div>`;
