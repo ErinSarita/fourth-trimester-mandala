@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ways to Help · My Fourth Trimester Plan</title>
+<link rel="icon" href="../favicon.svg?v=1" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Mulish:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+/* One letter page, 816 × 1056 px, for the fridge or the front door: every way to help, to circle and to rank. */
+:root{
+  --paper:#FFFBF6; --blush:#FBEDE6; --ink:#4E2A2E; --muted:#8E6366; --rule:#EBD8CF; --lineink:#E6CFC5;
+  --center:#F5D27A; --baby:#FAE29C; --mother:#F8C8B8; --partner:#F1B097; --circle:#EA9C91; --edu:#DF8A8E; --best:#D17489; --gold:#C08A2E;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#E9DDD7;font-family:Mulish,"Avenir Next","Segoe UI",sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+.bar{position:sticky;top:0;z-index:5;display:flex;gap:8px;justify-content:center;padding:10px;background:rgba(255,251,246,.92);border-bottom:1px solid var(--rule);font-size:14px}
+.bar a,.bar button{font:inherit;font-weight:600;border:1px solid var(--rule);background:#fff;color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer;text-decoration:none}
+.bar .primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+.wrap{display:flex;justify-content:center;padding:24px 12px 60px}
+.sheet{position:relative;width:816px;height:1056px;overflow:hidden;background:var(--paper);padding:44px 46px 0;box-shadow:0 10px 30px rgba(78,42,46,.18)}
+.sheet::before{content:"";position:absolute;left:0;right:0;top:0;height:8px;background:linear-gradient(90deg,var(--center),var(--baby) 16%,var(--mother) 34%,var(--partner) 52%,var(--circle) 68%,var(--edu) 84%,var(--best))}
+.top{display:grid;grid-template-columns:1fr 250px;gap:20px;align-items:end;margin-bottom:12px}
+.eb{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 6px}
+h1{font-family:Marcellus,Georgia,serif;font-weight:400;font-size:38px;line-height:1;margin:0 0 6px}
+.lede{font-family:Marcellus,Georgia,serif;font-size:13px;line-height:1.45;margin:0;color:var(--ink)}
+.for{display:grid;grid-template-columns:auto 1fr;gap:4px 8px;font-size:10.5px;color:var(--muted);align-items:end}
+.ln{height:22px;border-bottom:1px solid var(--lineink);font-style:italic;color:var(--ink);font-size:12.5px;line-height:22px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;font-size:10.5px;color:var(--muted);padding:8px 12px;border:1px solid var(--rule);border-radius:999px;background:#fff;margin:2px 0 10px;justify-content:center}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.cols{columns:3;column-gap:18px;font-size:10px;line-height:1.24}
+.grp{break-inside:avoid;margin:0 0 8px}
+.grp h3{font-family:Marcellus,Georgia,serif;font-weight:400;font-size:13px;margin:0 0 3px;display:flex;gap:7px;align-items:center;padding-bottom:3px;border-bottom:1.5px solid var(--c)}
+.grp h3 i{width:9px;height:9px;border-radius:50%;background:var(--c)}
+.grp ul{list-style:none;margin:0;padding:0;display:grid;gap:1.5px}
+.grp li{display:grid;grid-template-columns:12px 1fr auto;gap:6px;align-items:start}
+.o{width:10px;height:10px;border-radius:50%;border:1.3px solid var(--c);margin-top:1px}
+.o.on{background:var(--c)}
+.petals{display:inline-flex;gap:1.5px;margin-top:1px}
+.petals svg{width:7px;height:10px}
+.petals path{fill:none;stroke:var(--best);stroke-width:1.3}
+.petals path.on{fill:var(--best)}
+.foot{position:absolute;left:46px;right:46px;bottom:30px;display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid var(--rule);padding-top:10px;font-size:10px;color:var(--muted)}
+.foot b{font-family:Marcellus,Georgia,serif;font-weight:400;font-size:13px;color:var(--ink)}
+@media print{
+  @page{size:letter;margin:0}
+  body{background:none}.bar{display:none}.wrap{padding:0;display:block}
+  .sheet{box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (max-width:840px){ .wrap{zoom:.45} }
+</style>
+</head>
+<body>
+<div class="bar"><a href="./">Back to the workbook</a><button class="primary" type="button" onclick="print()">Print or save as PDF</button></div>
+<div class="wrap"><div class="sheet" id="sheet"></div></div>
+<script src="content.js"></script>
+<script>
+(function(){
+"use strict";
+const MINE=new URLSearchParams(location.search).has("mine");
+let v={}; if(MINE){ try{ const d=JSON.parse(localStorage.getItem("ftw-plan")||"null"); if(d) v=d.v||{}; }catch(e){} }
+const esc=t=>String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const petal=on=>`<svg viewBox="0 0 10 14"><path class="${on?"on":""}" d="M5 1C8 4 8.6 9 5 13C1.4 9 2 4 5 1Z"/></svg>`;
+const petals=n=>`<span class="petals">${[1,2,3].map(i=>petal(i<=n)).join("")}</span>`;
+const ornament=w=>{ const cols=["--center","--baby","--mother","--partner","--circle","--edu","--best"], g=w/cols.length;
+  return `<svg width="${w}" height="16" viewBox="0 0 ${w} 16">${cols.map((c,i)=>{ const x=(i+.5)*g; return `<path d="M${x} 1C${x+4} 5 ${x+4.6} 10 ${x} 15C${x-4.6} 10 ${x-4} 5 ${x} 1Z" fill="var(${c})"/>`; }).join("")}</svg>`; };
+document.getElementById("sheet").innerHTML=`
+  <div class="top"><div><div class="eb">From My Fourth Trimester Plan</div><h1>Ways to help</h1>
+    <p class="lede">In these weeks a new mother's work is to rest, heal, feed, and be with her baby. Everything else can be shared. Choose any task, let her know, and do it in your own way.</p></div>
+    <div class="for"><span>For</span><div class="ln">${esc(v["me.name"])}</div><span>and baby</span><div class="ln">${esc(v["me.baby"])}</div><span>Call or text</span><div class="ln">${esc(v["p.phone"]||"")}</div></div></div>
+  <div class="legend"><span><span class="o" style="--c:var(--best)"></span>Circled: help I would love</span><span>${petals(1)} nice to have</span><span>${petals(2)} would love</span><span>${petals(3)} most important</span></div>
+  <div class="cols">${CATS.map(([k,name,c,items])=>`<div class="grp" style="--c:var(${c})"><h3><i></i>${name}</h3><ul>${items.map((t,i)=>`<li><span class="o${v[`home.${k}.${i}`]?" on":""}"></span><span>${t}</span>${petals(+(v[`home.${k}.${i}.pri`]||0))}</li>`).join("")}</ul></div>`).join("")}</div>
+  <div class="foot"><span>${ornament(84)}</span><b>Thank you for holding us, so we can hold our baby.</b><span>The Fourth Trimester Mandala</span></div>`;
+if(new URLSearchParams(location.search).has("print")) window.addEventListener("load",()=>setTimeout(()=>print(),400));
+})();
+</script>
+</body>
+</html>
