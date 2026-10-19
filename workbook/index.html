@@ -48,6 +48,7 @@ h1{font-family:var(--display);font-weight:400;font-size:clamp(34px,6vw,52px);lin
 .toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:14px 0}
 .btn{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer}
 .btn:hover{background:var(--bg)}
+a.btn{text-decoration:none;display:inline-flex;align-items:center}
 .btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .toolbar .note{flex-basis:100%;margin:2px 0 0;font-size:13px;color:var(--muted)}
 .saved{font-size:13px;color:var(--muted);margin-left:auto}
@@ -101,6 +102,8 @@ ul.checks .why{display:block;font-size:13.5px;color:var(--muted)}
 .person .cat-l{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:4px}
 .person .req{font-size:14.5px;margin:0;white-space:pre-wrap}
 .empty{margin:0;color:var(--muted);font-size:14.5px}
+.printonly{display:none!important}
+@media print{ .printonly{display:grid!important} }
 .circlefig{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center}
 .circlefig svg{width:230px;height:230px;flex:none}
 .circlefig text{font-family:var(--body);font-size:11.5px;font-weight:700;fill:var(--on-light);text-anchor:middle;dominant-baseline:central}
@@ -128,7 +131,7 @@ ul.checks .why{display:block;font-size:13.5px;color:var(--muted)}
   section.part:first-of-type{break-before:auto}
   section.part.skip{display:none}
   .person{break-before:page;break-inside:avoid}
-  .person:first-child{break-before:auto}
+  .person:first-of-type{break-before:auto}
   .card,.cat,.learn article,.urgent{break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   input[type=text],input[type=tel],input[type=date],select{border:none;border-bottom:1px solid #bbb;border-radius:0;padding:2pt 0;background:none}
   textarea{border:1px solid #ddd;background:repeating-linear-gradient(#fff 0 23px,#ddd 23px 24px);-webkit-print-color-adjust:exact;print-color-adjust:exact;line-height:24px;padding:0 6pt;resize:none}
@@ -158,11 +161,12 @@ try{ var t=localStorage.getItem("ft-theme"); if(t==="light"||t==="dark") documen
   </header>
 
   <div class="toolbar">
+    <a class="btn" href="my-fourth-trimester-plan.pdf" target="_blank" rel="noopener">Open the PDF</a>
     <button class="btn primary" type="button" id="print">Print or save as PDF</button>
     <button class="btn" type="button" id="printblank">Print a blank copy</button>
     <button class="btn" type="button" id="clear">Clear everything</button>
     <span class="saved" id="saved" aria-live="polite"></span>
-    <p class="note">What you write is saved only in this browser, on this device, and is not sent anywhere. To share it, print it or save it as a PDF. Your birth story is printed only if you choose.</p>
+    <p class="note">Fill it in here, or open the PDF to flip through or print and write in by hand. What you write here is saved only in this browser, on this device, and is not sent anywhere. To share it, print it or save it as a PDF. Your birth story is printed only if you choose.</p>
   </div>
 
   <nav class="toc" id="toc" aria-label="Parts of the workbook"></nav>
@@ -281,7 +285,7 @@ const PARTS=[
 
  {id:"story", c:"--mother", title:"My birth story", html:()=>`
    <p class="intro">Telling the story of a birth, and being heard, is part of healing (Kendall-Tackett). Write as much or as little as you like, whenever you are ready, even months later. There is no right way for a birth to have gone.</p>
-   <p class="private"><label style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="story.print" id="storyprint" style="width:18px;height:18px;accent-color:var(--best)"> Include my birth story when I print or share this workbook</label></p>
+   <p class="private noprint"><label style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="story.print" id="storyprint" style="width:18px;height:18px;accent-color:var(--best)"> Include my birth story when I print or share this workbook</label></p>
    ${area("story.began","How it began")}
    ${area("story.born","How my baby was born")}
    ${area("story.with","Who was with me, and what they did")}
@@ -401,7 +405,9 @@ function summary(){
   // free-text names from an older version
   const others=list.filter(x=>x.who && x.who!=="anyone" && !ps.some(p=>p.id===x.who));
   const otherCard=others.length?`<div class="person" style="--c:var(--mother)"><h3>Others</h3><ul>${others.map(x=>`<li>${esc(x.task)}: ${esc(x.who)}</li>`).join("")}</ul></div>`:"";
-  box.innerHTML = (cards.join("")+openCard+otherCard) || `<p class="empty">As you check tasks in "Ways to help me" and choose who to ask, each person's list appears here.</p>`;
+  // with nothing assigned yet, the printed workbook gets blank pages to fill in by hand, one per supporter
+  const blank=n=>`<div class="person printonly" style="--c:var(${["--partner","--circle","--circle","--circle","--edu"][n]})"><div class="grid"><label class="f">Name<input type="text"></label><label class="f">Phone<input type="text"></label></div><label class="f">The help I am asking of you<textarea style="height:300px"></textarea></label><label class="f">What I would love from you<textarea style="height:120px"></textarea></label></div>`;
+  box.innerHTML = (cards.join("")+openCard+otherCard) || (`<p class="empty noprint">As you check tasks in "Ways to help me" and choose who to ask, each person's list appears here.</p>`+[0,1,2,3,4].map(blank).join(""));
 }
 
 /* the circle figure carries the names she writes */

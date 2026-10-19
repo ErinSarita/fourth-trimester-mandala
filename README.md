@@ -11,3 +11,5 @@ The mandala is the single file `index.html`. Its content lives in the `SLICES` a
 ## The workbook
 
 `workbook/index.html` is *My Fourth Trimester Plan*, a fillable workbook linked from the mandala's opening and its Support page. It covers the mother and baby, her circle of support (partner, at least three main supporters, wider layers), requests for her partner and each layer, her first hour plan, feeding plan, a menu of help to pick from (85 tasks in 14 groups) with each task assigned to a named person or to anyone, a "Who is doing what" page per supporter, rest and visitors, signs to watch for, her birth story (printed only if she ticks it), a guide for supporters drawn from the mandala, and contacts. What she writes is saved only in her browser (`ftw-plan`). Print or save as PDF to share, or print a blank copy to fill in by hand.
+
+`workbook/my-fourth-trimester-plan.pdf` is the same workbook as a blank PDF to flip through or print, linked beside the fillable version. After changing the workbook, rebuild it with the mandala served locally: `python3 workbook/build-pdf.py http://localhost:3000/workbook/`.
