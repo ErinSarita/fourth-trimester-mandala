@@ -12,20 +12,20 @@
 <style>
 /* Layout: the mandala holds the left (sticky on wide screens); the reading panel sits to the right. Center-out order everywhere. */
 :root{
-  --bg:#F4F8F2; --surface:#FFFFFF; --ink:#22402F; --muted:#5B7A67; --line:#D3E3D4;
-  --baby:#E3F0DC; --mother:#B9D9BC; --partner:#8FC09F; --circle:#69A585; --best:#4B8B6E; --time:#C9DFCB; --time2:#DCEBDB;
-  --on-dark:#FFFFFF; --on-light:#22402F; --gold:#C9993A; --seed:#FFFDF6; --center:#CFE6CB; --unit:#B6D3BA;
+  --bg:#FDF7F1; --surface:#FFFFFF; --ink:#4E2A2E; --muted:#8E6366; --line:#F1DCD2;
+  --baby:#FAE3A0; --mother:#F8CB98; --partner:#F4AE94; --circle:#EC94A0; --best:#DB7690; --time:#F6D9C6; --time2:#FAE7DA;
+  --on-dark:#FFFFFF; --on-light:#4E2A2E; --gold:#C08A2E; --seed:#FFFBEC; --center:#F5D27A; --unit:#F1C6AF;
   --display:"Marcellus", "Cormorant Garamond", Georgia, serif;
   --body:"Mulish", "Avenir Next", "Segoe UI", system-ui, sans-serif;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --bg:#14211A; --surface:#1B2B22; --ink:#E2EEE5; --muted:#9BB9A6; --line:#2C4437;
-  --baby:#D3E8CF; --mother:#A7CFAF; --partner:#82B895; --circle:#5F9D7D; --best:#468668; --time:#4B6B57; --time2:#5B7D67;
-  --on-dark:#FFFFFF; --on-light:#173024; --gold:#E0B65E; --seed:#F7FBF2; --center:#B3D6B2; --unit:#3C5A48; color-scheme:dark }}
+  --bg:#261A1C; --surface:#302124; --ink:#F6E6DE; --muted:#CBA39D; --line:#4A3135;
+  --baby:#F2D58C; --mother:#F0BD8B; --partner:#EAA088; --circle:#DD8590; --best:#C96A83; --time:#6E4C49; --time2:#7E5953;
+  --on-dark:#FFFFFF; --on-light:#3A1F22; --gold:#E8BE5E; --seed:#FFF6DA; --center:#E8C467; --unit:#6A4846; color-scheme:dark }}
 :root[data-theme="dark"]{
-  --bg:#14211A; --surface:#1B2B22; --ink:#E2EEE5; --muted:#9BB9A6; --line:#2C4437;
-  --baby:#D3E8CF; --mother:#A7CFAF; --partner:#82B895; --circle:#5F9D7D; --best:#468668; --time:#4B6B57; --time2:#5B7D67;
-  --on-dark:#FFFFFF; --on-light:#173024; --gold:#E0B65E; --seed:#F7FBF2; --center:#B3D6B2; --unit:#3C5A48; color-scheme:dark }
+  --bg:#261A1C; --surface:#302124; --ink:#F6E6DE; --muted:#CBA39D; --line:#4A3135;
+  --baby:#F2D58C; --mother:#F0BD8B; --partner:#EAA088; --circle:#DD8590; --best:#C96A83; --time:#6E4C49; --time2:#7E5953;
+  --on-dark:#FFFFFF; --on-light:#3A1F22; --gold:#E8BE5E; --seed:#FFF6DA; --center:#E8C467; --unit:#6A4846; color-scheme:dark }
 :root[data-theme="light"]{color-scheme:light}
 
 *{box-sizing:border-box}
@@ -840,7 +840,7 @@ function draw(){
     const a0=q*90, a1=a0+90;
     arcText((R.baby[0]+R.baby[1])/2+4,a0+31,a1-31,"BABY","lbl lbl-dark",14,2.5);
     arcText((R.mother[0]+R.mother[1])/2-6,a0+31,a1-31,"MOTHER","lbl lbl-dark",14,2.5);
-    arcText((R.partner[0]+R.partner[1])/2+4,a0+31,a1-31,"PARTNER","lbl lbl-light",14,2.5);
+    arcText((R.partner[0]+R.partner[1])/2+4,a0+31,a1-31,"PARTNER","lbl lbl-dark",14,2.5);
     arcText((R.circle[0]+R.circle[1])/2,a0+31,a1-31,"CIRCLE","lbl lbl-light",14,2.5);
     arcText(R.best[0]+22,a0+31,a1-31,"BEST PRACTICES","lbl lbl-light",11.5,1.6);
     const t=arcText(LBL.name,a0+3,a1-3,qq.name,"seclbl",22,1.5);
