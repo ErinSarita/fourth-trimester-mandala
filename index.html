@@ -217,7 +217,7 @@ try{ var t=localStorage.getItem("ft-theme"); if(t==="light"||t==="dark") documen
     <div class="eyebrow">Prenatal &amp; Perinatal Education</div>
     <h1>The Fourth Trimester Mandala</h1>
     <p class="lede">A gentle map of the first twelve weeks after birth, read from the center out. At the center are mother and baby, still one unit as the gestation continues outside the womb. Around them are the baby and the mother, then the partner, the steady person who stays close, then the wider circle who hold them all, then the educator, who brings the understanding and the science behind each moment. The outer petals hold the best practices: what to do, and why. However the birth unfolded, these weeks are a time to rest, to heal, and to come to know each other.</p>
-    <p class="planlink"><b>My Fourth Trimester Plan</b>, a workbook for your first hour, your circle of support, the help you would like, and your birth story: <a href="workbook/my-fourth-trimester-plan.pdf" target="_blank" rel="noopener">flip through the PDF</a> or <a href="workbook/">fill it in online</a>.</p>
+    <p class="planlink"><b>My Fourth Trimester Plan</b>, a workbook for your first hour, your circle of support, the help you would like, and your birth story: <a href="workbook/?view=read">turn the pages</a>, <a href="workbook/?view=fill">fill it in online</a>, or <a href="workbook/my-fourth-trimester-plan.pdf" target="_blank" rel="noopener">print the PDF</a>.</p>
   </header>
 
   <div class="main">
@@ -1212,7 +1212,7 @@ function showCalm(user){
 function showSupport(focus){
   sel={q:null,ring:null,idx:null,page:"support"}; applySel(); markTabs();
   panel.innerHTML=`<div class="phasehead"><h2>Support</h2><div class="meta">Who can help · signs it may help · how to find them</div>
-      <p>Asking for help is part of caring for a baby, not a sign of falling short. Most families need more than one kind of support in these weeks, and what is needed can change from one week to the next. Here are the people who can help, the signs that a particular kind of support may be worth reaching for, and where to find them.</p><p>Plan who will help with what in the workbook: <a class="go" href="workbook/my-fourth-trimester-plan.pdf" target="_blank" rel="noopener">the PDF</a> or <a class="go" href="workbook/#home">fill it in online</a>.</p></div>
+      <p>Asking for help is part of caring for a baby, not a sign of falling short. Most families need more than one kind of support in these weeks, and what is needed can change from one week to the next. Here are the people who can help, the signs that a particular kind of support may be worth reaching for, and where to find them.</p><p>Plan who will help with what in the workbook: <a class="go" href="workbook/#home">fill it in online</a>, or print the one-page <a class="go" href="workbook/ways-to-help.pdf" target="_blank" rel="noopener">Ways to help</a> sheet.</p></div>
     <div class="support urgent" id="sup-urgent"><h3>When to call right away</h3>
       <p><b>For the mother.</b> ${URGENT.mother}</p><p><b>For the baby.</b> ${URGENT.baby}</p><p>${URGENT.note}</p></div>
     ${SUPPORT.map(x=>`<article class="scard lang" id="sup-${x.id}"><h3>${x.name}</h3>

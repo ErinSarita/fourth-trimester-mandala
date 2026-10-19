@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Mulish:ital,wght@0,400;0,600;0,700;1,400&display=swap">
 <style>
-/* The booklet, drawn at print size: 528 × 816 px is 5.5 × 8.5 in, the size of the Pregnancy and Birth guidebook.
+/* The booklet, drawn at Letter size: 816 × 1056 px is 8.5 × 11 in, sixteen pages, printed double-sided on ordinary paper.
    The palette is the Fourth Trimester Mandala's: a yellow center warming through blush and peach to rose. */
 :root{
   --paper:#FFFBF6; --blush:#FBEDE6; --ink:#4E2A2E; --muted:#8E6366; --rule:#EBD8CF; --lineink:#E6CFC5;
@@ -17,148 +17,164 @@
   --display:Marcellus, Georgia, serif; --body:Mulish, "Avenir Next", "Segoe UI", sans-serif;
 }
 *{box-sizing:border-box}
-body{margin:0;background:#E9DDD7;font-family:var(--body);color:var(--ink);-webkit-font-smoothing:antialiased}
-.bar{position:sticky;top:0;z-index:5;display:flex;gap:8px;justify-content:center;align-items:center;padding:10px;background:rgba(255,251,246,.92);border-bottom:1px solid var(--rule);font-size:14px}
-.bar a,.bar button{font:inherit;font-weight:600;border:1px solid var(--rule);background:#fff;color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer;text-decoration:none}
-.bar .primary{background:var(--ink);color:#fff;border-color:var(--ink)}
-.book{display:flex;flex-direction:column;align-items:center;gap:22px;padding:24px 12px 60px}
+html,body{margin:0}
+body{background:#EADFD8;font-family:var(--body);color:var(--ink);-webkit-font-smoothing:antialiased}
 
-.pg{position:relative;width:528px;height:816px;overflow:hidden;background:var(--paper);padding:46px 46px 0;font-size:12px;line-height:1.55;box-shadow:0 10px 30px rgba(78,42,46,.18)}
-.pg.blush{background:var(--blush)}
+/* ---------- a page ---------- */
+.pg{position:relative;width:816px;height:1056px;overflow:hidden;background:var(--paper);padding:60px 64px 0;font-size:12.6px;line-height:1.55}
+.pg.part::before{content:"";position:absolute;left:0;right:0;top:0;height:9px;background:var(--c)}
 .pg p{margin:0 0 8px}
-.eb{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--c,var(--muted));margin:0 0 8px}
-h1{font-family:var(--display);font-weight:400;font-size:31px;line-height:1.1;margin:0 0 10px}
-h2{font-family:var(--display);font-weight:400;font-size:17px;line-height:1.2;margin:14px 0 6px;color:var(--ink)}
-.lede{font-family:var(--display);font-size:14.5px;line-height:1.55;color:var(--ink);margin:0 0 14px}
-.muted{color:var(--muted)}
-.small{font-size:10.5px;line-height:1.5}
-.foot{position:absolute;left:46px;right:46px;top:772px;border-top:1px solid var(--rule);padding-top:9px;display:flex;justify-content:space-between;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-/* each part carries its ring color as a band at the top of the page */
-.pg.part::before{content:"";position:absolute;left:0;right:0;top:0;height:7px;background:var(--c)}
-.tab{display:inline-flex;align-items:center;gap:7px}
-.tab i{width:9px;height:9px;border-radius:50%;background:var(--c)}
+.eb{font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:0 0 6px;display:flex;align-items:center;gap:8px}
+.eb i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+h1{font-family:var(--display);font-weight:400;font-size:36px;line-height:1.08;margin:0 0 8px}
+h2{font-family:var(--display);font-weight:400;font-size:20px;line-height:1.2;margin:16px 0 6px;display:flex;align-items:center;gap:9px}
+h2 i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.lede{font-family:var(--display);font-size:15px;line-height:1.5;margin:0 0 14px;max-width:640px}
+.muted{color:var(--muted)} .small{font-size:11px;line-height:1.5}
+.foot{position:absolute;left:64px;right:64px;top:1004px;border-top:1px solid var(--rule);padding-top:10px;display:flex;justify-content:space-between;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0 30px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 22px}
 
 /* writing space: soft lines to write on, or her own words written in */
-.lines{position:relative;background-image:linear-gradient(to bottom, transparent 23px, var(--lineink) 23px, var(--lineink) 24px);background-size:100% 24px;margin:0 0 10px}
-.lines .ans{font-size:12px;line-height:24px;white-space:pre-wrap;color:var(--ink);padding:0 2px;font-style:italic}
-.lab{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:10px 0 0}
-.q{font-family:var(--display);font-size:13.5px;color:var(--ink);margin:12px 0 0}
-.fields{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px}
-.field .lab{margin-top:8px}
-.box{border:1px solid var(--rule);border-left:4px solid var(--c);border-radius:12px;padding:10px 14px 2px;margin:0 0 12px;background:#fff}
-.box h2{margin:2px 0 2px;font-size:15px}
+.lines{background-image:linear-gradient(to bottom, transparent 25px, var(--lineink) 25px, var(--lineink) 26px);background-size:100% 26px;margin:0 0 6px}
+.lines .ans{font-size:12.5px;line-height:26px;white-space:pre-wrap;padding:0 2px;font-style:italic;color:var(--ink);overflow:hidden;height:100%}
+.lab{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:8px 0 0}
+.q{font-family:var(--display);font-size:14.5px;margin:10px 0 0}
+.box{border:1px solid var(--rule);border-left:5px solid var(--c);border-radius:14px;padding:10px 16px 4px;background:#fff}
+.box h3{font-family:var(--display);font-weight:400;font-size:17px;margin:2px 0 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 
 /* circles to circle, and petals for priority */
-ul.ck{list-style:none;margin:6px 0 10px;padding:0;display:grid;gap:6px}
-ul.ck li{display:grid;grid-template-columns:16px 1fr;gap:9px;align-items:start}
-.o{width:13px;height:13px;border-radius:50%;border:1.5px solid var(--c,var(--best));margin-top:1px}
+ul.ck{list-style:none;margin:6px 0 8px;padding:0;display:grid;gap:7px}
+ul.ck li{display:grid;grid-template-columns:16px 1fr;gap:10px;align-items:start}
+.o{width:14px;height:14px;border-radius:50%;border:1.6px solid var(--c,var(--best));margin-top:1px}
 .o.on{background:var(--c,var(--best))}
-ul.ck .why{display:block;font-size:10.5px;color:var(--muted)}
+ul.ck .why{display:block;font-size:11px;color:var(--muted)}
 .petals{display:inline-flex;gap:2px;vertical-align:-1px}
 .petals svg{width:9px;height:12px}
 .petals path{fill:none;stroke:var(--best);stroke-width:1.3}
 .petals path.on{fill:var(--best)}
+.orn{display:block;margin:0 auto;overflow:visible}
 
-/* the cover */
-.pg.cover{background:radial-gradient(circle at 50% 36%, #FFF6E6 0%, var(--paper) 46%, var(--blush) 100%);text-align:center;padding:52px 40px 0}
-.cover .eb{color:var(--gold);letter-spacing:.26em;margin-bottom:22px}
-.cover img{width:300px;height:300px;display:block;margin:0 auto 26px;filter:drop-shadow(0 10px 22px rgba(209,116,137,.25))}
-.cover .t{font-family:var(--display);font-size:40px;line-height:1.08;margin:0 0 12px}
-.cover .s{font-family:var(--display);font-size:15.5px;color:var(--best);margin:0 0 18px}
-.cover .dash{width:56px;border-top:1.5px solid var(--gold);margin:0 auto 16px}
-.cover .owner{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;width:300px;margin:0 auto;text-align:left;font-size:11px;color:var(--muted);align-items:end}
-.cover .owner .lines{margin:0;height:24px}
-.cover .by{position:absolute;left:0;right:0;bottom:40px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
-.braid{display:block;margin:0 auto;overflow:visible}
+/* ---------- particular pages ---------- */
+.pg.cover{background:radial-gradient(circle at 50% 34%, #FFF6E6 0%, var(--paper) 44%, var(--blush) 100%);text-align:center;padding:78px 70px 0}
+.cover .eb{justify-content:center;color:var(--gold);letter-spacing:.28em;margin-bottom:34px}
+.cover img{width:420px;height:420px;display:block;margin:0 auto 36px;filter:drop-shadow(0 14px 28px rgba(209,116,137,.25))}
+.cover .t{font-family:var(--display);font-size:56px;line-height:1.05;margin:0 0 14px}
+.cover .s{font-family:var(--display);font-size:19px;color:var(--best);margin:0 0 22px}
+.cover .dash{width:70px;border-top:1.5px solid var(--gold);margin:0 auto 22px}
+.cover .owner{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;width:430px;margin:0 auto;text-align:left;font-size:12px;color:var(--muted);align-items:end}
+.cover .owner .lines{margin:0;height:26px}
+.cover .by{position:absolute;left:0;right:0;bottom:52px;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.pg.back{background:var(--blush);text-align:center;padding-top:300px}
 
-/* the endpaper: a quiet repeat of the dyad, two circles overlapping */
-.pg.endpaper{background-color:var(--blush);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='66' height='66' viewBox='0 0 66 66'%3E%3Cg fill='none' stroke='%23E9B6A6' stroke-width='1.1' opacity='.75'%3E%3Ccircle cx='28' cy='33' r='11'/%3E%3Ccircle cx='38' cy='33' r='11'/%3E%3C/g%3E%3Cpath d='M33 23.4A11 11 0 0 1 33 42.6A11 11 0 0 1 33 23.4Z' fill='%23F5D27A' opacity='.35'/%3E%3C/svg%3E");background-size:66px 66px}
-
-/* the circle of support, with room to write names on each ring */
-.circlefig{display:block;margin:6px auto 4px}
-.circlefig text{font-family:var(--body);font-size:9px;font-weight:700;letter-spacing:.14em;text-anchor:middle;fill:var(--ink)}
-.circlefig .name{font-family:var(--display);font-size:13px;font-weight:400;letter-spacing:0;font-style:italic}
-
-/* the help menu */
-.menu{columns:2;column-gap:16px;font-size:9.6px;line-height:1.3}
-.menu .grp{break-inside:avoid;margin:0 0 7px}
-.menu h3{font-family:var(--display);font-weight:400;font-size:13px;margin:0 0 4px;display:flex;align-items:center;gap:6px;color:var(--ink)}
-.menu h3 i{width:8px;height:8px;border-radius:50%;background:var(--c)}
-.menu ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
-.menu li{display:grid;grid-template-columns:12px 1fr auto;gap:6px;align-items:start}
-.menu .o{width:10px;height:10px;border-width:1.2px;margin-top:1px}
-.menu .petals svg{width:7px;height:10px}
-.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:10px;color:var(--muted);margin:0 0 12px;align-items:center}
-.legend span{display:inline-flex;gap:5px;align-items:center}
-
-/* the help plan table */
-table.plan{width:100%;border-collapse:collapse;font-size:11px}
-table.plan th{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:700;padding:0 6px 6px 0;border-bottom:1.5px solid var(--c)}
-table.plan td{height:30px;border-bottom:1px solid var(--lineink);padding:4px 6px 2px 0;vertical-align:bottom;font-style:italic}
-table.plan td.p{width:46px;font-style:normal}
-
-/* five petals for the five needs */
-.five{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px}
-.five .need{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start}
-.five .need svg{width:20px;height:24px;margin-top:10px}
-
-/* reading pages */
-.read h2{display:flex;align-items:center;gap:8px;margin-top:12px}
-.read h2 i{width:10px;height:10px;border-radius:50%;background:var(--c)}
-.read p,.read li{font-size:11.5px;line-height:1.55}
-.read ul{margin:0 0 8px;padding-left:16px}
-.urgent{border:1px solid var(--best);border-left:4px solid var(--best);border-radius:12px;padding:10px 14px;font-size:10.8px;line-height:1.5;margin:10px 0 0;background:#fff}
-.urgent p{margin:0 0 5px}
-.contents{list-style:none;margin:14px 0 0;padding:0}
-.contents li{display:grid;grid-template-columns:16px 1fr auto;gap:10px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--rule);font-family:var(--display);font-size:14px}
-.contents li i{width:9px;height:9px;border-radius:50%;background:var(--c);align-self:center}
+.circlefig text{font-family:var(--body);font-size:9.5px;font-weight:700;letter-spacing:.14em;text-anchor:middle;fill:var(--ink)}
+.circlefig .name{font-family:var(--display);font-size:14px;font-weight:400;letter-spacing:0;font-style:italic}
+.contents{list-style:none;margin:6px 0 0;padding:0}
+.contents li{display:grid;grid-template-columns:14px 1fr auto;gap:10px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--rule);font-family:var(--display);font-size:15px}
+.contents li i{width:10px;height:10px;border-radius:50%;background:var(--c);align-self:center}
 .contents li span{font-family:var(--body);font-size:11px;color:var(--muted)}
-.private{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:640px;color:var(--muted)}
+.stages{display:grid;grid-template-columns:repeat(9,1fr);gap:6px;margin:4px 0 14px;text-align:center}
+.stages b{display:block;font-size:9.5px;line-height:1.2}
+.stages span{font-size:9px;color:var(--muted)}
+.menu{columns:3;column-gap:18px;font-size:10px;line-height:1.22}
+.menu .grp{break-inside:avoid;margin:0 0 8px}
+.menu h3{font-family:var(--display);font-weight:400;font-size:13px;margin:0 0 3px;display:flex;align-items:center;gap:7px;padding-bottom:3px;border-bottom:1.5px solid var(--c)}
+.menu h3 i{width:9px;height:9px;border-radius:50%;background:var(--c)}
+.menu ul{list-style:none;margin:0;padding:0;display:grid;gap:1.5px}
+.menu li{display:grid;grid-template-columns:12px 1fr auto;gap:6px;align-items:start}
+.menu .o{width:10px;height:10px;border-width:1.3px;margin-top:1px}
+.menu .petals svg{width:7px;height:10px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;justify-content:center;font-size:11px;color:var(--muted);padding:8px 12px;border:1px solid var(--rule);border-radius:999px;background:#fff;margin:0 0 10px}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+table.plan{width:100%;border-collapse:collapse;font-size:12px}
+table.plan th{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:700;padding:0 8px 7px 0;border-bottom:1.6px solid var(--c)}
+table.plan td{height:34px;border-bottom:1px solid var(--lineink);padding:4px 8px 3px 0;vertical-align:bottom;font-style:italic}
+table.plan td.p{width:56px;font-style:normal}
+table.plan td.w{width:150px} table.plan td.n{width:110px}
+.sup{height:254px;overflow:hidden}
+.read h2{font-size:17px;margin:12px 0 4px}
+.read p,.read li{font-size:11.6px;line-height:1.52}
+.read ul{margin:0 0 6px;padding-left:16px}
+.urgent{border:1px solid var(--best);border-left:5px solid var(--best);border-radius:12px;padding:10px 14px;font-size:11.2px;line-height:1.5;background:#fff;margin-top:10px}
+.urgent p{margin:0 0 5px}
+.need{display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start}
+.need svg{margin-top:14px}
+.private{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:820px;color:var(--muted)}
+
+/* ---------- the page turner, on screen ---------- */
+#book{display:none}
+.viewer{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:14px 10px 12px}
+.stage{position:relative;flex:1;width:100%;display:flex;align-items:center;justify-content:center;min-height:0}
+.spread{position:relative;display:flex;transform-origin:center center;perspective:3200px}
+.spread .slot{width:816px;height:1056px;position:relative}
+.spread .slot .pg{box-shadow:0 12px 36px rgba(78,42,46,.20)}
+.spread .slot.l .pg{box-shadow:-6px 12px 36px rgba(78,42,46,.20), inset -18px 0 24px -18px rgba(78,42,46,.18)}
+.spread .slot.r .pg{box-shadow:6px 12px 36px rgba(78,42,46,.20), inset 18px 0 24px -18px rgba(78,42,46,.14)}
+.leaf{position:absolute;top:0;width:816px;height:1056px;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.4,.1,.2,1);z-index:3}
+.leaf .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.leaf .face.back{transform:rotateY(180deg)}
+.controls{display:flex;align-items:center;gap:10px;font-size:14px;flex-wrap:wrap;justify-content:center}
+.controls button,.controls select,.controls a{font:inherit;font-weight:600;border:1px solid var(--rule);background:#fff;color:var(--ink);border-radius:999px;padding:7px 14px;cursor:pointer;text-decoration:none}
+.controls button:disabled{opacity:.35;cursor:default}
+.controls .count{min-width:120px;text-align:center;color:var(--muted)}
+.controls .primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+.hint{font-size:12px;color:var(--muted)}
+@media (prefers-reduced-motion: reduce){ .leaf{transition:none} }
 
 @media print{
-  @page{size:5.5in 8.5in;margin:0}
+  @page{size:letter;margin:0}
   body{background:none}
-  .bar{display:none}
-  .book{display:block;padding:0}
-  .pg{box-shadow:none;break-after:page;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .viewer{display:none!important}
+  #book{display:block!important}
+  .pg{break-after:page;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
-@media (max-width:560px){ .book{zoom:.66} }
 </style>
 </head>
 <body>
-<div class="bar"><a href="./">Back to the workbook</a><button class="primary" type="button" onclick="print()">Print or save as PDF</button></div>
-<div class="book" id="book"></div>
+<div class="viewer" id="viewer">
+  <div class="stage" id="stage"><div class="spread" id="spread"></div></div>
+  <div class="controls">
+    <button type="button" id="prev" aria-label="Previous page">‹ Back</button>
+    <span class="count" id="count" aria-live="polite"></span>
+    <button type="button" id="next" aria-label="Next page">Next ›</button>
+    <select id="goto" aria-label="Go to a part"></select>
+    <button type="button" class="primary" id="printit">Print or save as PDF</button>
+  </div>
+</div>
+<div id="book"></div>
 <script src="content.js"></script>
 <script>
 (function(){
 "use strict";
-/* Blank by default. Opened from the workbook with ?mine, it carries her own answers from this device. */
-const MINE=new URLSearchParams(location.search).has("mine");
+const Q=new URLSearchParams(location.search);
+/* Blank by default. With ?mine, it carries her own answers from this device. */
+const MINE=Q.has("mine");
 let v={}, rep={};
 if(MINE){ try{ const d=JSON.parse(localStorage.getItem("ftw-plan")||"null"); if(d){ v=d.v||{}; rep=d.rep||{}; } }catch(e){} }
 const esc=t=>String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;");
-const val=k=>v[k]?esc(v[k]):"";
+const val=k=>k&&v[k]?esc(v[k]):"";
 
 /* ---------- pieces ---------- */
-const lines=(k,n)=>`<div class="lines" style="height:${n*24}px"><div class="ans">${k?val(k):""}</div></div>`;
-const q=(k,label,n=3)=>`<div class="q">${label}</div>${lines(k,n)}`;
-const field=(k,label)=>`<div class="field"><div class="lab">${label}</div>${lines(k,1)}</div>`;
-const ck=(k,items)=>`<ul class="ck">${items.map((it,i)=>{ const [t,why]=Array.isArray(it)?it:[it,""]; return `<li><span class="o${v[k+"."+i]?" on":""}"></span><span>${t}${why?`<span class="why">${why}</span>`:""}</span></li>`; }).join("")}</ul>`;
+const lines=(k,n)=>`<div class="lines" style="height:${n*26}px"><div class="ans">${val(k)}</div></div>`;
+const q=(k,label,n=2)=>`<div><div class="q">${label}</div>${lines(k,n)}</div>`;
+const q3=(k,label)=>q(k,label,3);
+const field=(k,label)=>`<div><div class="lab">${label}</div>${lines(k,1)}</div>`;
+const ckItems=(k,items,off=0)=>`<ul class="ck">${items.map((it,j)=>{ const i=j+off, [t,why]=Array.isArray(it)?it:[it,""]; return `<li><span class="o${v[k+"."+i]?" on":""}"></span><span>${t}${why?`<span class="why">${why}</span>`:""}</span></li>`; }).join("")}</ul>`;
 const petal=on=>`<svg viewBox="0 0 10 14"><path class="${on?"on":""}" d="M5 1C8 4 8.6 9 5 13C1.4 9 2 4 5 1Z"/></svg>`;
 const petals=n=>`<span class="petals">${[1,2,3].map(i=>petal(i<=n)).join("")}</span>`;
-// an ornament: a row of the mandala's petals, from the yellow center out to the rose edge
-function braid(w){
-  const cols=["--center","--baby","--mother","--partner","--circle","--edu","--best","--edu","--circle","--partner","--mother","--baby","--center"], n=cols.length, gap=w/n;
-  return `<svg class="braid" width="${w}" height="20" viewBox="0 0 ${w} 20">${cols.map((c,i)=>`<path d="M${(i+.5)*gap} 2C${(i+.5)*gap+5} 7 ${(i+.5)*gap+5.6} 13 ${(i+.5)*gap} 18C${(i+.5)*gap-5.6} 13 ${(i+.5)*gap-5} 7 ${(i+.5)*gap} 2Z" fill="var(${c})"/>`).join("")}</svg>`;
-}
+const bigPetal=(c,w=20,h=26)=>`<svg viewBox="0 0 20 26" width="${w}" height="${h}"><path d="M10 1C16 7 17 17 10 25C3 17 4 7 10 1Z" fill="var(${c})"/></svg>`;
+function orn(w){ const cols=["--center","--baby","--mother","--partner","--circle","--edu","--best","--edu","--circle","--partner","--mother","--baby","--center"], g=w/cols.length;
+  return `<svg class="orn" width="${w}" height="20" viewBox="0 0 ${w} 20">${cols.map((c,i)=>{ const x=(i+.5)*g; return `<path d="M${x} 2C${x+5} 7 ${x+5.6} 13 ${x} 18C${x-5.6} 13 ${x-5} 7 ${x} 2Z" fill="var(${c})"/>`; }).join("")}</svg>`; }
 let N=0; const PAGES=[], TOC=[];
-function page(html,{cls="",c="--best",foot="My Fourth Trimester Plan",toc=null}={}){
-  N++; if(toc) TOC.push([toc,c,N]);
-  PAGES.push(`<section class="pg ${cls}" style="--c:var(${c})">${html}${foot?`<div class="foot"><span>${foot}</span><span>${N}</span></div>`:""}</section>`);
+function page(html,{cls="part",c="--best",foot=true,toc=null}={}){
+  N++; if(toc) (Array.isArray(toc)?toc:[toc]).forEach(t=>TOC.push([t,c,N]));
+  PAGES.push(`<section class="pg ${cls}" style="--c:var(${c})">${html}${foot?`<div class="foot"><span>My Fourth Trimester Plan</span><span>${N}</span></div>`:""}</section>`);
 }
-const head=(eb,title,lede)=>`<div class="eb tab"><i></i>${eb}</div><h1>${title}</h1>${lede?`<p class="lede">${lede}</p>`:""}`;
+const head=(eb,title,lede)=>`<div class="eb"><i></i>${eb}</div><h1>${title}</h1>${lede?`<p class="lede">${lede}</p>`:""}`;
+const sec=(c,title)=>`<h2 style="--c:var(${c})"><i></i>${title}</h2>`;
 
-/* people, and the help assigned to each, for a booklet carrying her answers */
+/* people, and the help assigned to each */
 function people(){
   const out=[{id:"p",name:v["p.name"],rel:v["p.rel"]||"My partner",phone:v["p.phone"]}];
   for(let i=0;i<Math.max(3,rep.main||0);i++) out.push({id:"main."+i,name:v[`main.${i}.name`],rel:v[`main.${i}.rel`],phone:v[`main.${i}.phone`]});
@@ -173,155 +189,200 @@ function assigned(){
   });
   return list.sort((a,b)=>b.pri-a.pri);
 }
-const nameOf=id=>{ if(id==="anyone") return "Anyone who can help"; const p=people().find(p=>p.id===id); return p? (p.name||"") : id; };
+const nameOf=id=>{ if(id==="anyone") return "Anyone who can help"; const p=people().find(p=>p.id===id); return p?(p.name||""):id; };
 
-/* ---------- the pages ---------- */
+/* ---------- the sixteen pages ---------- */
 // 1 · cover
 page(`<div class="eb">A workbook from The Fourth Trimester Mandala</div>
   <img src="img/wheel.webp" alt="">
-  <div class="t">My Fourth<br>Trimester Plan</div>
+  <div class="t">My Fourth Trimester Plan</div>
   <div class="s">For the first hour, the first weeks, and the people who hold you</div>
   <div class="dash"></div>
-  <div class="owner"><span>This plan belongs to</span>${lines("me.name",1)}<span>For my baby</span>${lines("me.baby",1)}</div>
-  <div class="by">Erin Singleton</div>`,{cls:"cover",foot:""});
-// 2 · endpaper
-page("",{cls:"endpaper",foot:""});
-// 3 · welcome
-page(`${head("Welcome","Dear mother","")}
-  <p class="lede">So much happens after a baby arrives, and families often plan carefully for the birth and much less for what comes after. This workbook is a place to plan for the fourth trimester as lovingly as for the birth itself.</p>
+  <div class="owner"><span>This plan belongs to</span>${lines("me.name",1)}<span>For my baby</span>${lines("me.baby",1)}<span>Due</span>${lines("me.due",1)}</div>
+  <div class="by">Erin Singleton</div>`,{cls:"cover",foot:false});
+
+// 2 · welcome and contents
+page(`<div class="two"><div>${head("Welcome","Dear mother","")}
+  <p class="lede">So much happens after a baby arrives, and families often plan carefully for the birth and much less for what comes after. This workbook is a place to plan the fourth trimester as lovingly as the birth itself.</p>
   <p>In these weeks your body is healing, your milk is coming in, sleep comes in pieces, and you are meeting a new person while becoming a new version of yourself. Your baby needs you close: your chest is her habitat, and your calm is her calm. You need holding too.</p>
   <p>Here you can write down your first hour, the people in your circle and what you would love from each of them, how you plan to feed, the help that would let you rest, the signs that you might be struggling, and, when you are ready, your birth story.</p>
-  <h2>How to use it</h2>
-  <ul class="ck">${["Fill it in with your partner in the last weeks of pregnancy.","Share it with your circle, so everyone knows how to hold you.","Show your first hour and feeding pages to your midwife or doctor.","Pin the Ways to help page somewhere visitors will see it.","Return to it as the weeks unfold. Plans can change, and that is all right."].map(t=>`<li><span class="o" style="--c:var(--partner)"></span><span>${t}</span></li>`).join("")}</ul>
-  <p class="small muted" style="margin-top:14px">You can also fill this workbook in online, on your phone or computer, and print it with your own words written in.</p>
-  <div style="margin-top:22px">${braid(200)}</div>`,{c:"--center",foot:"Welcome"});
-// 4 · contents, filled in at the end
-page(`${head("Contents","Inside","")}<ol class="contents" id="toc"></ol>`,{c:"--center"});
+  ${sec("--partner","How to use it")}
+  <ul class="ck">${["Fill it in with your partner in the last weeks of pregnancy.","Share it with your circle, so everyone knows how to hold you.","Show your first hour and feeding plans to your midwife or doctor.","Pin the Ways to help page where visitors will see it.","Return to it as the weeks unfold. Plans can change, and that is all right."].map(t=>`<li><span class="o" style="--c:var(--partner)"></span><span>${t}</span></li>`).join("")}</ul>
+  <p class="small muted">You can also fill it in online, on your phone or computer, and print it with your own words written in.</p></div>
+  <div><div class="eb"><i style="background:var(--center)"></i>Contents</div><h1>Inside</h1><ol class="contents" id="toc"></ol><div style="margin-top:28px">${orn(240)}</div></div></div>`,{c:"--center"});
 
-// About me
-page(`${head("01","About me and my baby","The basics, so anyone reading this knows who it is for.")}
-  <div class="fields">${field("me.name","My name")}${field("me.baby","My baby's name")}${field("me.due","Due date")}${field("me.born","Birth date")}</div>
-  ${field("me.place","Where I plan to give birth")}
-  <div class="fields">${field("me.provider","My midwife or doctor")}${field("me.babydoc","My baby's care provider")}</div>
+// 3 · about me, and my circle
+const ringName=k=>v[k]?esc(v[k].trim().split(/\s+/)[0]):"";
+page(`${head("01 · 02","About me, and my circle of support","")}
+  <div class="three">${field("me.name","My name")}${field("me.baby","My baby's name")}${field("me.due","Due date")}${field("me.place","Where I plan to give birth")}${field("me.provider","My midwife or doctor")}${field("me.babydoc","My baby's care provider")}</div>
   ${q("me.words","Three words for how I want these weeks to feel",1)}
-  ${q("","A note to myself, for the weeks ahead",8)}`,{c:"--center",toc:"About me and my baby"});
+  <div class="two" style="margin-top:14px;align-items:start"><div>
+    <svg class="circlefig" width="330" height="330" viewBox="-150 -150 300 300">
+      <g stroke="#fff" stroke-width="4"><circle r="148" fill="var(--circle)"/><circle r="110" fill="var(--partner)"/><circle r="72" fill="var(--mother)"/><circle r="36" fill="var(--baby)"/></g>
+      <text y="-126" style="fill:#fff">MY CIRCLE</text><text y="-88">MY PARTNER</text><text y="-50">ME</text><text y="-6">BABY</text>
+      <text class="name" y="12">${ringName("me.baby")}</text><text class="name" y="-32">${ringName("me.name")}</text><text class="name" y="-70">${ringName("p.name")}</text></svg>
+    <p class="small muted" style="text-align:center">Each layer holds the one inside it, so no one carries it all alone.</p></div>
+  <div><p class="lede" style="font-size:14px">Every mother and baby need at least two layers of support, and everyone who gives support needs support too (Castellino). Your partner, or your closest person, is the first layer. Around them are your main supporters, and around them the wider circle.</p>
+    ${q("","The people in my circle",7)}</div></div>
+  ${q("","A note to myself, for the weeks ahead",4)}`,{c:"--partner",toc:["About me and my baby","My circle of support"]});
 
-// My circle: the rings with room for names
-const ringName=(id,f)=>v[id]?esc(v[id]):f;
-page(`${head("02","My circle of support","Every mother and baby need at least two layers of support, and everyone who gives support needs support too (Castellino).")}
-  <svg class="circlefig" width="300" height="300" viewBox="-150 -150 300 300">
-    <g stroke="#fff" stroke-width="4"><circle r="148" fill="var(--circle)"/><circle r="110" fill="var(--partner)"/><circle r="72" fill="var(--mother)"/><circle r="36" fill="var(--baby)"/></g>
-    <text y="-126" fill="#fff" style="fill:#fff">MY CIRCLE</text><text y="-88">MY PARTNER</text><text y="-50">ME</text><text y="-6">BABY</text>
-    <text class="name" y="10">${ringName("me.baby","")}</text><text class="name" y="-32">${ringName("me.name","")}</text><text class="name" y="-70">${ringName("p.name","")}</text>
-  </svg>
-  <p class="small muted" style="text-align:center;margin:0 0 6px">Each layer holds the one inside it, so no one carries it all alone.</p>
-  <div class="q">The people in my circle</div>${lines("",4)}`,{c:"--partner",toc:"My circle of support"});
-
-const sup=(pre,title,c,kn,kr,kp,kw,kh)=>`<div class="box" style="--c:var(${c})"><h2>${title}</h2><div class="fields">${field(kn,"Name")}${field(kr,"Who they are to me")}${field(kp,"Phone")}${field(kw,"When they can help")}</div>${kh?field(kh,"How they will help"):""}</div>`;
+// 4 · the people closest, and the wider circle
+const supBox=(t,c,kn,kr,kp,kw,kh)=>`<div class="box" style="--c:var(${c})"><h3>${t}</h3><div class="grid2" style="gap:0 14px">${field(kn,"Name")}${field(kr,"Who they are to me")}${field(kp,"Phone")}${field(kw,"When they can help")}</div>${kh?field(kh,"How they will help"):`<div style="height:46px"></div>`}</div>`;
 page(`${head("02","The people closest to me","")}
-  ${sup("p","My partner, or my number one support","--partner","p.name","p.rel","p.phone","p.when","")}
-  ${[0,1].map(i=>sup("main."+i,"Main supporter "+(i+1),"--circle",`main.${i}.name`,`main.${i}.rel`,`main.${i}.phone`,`main.${i}.when`,`main.${i}.help`)).join("")}`,{c:"--partner"});
-page(`${sup("main.2","Main supporter 3","--circle","main.2.name","main.2.rel","main.2.phone","main.2.when","main.2.help")}
-  <div class="eb tab" style="--c:var(--edu);margin-top:16px"><i></i>The wider circle</div>
-  <p class="small muted" style="margin:0 0 8px">Family, friends, a birth or postpartum doula, a lactation consultant, neighbors, a faith or parent community, a therapist.</p>
-  ${[0,1].map(i=>`<div class="box" style="--c:var(--edu)"><div class="fields">${field(`wider.${i}.who`,"Who")}${field(`wider.${i}.names`,"Names")}${field(`wider.${i}.contact`,"How to reach them")}${field(`wider.${i}.role`,"Their part in my plan")}</div></div>`).join("")}`,{c:"--edu"});
+  <div class="grid2">${supBox("My partner, or number one support","--partner","p.name","p.rel","p.phone","p.when","")}${[0,1,2].map(i=>supBox("Main supporter "+(i+1),"--circle",`main.${i}.name`,`main.${i}.rel`,`main.${i}.phone`,`main.${i}.when`,`main.${i}.help`)).join("")}</div>
+  ${sec("--edu","The wider circle")}<p class="small muted" style="margin:0 0 8px">Family, friends, a birth or postpartum doula, a lactation consultant, neighbors, a faith or parent community, a therapist.</p>
+  <div class="grid2">${[0,1,2,3].map(i=>`<div class="box" style="--c:var(--edu)"><div class="grid2" style="gap:0 14px">${field(`wider.${i}.who`,"Who")}${field(`wider.${i}.names`,"Names")}${field(`wider.${i}.contact`,"How to reach them")}${field(`wider.${i}.role`,"Their part in my plan")}</div></div>`).join("")}</div>`,{c:"--partner"});
 
-// For my partner
+// 5 · for my partner
 page(`${head("03","For my partner","You are my first layer. The mother is the baby's habitat, and the partner protects and supports them both, so they can stay together (Bergman).")}
-  <div class="lab">What I would love from you</div>${ck("p.req",PARTNER_REQ)}`,{c:"--partner",toc:"For my partner"});
-page(`${head("03","For my partner","")}
-  ${q("p.hour","In the first hour, I would love you to…",3)}${q("p.days","In the first days, please…",3)}${q("p.nights","At night, I would like…",2)}${q("p.feeds","When I am feeding, please…",2)}${q("p.hard","When I am overwhelmed or in tears, what helps most is…",3)}`,{c:"--partner"});
-page(`${head("03","For my partner","")}
-  ${q("p.protect","Please protect me from…",3)}${q("p.words","Words I would love to hear from you",3)}${q("p.share","How I would like us to share caring for the baby",3)}${q("p.you","What you need, and who supports you",3)}`,{c:"--partner"});
+  <div class="two"><div><div class="lab">What I would love from you</div>${ckItems("p.req",PARTNER_REQ)}</div>
+  <div>${q("p.hour","In the first hour, I would love you to…",3)}${q("p.days","In the first days, please…",3)}${q("p.nights","At night, I would like…",2)}</div></div>
+  <div class="two">${q3("p.feeds","When I am feeding, please…",2)}${q3("p.hard","When I am overwhelmed or in tears, what helps most is…",2)}${q3("p.protect","Please protect me from…",2)}${q3("p.words","Words I would love to hear from you",2)}${q3("p.share","How I would like us to share caring for the baby",2)}${q3("p.you","What you need, and who supports you",2)}</div>`,{c:"--partner",toc:"For my partner"});
 
-// Requests
-const reqCard=i=>`<div class="box" style="--c:var(--circle)">${field(`req.${i}.to`,"To")}<div class="lab">What I would love from you</div>${lines(`req.${i}.yes`,3)}<div class="lab">What would not help right now</div>${lines(`req.${i}.no`,2)}</div>`;
-page(`${head("04","Requests for my circle","Kind, clear requests make it easier for people to say yes.")}${reqCard(0)}${reqCard(1)}`,{c:"--circle",toc:"Requests for my circle"});
-page(`${head("04","Requests for my circle","")}${reqCard(2)}${reqCard(3)}`,{c:"--circle"});
+// 6 · requests for my circle
+const reqCard=i=>`<div class="box" style="--c:var(--circle)">${field(`req.${i}.to`,"To")}<div class="lab">What I would love from you</div>${lines(`req.${i}.yes`,6)}<div class="lab">What would not help right now</div>${lines(`req.${i}.no`,3)}</div>`;
+page(`${head("04","Requests for my circle","A card for each person or group. Kind, clear requests make it easier for people to say yes.")}<div class="grid2">${[0,1,2,3].map(reqCard).join("")}</div>`,{c:"--circle",toc:"Requests for my circle"});
 
-// First hour, with the nine stages laid out as petals
+// 7 · first hour
 const STAGES=[["Birth cry","at birth"],["Relaxation","right after"],["Awakening","2–4 min"],["Activity","4–12 min"],["Rest","throughout"],["Crawling","18–54 min"],["Familiarization","29–62 min"],["Suckling","49–90 min"],["Sleeping","90–120 min"]];
-page(`${head("05","My first hour plan","Placed skin to skin and left undisturbed, a newborn moves through nine instinctive stages on her own (Widström). Share these pages with your care team before the birth.")}
-  <div style="display:grid;grid-template-columns:repeat(9,1fr);gap:4px;margin:4px 0 12px;text-align:center">${STAGES.map(([n,t],i)=>`<div><svg viewBox="0 0 20 26" width="22" height="28"><path d="M10 1C16 7 17 17 10 25C3 17 4 7 10 1Z" fill="var(${["--baby","--baby","--baby","--mother","--mother","--mother","--partner","--partner","--partner"][i]})"/><text x="10" y="17" text-anchor="middle" font-size="8" font-weight="700" fill="#4E2A2E">${i+1}</text></svg><div style="font-size:8px;line-height:1.2;font-weight:700">${n}</div><div style="font-size:7.5px;color:var(--muted)">${t}</div></div>`).join("")}</div>
-  <div class="lab">I would like</div>${ck("hour",HOUR.slice(0,6))}`,{c:"--baby",toc:"My first hour plan"});
-page(`${head("05","My first hour plan","")}
-  <ul class="ck">${HOUR.slice(6).map(([t,why],j)=>{ const i=j+6; return `<li><span class="o${v["hour."+i]?" on":""}"></span><span>${t}${why?`<span class="why">${why}</span>`:""}</span></li>`; }).join("")}</ul>
-  ${q("hour.words","The first words I would like my baby to hear",2)}${q("hour.notes","Notes for my care team",5)}`,{c:"--baby"});
+const SC=["--baby","--baby","--baby","--mother","--mother","--mother","--partner","--partner","--partner"];
+page(`${head("05","My first hour plan","Placed skin to skin and left undisturbed, a newborn moves through nine instinctive stages on her own (Widström). Share this page with your care team before the birth.")}
+  <div class="stages">${STAGES.map(([n,t],i)=>`<div><svg viewBox="0 0 20 26" width="28" height="36"><path d="M10 1C16 7 17 17 10 25C3 17 4 7 10 1Z" fill="var(${SC[i]})"/><text x="10" y="17" text-anchor="middle" font-size="8" font-weight="700" fill="#4E2A2E">${i+1}</text></svg><b>${n}</b><span>${t}</span></div>`).join("")}</div>
+  <div class="lab">I would like</div><div class="two">${ckItems("hour",HOUR.slice(0,6))}${ckItems("hour",HOUR.slice(6),6)}</div>
+  <div class="two">${q("hour.words","The first words I would like my baby to hear",3)}${q("hour.notes","Notes for my care team",3)}</div>`,{c:"--baby",toc:"My first hour plan"});
 
-// Feeding
+// 8 · feeding, and visitors
 page(`${head("06","My feeding plan","Whatever path you choose, every feed can be close and calm, and skilled help early makes a real difference.")}
-  <div class="lab">How I plan to feed</div>
-  <ul class="ck" style="grid-template-columns:1fr 1fr;display:grid">${FEED_HOW.map((t,i)=>`<li><span class="o${v["feed.how"]===String(i)?" on":""}"></span><span>${t}</span></li>`).join("")}</ul>
-  <div class="lab">I would like</div>${ck("feed.want",FEED_WANT)}
-  <div class="fields">${field("feed.ibclc","My lactation contact")}${field("feed.ibclcphone","Their phone")}</div>
-  ${q("feed.know","What I would like everyone to know about how I feed my baby",2)}`,{c:"--mother",toc:"My feeding plan"});
+  <div class="two"><div><div class="lab">How I plan to feed</div><ul class="ck">${FEED_HOW.map((t,i)=>`<li><span class="o${v["feed.how"]===String(i)?" on":""}"></span><span>${t}</span></li>`).join("")}</ul>
+    <div class="grid2" style="gap:0 14px">${field("feed.ibclc","My lactation contact")}${field("feed.ibclcphone","Their phone")}</div>${q("feed.know","What I would like everyone to know",3)}</div>
+  <div><div class="lab">I would like</div>${ckItems("feed.want",FEED_WANT)}</div></div>
+  <div style="border-top:1px solid var(--rule);margin:10px 0 0;padding-top:4px"></div>
+  ${sec("--edu","Visitors")}<p class="small muted" style="margin:0">Short, quiet, helpful visits protect your rest and your time with your baby.</p>
+  <div class="two"><div>${ckItems("visit",VISIT)}</div><div>${q("visit.who","Who is welcome in the first days, and when",4)}${q("visit.news","How and when we will share the news",3)}</div></div>`,{c:"--mother",toc:["My feeding plan","Visitors"]});
 
-// Ways to help: the whole menu over two facing pages
-const legend=`<div class="legend"><span><span class="o"></span> Circle what you would like</span><span>${petals(1)} nice to have</span><span>${petals(2)} would love</span><span>${petals(3)} most important</span></div>`;
-const grp=([k,name,c,items])=>`<div class="grp" style="--c:var(${c})"><h3><i></i>${name}</h3><ul>${items.map((t,i)=>`<li><span class="o${v[`home.${k}.${i}`]?" on":""}" style="--c:var(${c})"></span><span>${t}</span>${petals(+(v[`home.${k}.${i}.pri`]||0))}</li>`).join("")}</ul></div>`;
-page(`${head("07","Ways to help","In these weeks the mother's work is to rest, heal, feed, and be with her baby. Everything else can be shared.")}${legend}<div class="menu">${CATS.slice(0,5).map(grp).join("")}</div>`,{c:"--circle",toc:"Ways to help"});
-page(`<div class="eb tab" style="margin-top:4px"><i></i>07 · Ways to help</div><div class="menu" style="margin-top:8px">${CATS.slice(5).map(grp).join("")}</div>`,{c:"--circle"});
+// 9 · ways to help, on one page
+const legend=`<div class="legend"><span><span class="o"></span>Circle what you would like</span><span>${petals(1)} nice to have</span><span>${petals(2)} would love</span><span>${petals(3)} most important</span></div>`;
+const grp=([k,name,c,items])=>`<div class="grp" style="--c:var(${c})"><h3><i></i>${name}</h3><ul>${items.map((t,i)=>`<li><span class="o${v[`home.${k}.${i}`]?" on":""}"></span><span>${t}</span>${petals(+(v[`home.${k}.${i}.pri`]||0))}</li>`).join("")}</ul></div>`;
+page(`${head("07","Ways to help","A new mother's work is to rest, heal, feed, and be with her baby. Everything else can be shared.")}${legend}<div class="menu">${CATS.map(grp).join("")}</div>`,{c:"--circle",toc:"Ways to help"});
 
-// The help plan: priorities assigned to people
+// 10 · our help plan
 const rows=assigned().filter(x=>x.who||x.pri);
 page(`${head("08","Our help plan","Your most important requests, and who has said yes. Most important first.")}
   <table class="plan"><thead><tr><th>Priority</th><th>What</th><th>Who</th><th>When</th></tr></thead><tbody>
-  ${Array.from({length:17},(_,i)=>{ const r=rows[i]; return `<tr><td class="p">${petals(r?r.pri:0)}</td><td>${r?esc(r.task):""}</td><td>${r?esc(nameOf(r.who)):""}</td><td></td></tr>`; }).join("")}
+  ${Array.from({length:23},(_,i)=>{ const r=rows[i]; return `<tr><td class="p">${petals(r?r.pri:0)}</td><td>${r?esc(r.task):""}</td><td class="w">${r?esc(nameOf(r.who)):""}</td><td class="n"></td></tr>`; }).join("")}
   </tbody></table>`,{c:"--partner",toc:"Our help plan"});
 
-// One card for each supporter, two to a page, with the help asked of them
-const ps=people(), list=assigned();
+// 11 · a card for each supporter
+const list=assigned(), named=people().filter(p=>p.name && list.some(x=>x.who===p.id));
 const card=p=>{ const mine=p?list.filter(x=>x.who===p.id):[];
-  return `<div class="box" style="--c:var(--partner);height:300px;overflow:hidden"><div class="fields">${p&&p.name?`<div class="field"><div class="lab">Name</div><div class="lines" style="height:24px"><div class="ans">${esc(p.name)}</div></div></div><div class="field"><div class="lab">Phone</div><div class="lines" style="height:24px"><div class="ans">${esc(p.phone||"")}</div></div></div>`:`${field("","Name")}${field("","Phone")}`}</div>
-    <div class="lab">The help I am asking of you</div>${mine.length?`<ul class="ck" style="gap:3px">${mine.slice(0,8).map(x=>`<li><span class="o on"></span><span>${esc(x.task)} ${petals(x.pri)}</span></li>`).join("")}</ul>`:lines("",8)}</div>`; };
-const named=ps.filter(p=>p.name && list.some(x=>x.who===p.id));
-const four=[0,1,2,3].map(i=>named[i]||null);
-page(`${head("08","For each of my supporters","A card for each person, with the help you have asked of them.")}${card(four[0])}${card(four[1])}`.replace('<h1>','<h1 style="font-size:24px">'),{c:"--partner"});
-page(`${card(four[2])}${card(four[3])}`,{c:"--partner"});
+  const nm=p?`<div><div class="lab">Name</div><div class="lines" style="height:26px"><div class="ans">${esc(p.name)}</div></div></div><div><div class="lab">Phone</div><div class="lines" style="height:26px"><div class="ans">${esc(p.phone||"")}</div></div></div>`:`${field("","Name")}${field("","Phone")}`;
+  return `<div class="box sup" style="--c:var(--partner)"><div class="grid2" style="gap:0 14px">${nm}</div><div class="lab">The help I am asking of you</div>${mine.length?`<ul class="ck" style="gap:4px">${mine.slice(0,7).map(x=>`<li><span class="o on"></span><span>${esc(x.task)} ${petals(x.pri)}</span></li>`).join("")}</ul>`:lines("",7)}</div>`; };
+page(`${head("08","For each of my supporters","A card for each person, with the help you have asked of them. Cut them apart, or share a photo.")}<div class="grid2">${[0,1,2,3,4,5].map(i=>card(named[i]||null)).join("")}</div>`,{c:"--partner",toc:"Cards for my supporters"});
 
-// Rest and recovery: five needs as five petals
+// 12 · rest and recovery, and watching over me
 const NEEDS5=[["rest.rest","Extended rest","--baby"],["rest.food","Nourishing food","--mother"],["rest.touch","Loving touch","--partner"],["rest.wise","Wise women around me","--circle"],["rest.nature","Time in nature","--edu"]];
-page(`${head("09","Rest and recovery","Kimberly Ann Johnson names five needs of every new mother. Many cultures keep a lying-in of about forty days. Write what each means for you.")}
+page(`${head("09 · 10","Rest, recovery, and watching over me","Kimberly Ann Johnson names five needs of every new mother, and many cultures keep a lying-in of about forty days. Write what each means for you.")}
   ${field("rest.long","How long I would like to rest and be cared for")}
-  ${NEEDS5.map(([k,n,c])=>`<div class="five" style="grid-template-columns:22px 1fr;display:grid;gap:8px"><svg viewBox="0 0 20 26" width="20" height="26" style="margin-top:12px"><path d="M10 1C16 7 17 17 10 25C3 17 4 7 10 1Z" fill="var(${c})"/></svg><div>${q(k,n,2)}</div></div>`).join("")}`,{c:"--edu",toc:"Rest, recovery, and visitors"});
-page(`${head("09","Visitors","Short, quiet, helpful visits protect your rest and your time with your baby.")}${ck("visit",VISIT)}${q("visit.who","Who is welcome in the first days, and when",4)}${q("visit.news","How and when we will share the news, and who will share it",3)}`,{c:"--edu"});
+  <div class="two">${NEEDS5.map(([k,n,c])=>`<div class="need">${bigPetal(c)}<div>${q(k,n,2)}</div></div>`).join("")}<div class="need">${bigPetal("--best")}<div>${q("","Anything else I need",2)}</div></div></div>
+  ${sec("--best","Watching over me")}<p class="small muted" style="margin:0">The baby blues are common and usually pass within two weeks. Sadness, worry, frightening thoughts, rage, or numbness that last or deepen may be postpartum depression or anxiety: common, treatable, and not her fault.</p>
+  <div class="three">${q("watch.signs","Signs that I am struggling",3)}${q("watch.helps","What helps me come back",3)}${q("watch.call","Who to call if you are worried about me",3)}</div>
+  <div class="urgent"><p><b>When to call right away.</b> For the mother: heavy bleeding (soaking a pad in an hour or less), a fever, a severe headache or changes in vision, chest pain or trouble breathing, a swollen, painful leg, or thoughts of harming herself or the baby. For the baby: a fever (under three months, 100.4°F or 38°C), trouble breathing or a bluish color, being very hard to wake, refusing feeds, far fewer wet diapers, or yellow skin that is spreading.</p><p>National Maternal Mental Health Hotline (US), free, day and night: 1-833-TLC-MAMA (1-833-852-6262) · Postpartum Support International: postpartum.net</p></div>`,{c:"--edu",toc:["Rest and recovery","Watching over me"]});
 
-// Watching over me
-page(`${head("10","Watching over me","The baby blues are common and usually pass within two weeks. Sadness, worry, frightening thoughts, rage, or numbness that last or deepen may be postpartum depression or anxiety: common, treatable, and not her fault.")}
-  ${q("watch.signs","Signs that I am struggling",3)}${q("watch.helps","What helps me come back",3)}${q("watch.call","Who I would like you to call if you are worried about me",2)}
-  <div class="urgent"><p><b>When to call right away.</b> For the mother: heavy bleeding, a fever, a severe headache or changes in vision, chest pain or trouble breathing, a swollen, painful leg, or thoughts of harming herself or the baby. For the baby: a fever (under three months, 100.4°F or 38°C), trouble breathing or a bluish color, being very hard to wake, refusing feeds, far fewer wet diapers, or yellow skin that is spreading.</p><p>National Maternal Mental Health Hotline (US), free, day and night: 1-833-TLC-MAMA. Postpartum Support International: postpartum.net.</p></div>`,{c:"--best",toc:"Watching over me"});
-
-// Birth story: three pages, kept private unless she chooses to share it
+// 13 · birth story, kept private unless she chooses to share it
 const storyOn=!MINE || v["story.print"];
-const privatePg=`<div class="private"><div class="eb">My birth story</div><p class="lede" style="max-width:300px">My birth story is kept private for now.</p></div>`;
-page(storyOn?`${head("11","My birth story","Telling the story of a birth, and being heard, is part of healing (Kendall-Tackett). Write as much or as little as you like, whenever you are ready. There is no right way for a birth to have gone.")}${q("story.began","How it began",5)}${q("story.born","How my baby was born",6)}`:privatePg,{c:"--mother",toc:"My birth story"});
-page(storyOn?`${head("11","My birth story","")}${q("story.with","Who was with me, and what they did",4)}${q("story.hard","What was hard",5)}${q("story.proud","What I am proud of",5)}`:privatePg,{c:"--mother"});
-page(storyOn?`${head("11","My birth story","")}${q("story.know","What I would like my circle to know about my birth",5)}${q("story.baby","What I would like to tell my baby about her birth",5)}${q("story.partner","My partner's story",4)}`:privatePg,{c:"--mother"});
+page(storyOn?`${head("11","My birth story","Telling the story of a birth, and being heard, is part of healing (Kendall-Tackett). Write as much or as little as you like, whenever you are ready. There is no right way for a birth to have gone.")}
+  <div class="two">${q("story.began","How it began",5)}${q("story.born","How my baby was born",5)}${q("story.with","Who was with me, and what they did",5)}${q("story.hard","What was hard",5)}${q("story.proud","What I am proud of",5)}${q("story.know","What I would like my circle to know",5)}${q("story.baby","What I would like to tell my baby about her birth",5)}${q("story.partner","My partner's story",5)}</div>`
+  :`<div class="private"><div class="eb">11 · My birth story</div><p class="lede" style="max-width:360px">My birth story is kept private for now.</p></div>`,{c:"--mother",toc:"My birth story"});
 
-// For supporters
-const L=LEARN, art=a=>`<h2><i style="--c:var(${a.c})"></i>${a.h}</h2>${a.html}`;
-page(`<div class="read">${head("12","For my supporters","The key ideas behind the requests in this workbook, so you know why closeness and quiet matter so much right now.")}${art(L[0])}${art(L[1])}</div>`,{c:"--edu",toc:"For my supporters: why this matters"});
-page(`<div class="read">${art(L[2])}${art(L[3])}${art(L[4])}</div>`,{c:"--edu"});
-page(`<div class="read">${art(L[5])}${art(L[6])}</div>`,{c:"--edu"});
+// 14 · for my supporters
+page(`<div class="read">${head("12","For my supporters: why this matters","The key ideas behind the requests in this workbook, so you know why closeness and quiet matter so much right now. There is more in The Fourth Trimester Mandala.")}
+  <div class="two"><div>${LEARN.slice(0,4).map(a=>`${sec(a.c,a.h)}${a.html}`).join("")}</div><div>${LEARN.slice(4).map(a=>`${sec(a.c,a.h)}${a.html}`).join("")}</div></div></div>`,{c:"--edu",toc:"For my supporters"});
 
-// Contacts
+// 15 · contacts and notes
 page(`${head("13","Important contacts","")}
-  ${[["c.provider","My midwife or doctor"],["c.babydoc","My baby's care provider"],["c.hosp","Hospital or birth center"],["c.ibclc","Lactation consultant"],["c.doula","Birth doula"],["c.ppdoula","Postpartum doula"],["c.therapist","Therapist or counselor"],["c.other","Someone I trust"]].map(([k,l])=>field(k,l)).join("")}
-  <p class="small muted" style="margin-top:12px">In the United States: emergency 911 · crisis line 988 · National Maternal Mental Health Hotline 1-833-TLC-MAMA · Postpartum Support International postpartum.net</p>`,{c:"--center",toc:"Important contacts"});
+  <div class="two">${[["c.provider","My midwife or doctor"],["c.babydoc","My baby's care provider"],["c.hosp","Hospital or birth center"],["c.ibclc","Lactation consultant"],["c.doula","Birth doula"],["c.ppdoula","Postpartum doula"],["c.therapist","Therapist or counselor"],["c.other","Someone I trust"]].map(([k,l])=>field(k,l)).join("")}</div>
+  <p class="small muted" style="margin-top:8px">In the United States: emergency 911 · crisis line 988 · National Maternal Mental Health Hotline 1-833-TLC-MAMA · Postpartum Support International postpartum.net</p>
+  ${sec("--center","Notes")}${lines("",19)}`,{c:"--center",toc:"Important contacts"});
 
-// Notes, to round the booklet to whole sheets
-while((N+1)%4) page(`${head("Notes","Notes","")}${lines("",23)}`,{c:"--center"});
-// back cover
-page(`<div style="text-align:center;padding-top:140px">
-  <div style="margin:0 auto 26px;width:200px">${braid(200)}</div>
-  <p class="lede" style="font-size:17px;max-width:360px;margin:0 auto 18px">No one is meant to carry these weeks alone. Hold your baby; let your circle hold you.</p>
-  <img src="img/wheel.webp" alt="" style="width:120px;height:120px;margin:26px auto 22px;display:block;opacity:.95">
-  <p class="small muted" style="max-width:340px;margin:0 auto">A companion to The Fourth Trimester Mandala, a teaching map of the first twelve weeks after birth. erinsarita.github.io/fourth-trimester-mandala</p>
-  <p class="small muted" style="max-width:340px;margin:10px auto 0">Created by Erin Singleton, a student in APPPAH's Prenatal &amp; Perinatal Educator certification. An educational workbook, not medical advice.</p></div>`,{cls:"blush",foot:""});
+// 16 · back cover
+page(`${orn(220)}
+  <p class="lede" style="font-size:22px;max-width:520px;margin:30px auto 0">No one is meant to carry these weeks alone. Hold your baby; let your circle hold you.</p>
+  <img src="img/wheel.webp" alt="" style="width:150px;height:150px;margin:44px auto 30px;display:block">
+  <p class="small muted" style="max-width:440px;margin:0 auto">A companion to The Fourth Trimester Mandala, a teaching map of the first twelve weeks after birth. erinsarita.github.io/fourth-trimester-mandala</p>
+  <p class="small muted" style="max-width:440px;margin:10px auto 0">Created by Erin Singleton, a student in APPPAH's Prenatal &amp; Perinatal Educator certification. An educational workbook, not medical advice.</p>`,{cls:"back",foot:false});
 
-document.getElementById("book").innerHTML=PAGES.join("");
-document.getElementById("toc").innerHTML=TOC.map(([t,c,n])=>`<li style="--c:var(${c})"><i></i>${t}<span>${n}</span></li>`).join("");
-if(new URLSearchParams(location.search).has("print")) window.addEventListener("load",()=>setTimeout(()=>print(),400));
+const book=document.getElementById("book");
+book.innerHTML=PAGES.join("");
+book.querySelector("#toc").innerHTML=TOC.map(([t,c,n])=>`<li style="--c:var(${c})"><i></i>${t}<span>${n}</span></li>`).join("");
+const pages=[...book.querySelectorAll(".pg")];
+
+/* ---------- the page turner: two facing pages on a wide screen, one at a time on a narrow one ---------- */
+const spreadEl=document.getElementById("spread"), stage=document.getElementById("stage");
+const count=document.getElementById("count"), prev=document.getElementById("prev"), next=document.getElementById("next"), go=document.getElementById("goto");
+let two=false, at=0, busy=false;
+// spreads: the cover alone, then facing pairs, the back cover alone
+function views(){ if(!two) return pages.map((_,i)=>[i]); const out=[[null,0]]; for(let i=1;i<pages.length-1;i+=2) out.push([i,i+1<pages.length-1?i+1:null]); out.push([pages.length-1,null]); return out; }
+let V=views();
+const clone=i=>{ if(i==null) return null; const c=pages[i].cloneNode(true); c.removeAttribute("id"); c.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id")); return c; };
+function slot(i,side){ const s=document.createElement("div"); s.className="slot "+side; if(i!=null) s.appendChild(clone(i)); else s.style.visibility="hidden"; return s; }
+function fit(){
+  const w=stage.clientWidth-12, h=stage.clientHeight-8, cols=two?2:1;
+  const k=Math.min(w/(816*cols), h/1056);
+  spreadEl.style.transform=`scale(${k})`; spreadEl.style.width=816*cols+"px"; spreadEl.style.height="1056px";
+  spreadEl.style.margin=`${(1056*k-1056)/2}px ${(816*cols*k-816*cols)/2}px`;
+}
+function show(n){
+  at=Math.max(0,Math.min(V.length-1,n)); const view=V[at];
+  spreadEl.innerHTML="";
+  if(two){ spreadEl.appendChild(slot(view[0],"l")); spreadEl.appendChild(slot(view[1],"r")); }
+  else spreadEl.appendChild(slot(view[0],"r"));
+  const nums=view.filter(x=>x!=null).map(x=>x+1);
+  count.textContent=nums.length>1?`Pages ${nums[0]}–${nums[1]} of ${pages.length}`:`Page ${nums[0]} of ${pages.length}`;
+  prev.disabled=at===0; next.disabled=at===V.length-1;
+  const cur=TOC.filter(t=>t[2]<=Math.max(...nums)).pop(); go.value=cur?String(cur[2]):"";
+  fit();
+}
+// a turn: the page lifts from its edge and swings over the spine to show the next one
+function turn(dir){
+  if(busy) return; const to=at+dir; if(to<0||to>=V.length) return;
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches; if(reduce){ show(to); return; }
+  busy=true; const from=V[at], dest=V[to];
+  const leaf=document.createElement("div"); leaf.className="leaf";
+  const front=document.createElement("div"); front.className="face"; const back=document.createElement("div"); back.className="face back";
+  if(two){
+    const lifting=dir>0?from[1]:from[0], landing=dir>0?dest[0]:dest[1];
+    if(lifting!=null) front.appendChild(clone(lifting)); if(landing!=null) back.appendChild(clone(landing));
+    // what shows beneath while the leaf turns
+    const under=dir>0?[from[0],dest[1]]:[dest[0],from[1]];
+    spreadEl.innerHTML=""; spreadEl.appendChild(slot(under[0],"l")); spreadEl.appendChild(slot(under[1],"r"));
+    leaf.style.left=dir>0?"816px":"0"; leaf.style.transformOrigin=dir>0?"left center":"right center";
+  } else {
+    front.appendChild(clone(from[0])); back.style.display="none";
+    spreadEl.innerHTML=""; spreadEl.appendChild(slot(dir>0?dest[0]:from[0],"r"));
+    if(dir<0){ front.innerHTML=""; front.appendChild(clone(dest[0])); leaf.style.transform="rotateY(-100deg)"; leaf.style.opacity="0"; }
+    leaf.style.left="0"; leaf.style.transformOrigin="left center";
+  }
+  leaf.append(front,back); spreadEl.appendChild(leaf);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    if(two) leaf.style.transform=dir>0?"rotateY(-180deg)":"rotateY(180deg)";
+    else if(dir>0){ leaf.style.transform="rotateY(-100deg)"; leaf.style.opacity="0"; leaf.style.transition="transform .6s ease, opacity .6s ease"; }
+    else { leaf.style.transition="transform .6s ease, opacity .4s ease"; leaf.style.transform="rotateY(0)"; leaf.style.opacity="1"; }
+  }));
+  setTimeout(()=>{ busy=false; show(to); }, 720);
+}
+function layout(){ const wide=innerWidth>=980 && innerWidth/innerHeight>1.05; if(wide!==two){ const first=V[at].find(x=>x!=null)||0; two=wide; V=views(); show(Math.max(0,V.findIndex(v=>v.includes(first)))); } else fit(); }
+prev.addEventListener("click",()=>turn(-1)); next.addEventListener("click",()=>turn(1));
+document.addEventListener("keydown",e=>{ if(e.key==="ArrowRight"||e.key==="PageDown") turn(1); if(e.key==="ArrowLeft"||e.key==="PageUp") turn(-1); });
+// tap the right half of the book to go on, the left half to go back; swipe on a phone
+stage.addEventListener("click",e=>{ const r=spreadEl.getBoundingClientRect(); if(e.clientX<r.left||e.clientX>r.right) return; turn(e.clientX>r.left+r.width/2?1:-1); });
+let sx=null; stage.addEventListener("touchstart",e=>{ sx=e.touches[0].clientX; },{passive:true});
+stage.addEventListener("touchend",e=>{ if(sx==null) return; const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>40){ e.preventDefault(); turn(dx<0?1:-1); } sx=null; });
+go.innerHTML=`<option value="">Go to…</option>`+TOC.map(([t,,n])=>`<option value="${n}">${t}</option>`).join("");
+go.addEventListener("change",()=>{ const n=+go.value-1; if(n<0) return; const i=V.findIndex(v=>v.includes(n)); if(i>=0) show(i); });
+document.getElementById("printit").addEventListener("click",()=>print());
+addEventListener("resize",layout);
+two=innerWidth>=980 && innerWidth/innerHeight>1.05; V=views(); show(+(Q.get("page")||0));
+if(Q.has("print")) addEventListener("load",()=>setTimeout(()=>print(),500));
 })();
 </script>
 </body>

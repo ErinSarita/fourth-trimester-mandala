@@ -54,6 +54,15 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
 .saved{font-size:13px;color:var(--muted);margin-left:auto}
 
 nav.toc{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
+.views{display:flex;gap:6px;margin:16px 0 12px;padding:5px;border:1px solid var(--line);border-radius:999px;background:var(--surface);width:max-content;max-width:100%}
+.view{font:inherit;font-size:15px;font-weight:700;padding:8px 18px;border-radius:999px;border:none;background:transparent;color:var(--ink);cursor:pointer}
+.view[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.view:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.reader{display:none;margin:0 0 18px}
+.reader iframe{width:100%;height:min(86vh,980px);border:1px solid var(--line);border-radius:16px;background:#EADFD8;display:block}
+body.reading .reader{display:block}
+body.reading .toolbar .note,body.reading nav.toc,body.reading form#wb{display:none}
+body.reading .wrap{max-width:1240px}
 .chip{font-size:13px;font-weight:600;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:7px}
 .chip i{width:10px;height:10px;border-radius:50%;background:var(--c)}
 
@@ -161,15 +170,20 @@ try{ var t=localStorage.getItem("ft-theme"); if(t==="light"||t==="dark") documen
     <p class="lede">A place to gather what you will need after your baby arrives: your first hour, your circle of support and what you would love from each of them, your feeding plan, the help that keeps a home running, time to rest, and your birth story when you are ready to tell it. Fill it in with your partner in the last weeks of pregnancy, then share it, so the people around you know how to hold you while you hold your baby.</p>
   </header>
 
+  <div class="views" role="tablist" aria-label="How to use the workbook">
+    <button type="button" role="tab" class="view" data-view="read" aria-selected="true">Read the booklet</button>
+    <button type="button" role="tab" class="view" data-view="fill" aria-selected="false">Fill it in</button>
+  </div>
+  <div class="reader" id="reader"><iframe id="bookframe" title="My Fourth Trimester Plan, as a booklet to page through"></iframe></div>
+
   <div class="toolbar">
     <button class="btn primary" type="button" id="print">Print my plan as a booklet</button>
     <a class="btn" href="ways-to-help.html?mine" target="_blank" rel="noopener">My Ways to help sheet</a>
     <a class="btn" href="my-fourth-trimester-plan.pdf" target="_blank" rel="noopener">Blank booklet (PDF)</a>
-    <a class="btn" href="my-fourth-trimester-plan-booklet.pdf" target="_blank" rel="noopener">Booklet to print and fold</a>
     <a class="btn" href="ways-to-help.pdf" target="_blank" rel="noopener">Blank Ways to help (PDF)</a>
     <button class="btn" type="button" id="clear">Clear everything</button>
     <span class="saved" id="saved" aria-live="polite"></span>
-    <p class="note">Fill it in here and print it as a booklet with your own words written in, or open the blank booklet to flip through or print and fill in by hand. The Ways to help sheet is a single page for the fridge, with every task you have circled and its priority. What you write here is saved only in this browser, on this device, and is not sent anywhere. To share it, print it or save it as a PDF. Your birth story is printed only if you choose.</p>
+    <p class="note">Fill it in here, and turn the pages of the booklet to see it with your own words written in. Print it as a booklet, or open the blank booklet to print and fill in by hand. The Ways to help sheet is a single page for the fridge, with every task you have circled and its priority. What you write here is saved only in this browser, on this device, and is not sent anywhere. To share it, print it or save it as a PDF. Your birth story is printed only if you choose.</p>
   </div>
 
   <nav class="toc" id="toc" aria-label="Parts of the workbook"></nav>
@@ -437,6 +451,20 @@ tbtn.addEventListener("click",()=>{ const next=isDark()?"light":"dark"; root.set
 sysDark.addEventListener("change",syncTheme); syncTheme();
 
 counts(); fill();
+
+/* two views: turn the pages of the booklet, or fill it in. The booklet always shows her latest words. */
+const frame=document.getElementById("bookframe");
+function setView(view, keep){
+  document.body.classList.toggle("reading", view==="read");
+  document.querySelectorAll(".view").forEach(b=>b.setAttribute("aria-selected", b.dataset.view===view?"true":"false"));
+  if(view==="read") frame.src="booklet.html?mine&t="+Date.now();
+  if(keep){ try{ localStorage.setItem("ftw-view",view); }catch(e){} }
+}
+document.querySelectorAll(".view").forEach(b=>b.addEventListener("click",()=>setView(b.dataset.view,true)));
+let first="read"; try{ first=localStorage.getItem("ftw-view")||"read"; }catch(e){}
+const asked=new URLSearchParams(location.search).get("view"); if(asked==="read"||asked==="fill") first=asked;
+if(location.hash && location.hash!=="#") first="fill";
+setView(first,false);
 })();
 </script>
 </body></html>
