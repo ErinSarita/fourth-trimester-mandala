@@ -1136,7 +1136,9 @@ function select(q, ring, idx, user){
   sel={q,ring,idx}; applySel(); markTabs();
   const qq=QUARTERS[q], ts=todaySlice();
   const hl=(k,i)=> (ring===k && (idx==null||idx===i))?" hl":"";
-  const cards=[q*3,q*3+1,q*3+2].map(i=>{
+  // a quarter shows its three slices; a slice picked on its own, from the wheel or the jump row, shows just that slice
+  const shown = idx!=null ? [idx] : [q*3,q*3+1,q*3+2];
+  const cards=shown.map(i=>{
     const s=SLICES[i], isNow=(ts===i);
     return `<article class="scard${idx===i?" cur":""}" id="sl-${i}">
       <div class="st">${s.t}<span>${s.w}${isNow?" · <b>today</b>":""}</span></div>
@@ -1151,7 +1153,10 @@ function select(q, ring, idx, user){
       <p class="repair"><b>Repair. ${s.repair[0]}.</b> ${s.repair[1]}</p>
     </article>`;
   }).join("");
-  panel.innerHTML=`<div class="phasehead"><h2>${qq.name}</h2><div class="meta">${qq.sub}${ts!=null&&Math.floor(ts/3)===q?" · you are here":""}</div><p>${qq.intro}</p></div>
+  const head = idx!=null
+    ? `<div class="phasehead slim"><div class="eyebrow">${qq.name} · ${idx%3+1} of 3</div></div>`
+    : `<div class="phasehead"><h2>${qq.name}</h2><div class="meta">${qq.sub}${ts!=null&&Math.floor(ts/3)===q?" · you are here":""}</div><p>${qq.intro}</p></div>`;
+  panel.innerHTML=`${head}
     ${cards}
     <div class="support"><h3>If more support is needed</h3><p>No one is meant to carry these weeks alone. When something feels too big to hold, for the baby, the mother, or the partner, help is out there: someone for feeding, for rest, for the birth story, for her mind and her body, and for the baby's body too.</p><p><a class="go" href="#support" data-go="sup">See who can help, the signs that support may help, and how to find it.</a></p></div>`;
   const card = idx!=null ? document.getElementById("sl-"+idx) : null;
