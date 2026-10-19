@@ -183,7 +183,7 @@ try{ var t=localStorage.getItem("ft-theme"); if(t==="light"||t==="dark") documen
     </button>
     <div class="eyebrow">Prenatal &amp; Perinatal Education</div>
     <h1>The Fourth Trimester Mandala</h1>
-    <p class="lede">A teaching map of the first twelve weeks after birth, read from the center out. At the center is the dyad, mother and baby, still one unit as the gestation continues outside the womb. Around them are the baby and the mother, then the partner, the one steady person who protects them, then the wider circle who hold them all. On the outer petals are the best practices for each moment: what to do, and why.</p>
+    <p class="lede">A gentle map of the first twelve weeks after birth, read from the center out. At the center are mother and baby, still one unit as the gestation continues outside the womb. Around them are the baby and the mother, then the partner, the steady person who stays close, then the wider circle who hold them all. The outer petals hold the best practices for each moment: what to do, and why. However the birth unfolded, these weeks are a time to rest, to heal, and to come to know each other.</p>
   </header>
 
   <div class="main">
@@ -258,7 +258,7 @@ try{ var t=localStorage.getItem("ft-theme"); if(t==="light"||t==="dark") documen
 /* ---------- Content ---------- */
 const RINGS = {
   baby:    {name:"The baby", color:"--baby", about:"The first ring around the dyad: what the newborn is doing, sensing, and needing in each moment, and a question she may be asking."},
-  mother:  {name:"The mother", color:"--mother", about:"Her body as it recovers and makes milk, her emotional life, and how she can care for herself. Her body is the baby's habitat, so caring for her is caring for the baby."},
+  mother:  {name:"The mother", color:"--mother", about:"Her body as it recovers and makes milk, her emotional life, and how she can care for herself. Her body is the baby's habitat, so caring for her is caring for the baby. She deserves the same tenderness she gives."},
   partner: {name:"The partner", color:"--partner", about:"The first layer of support: one steady, consistent person around the mother, often the baby's father. Bergman describes this role as protecting mother and baby so they can stay together. Each slice shows how the partner can protect the dyad, support the mother, and be supported too."},
   circle:  {name:"The circle", color:"--circle", about:"The wider layers: family, friends, a doula, a midwife or doctor, a lactation consultant, and the community. They hold the partner as well as the mother, because everyone who gives support needs support too (Castellino, in White, 2013).",
    more:`<figure class="layers">
@@ -276,13 +276,13 @@ const RING_TAG={baby:"Baby ring", mother:"Mother ring", partner:"Partner ring", 
 
 const QUARTERS = [
   {id:"found", name:"The foundations", tab:"Foundations", sub:"Warmth · milk · love",
-   intro:"What every newborn needs, from the first minute through the whole fourth trimester: oxygen, warmth, nutrition, and protection. Bergman calls the mother's body the newborn's habitat and feeding her niche, and the two belong together. The doctors who first described kangaroo care named its three parts warmth, milk, and love. Learned before birth, these three hold everything that follows."},
+   intro:"Before anything else, a newborn needs to be warm, fed, protected, and close, from the first minute through the whole fourth trimester. Bergman describes the mother's body as the baby's habitat, the place where she belongs, and feeding as her niche, what that place makes possible. The doctors who first described kangaroo care named its three parts warmth, milk, and love. Learned before the birth, they give a family something steady to return to when the days feel uncertain."},
   {id:"hour", name:"The first hour", tab:"First hour", sub:"The nine stages",
-   intro:"The sacred hour: the baby's transition from womb to air, and the start of feeding. Placed skin to skin and left undisturbed, a newborn moves through nine instinctive stages, from her birth cry to finding the breast and falling into her first deep sleep (Widström et al., 2011). Bergman's point is that she carries the program; the adults' work is to protect the space, wait, and keep her close."},
+   intro:"The first hour after birth is a threshold for both of them. Placed skin to skin and left undisturbed, a newborn moves through nine instinctive stages, from her first cry to finding the breast and falling into her first deep sleep (Widström et al., 2011). She knows the way. The work of everyone around her is to keep the space warm and quiet, to wait, and to keep mother and baby close. If the first hour was interrupted, or looked different from what was hoped for, the bond is not lost: these same instincts can be welcomed again in the days that follow."},
   {id:"days", name:"The first days", tab:"First days", sub:"Day 1 to two weeks",
-   intro:"Colostrum becomes milk, both bodies recover from birth, and the family learns each other's rhythms. The mother's hormones shift quickly, the baby is sorting out her new world and may begin telling the story of her birth, and the support around them matters most."},
+   intro:"These are tender days. The mother's body is healing and her milk is coming in, her hormones are shifting quickly, and sleep comes in pieces. Tears may arrive alongside the joy, and both belong here. The baby is finding her way in a new world and may begin to tell the story of her birth. Above all, this is a time for rest, closeness, and being cared for, while the circle takes care of the rest."},
   {id:"months", name:"The first months", tab:"First months", sub:"Weeks 3 to 12",
-   intro:"The relationship deepens. Crying often peaks around six weeks, the first social smiles arrive, and sleeping and waking begin to organize. The baby's brain is still wiring quickly, so closeness, carrying, and being understood remain her habitat, as the family begins to turn back toward the wider world."}
+   intro:"Over these weeks the relationship deepens. Crying often reaches its peak around six weeks, and then the first real smiles arrive. Sleep and waking slowly begin to find a rhythm. Tiredness can run deep by now, and help is still needed after the visitors thin out. The baby's brain is still growing quickly, so closeness, carrying, and being understood remain her home as the family begins to turn back toward the wider world."}
 ];
 
 // Twelve slices, three per quarter. Every ring shares these slices, so reading straight out shows one moment.
@@ -899,9 +899,9 @@ function ul(items){ return "<ul>"+items.map(i=>`<li>${i}</li>`).join("")+"</ul>"
 const CENTER_HTML=`<div class="center-msg">
     <div class="eyebrow">Begin here</div>
     <h2>The dyad at the center</h2>
-    <p>After birth, mother and baby are not so much two separate people as one unit, continuing the gestation outside the womb. In medicine the pair is called a dyad (Bergman). The womb did the work of the placenta and the cord; now her chest and her milk do it, and the baby's own instincts lead the way.</p>
-    <p>Pre- and perinatal education adds that the baby is aware: she is feeling, remembering, and taking in how she is met, and she tells her story through her crying and her body. A mother who is held can hold her baby, and a baby who is understood can settle and trust.</p>
-    <p>Every ring around the dyad exists to keep them together and to hold them: the partner who protects them, the circle who holds them all, and the best practices that turn this knowledge into what people actually do, hour by hour and day by day.</p>
+    <p>After birth, a mother and her baby are not so much two separate people as one unit, the gestation continuing outside the womb. In medicine the pair is called a dyad (Bergman). What the placenta and cord once did, her chest, her warmth, and her milk now do, and the baby's own instincts help lead the way.</p>
+    <p>Pre- and perinatal education adds that the baby is aware. She is feeling, remembering, and taking in how she is met, and she tells her story through her crying and her body. A mother needs the same: to be seen, cared for, and given time. When she is held, she can hold her baby, and a baby who feels understood can settle and begin to trust.</p>
+    <p>The fourth trimester asks a great deal of a mother. She is healing, often short on sleep, and meeting a new person while becoming a new version of herself. Every ring around the dyad is here to protect that tender work: the partner who stays close, the circle who holds them all, and the practices that turn knowledge into care, hour by hour and day by day.</p>
     <p class="sym">At the center are two circles overlapping, the oldest picture of two becoming one. The shared space between them is the dyad: neither one alone, both at once.</p>
   </div>`;
 function showCenter(user){
@@ -912,7 +912,7 @@ function showIntro(){
   sel={q:null,ring:null,idx:null}; applySel(); markTabs();
   panel.innerHTML=CENTER_HTML+`<div class="intro">
     <h2>Reading from the center out</h2>
-    <p>Begin at the center with the dyad and move outward. Each ring is a layer within the same moment, so reading straight out from any slice shows how the baby, the mother, the partner, the circle, and the best practices meet then. The rings are also layers of support: each one holds the one inside it.</p>
+    <p>Begin at the center with the dyad and move outward. Each ring is a layer within the same moment, so reading straight out from any slice shows how the baby, the mother, the partner, the circle, and the best practices meet then. The rings are also layers of support: each one holds the one inside it. There is no right pace for reading it. Take what is useful now, and return to the rest when it fits.</p>
     <ul class="legend">
       ${RING_ORDER.map(k=>`<li>${sw(RINGS[k].color)}<div><b>${RINGS[k].name}</b>${RINGS[k].about}${RINGS[k].more||""}</div></li>`).join("")}
       <li>${sw("--time")}<div><b>The time wheel</b>The timekeeper. Its inner band names each slice, lined up with the rings. Its small petals hold Bergman's four needs in the foundations, Widström's nine stages in the first hour, the first fourteen days, and weeks three to twelve. Enter a birth date and today turns gold.</div></li>
@@ -941,7 +941,7 @@ function select(q, ring, idx, user){
   }).join("");
   panel.innerHTML=`<div class="phasehead"><h2>${qq.name}</h2><div class="meta">${qq.sub}${ts!=null&&Math.floor(ts/3)===q?" · you are here":""}</div><p>${qq.intro}</p></div>
     ${cards}
-    <div class="support"><h3>If more support is needed</h3><p>When feelings or symptoms feel too big to hold alone, for the baby, the mother, or the partner, these are places to turn.</p>${ul(MORE_SUPPORT)}</div>`;
+    <div class="support"><h3>If more support is needed</h3><p>No one is meant to carry these weeks alone. When feelings or symptoms feel too big to hold, for the baby, the mother, or the partner, these are places to turn.</p>${ul(MORE_SUPPORT)}</div>`;
   const target = idx!=null ? document.getElementById("sl-"+idx) : null;
   if(!user) return;
   if(window.matchMedia("(max-width:900px)").matches) (target||panel).scrollIntoView({behavior:"smooth",block:"start"});
