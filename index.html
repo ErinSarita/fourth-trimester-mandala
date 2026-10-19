@@ -1182,12 +1182,13 @@ let jumped=null;   // the section last jumped to, marked in the index
 function markTabs(){
   const guide = sel.q!=null ? null : (sel.page||"intro");
   const sub=(target,label,on)=>`<button class="sub" type="button" data-jump="${target}" aria-current="${on?"true":"false"}">${label}</button>`;
-  nav.innerHTML=`<div class="navgroup"><div class="navlbl">The mandala, in four quarters</div>
+  const mandala=`<div class="navgroup"><div class="navlbl">The mandala, in four quarters</div>
       <div class="tabs" role="tablist">${QUARTERS.map((qq,q)=>`<button class="tab" type="button" role="tab" data-q="${q}" aria-selected="${sel.q===q}">${qq.tab}</button>`).join("")}</div>
-      ${sel.q!=null?`<div class="jump"><span>Jump to</span>${[0,1,2].map(k=>{ const i=sel.q*3+k; return sub("sl-"+i,SLICES[i].t,sel.idx===i); }).join("")}</div>`:""}</div>
-    <div class="navgroup"><div class="navlbl">Guides and resources</div>
+      ${sel.q!=null?`<div class="jump"><span>Jump to</span>${[0,1,2].map(k=>{ const i=sel.q*3+k; return sub("sl-"+i,SLICES[i].t,sel.idx===i); }).join("")}</div>`:""}</div>`;
+  const guides=`<div class="navgroup"><div class="navlbl">Guides and resources</div>
       <div class="tabs" role="tablist">${GUIDES.map(g=>`<button class="tab" type="button" role="tab" data-guide="${g.id}" aria-selected="${guide===g.id}">${g.tab}</button>`).join("")}</div>
       ${guide?`<div class="jump"><span>Jump to</span>${GUIDES.find(g=>g.id===guide).subs.map(([t,l])=>sub(t,l,jumped===t)).join("")}</div>`:""}</div>`;
+  nav.innerHTML=guides+mandala;
 }
 nav.addEventListener("click",e=>{
   const b=e.target.closest("button"); if(!b) return;
