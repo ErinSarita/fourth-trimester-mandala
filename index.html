@@ -170,6 +170,7 @@ a.go{color:var(--ink);font-weight:600;text-underline-offset:2px}
 .state p{margin:0}
 .state .help{color:var(--muted);font-size:14.5px}
 .lang ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.support.urgent{border-color:var(--best);border-left:5px solid var(--best)}
 
 section.about{margin-top:56px;display:grid;gap:18px;max-width:880px}
 section.about h2{font-family:var(--display);font-weight:400;font-size:30px;margin:0}
@@ -327,6 +328,7 @@ const SLICES = [
        ["Long sessions rather than short ones.","Each move in and out is a disruption for a small baby, so WHO guidance suggests sessions of at least an hour."],
        ["Carry her through the day.","A wrap or soft carrier keeps her in her habitat while you move. Humans are a carrying species."]],
      src:"Bergman; Erlandsson et al. (2007); WHO (2003); Moore et al. (2016)"},
+   sup:["doula","community","nicu"],
    repair:["If you were apart", "Begin skin to skin as soon as you are together, and stay as long as you can. It is not too late. Tell her: “We were apart, and I missed you. You are with me now. This is where you belong.”"]},
 
   {t:"Milk", w:"The niche: feeding close", span:"MILK",
@@ -354,6 +356,7 @@ const SLICES = [
        ["If bottles are used, keep it close.","Hold her skin to skin, let her set the pace, and switch sides, so every feed is still contact."],
        ["Get skilled help early.","Pain, a shallow latch, or worry about weight are reasons to see an IBCLC in the first days, not weeks later. Asking early is a sign of care, not of failure."]],
      src:"Bergman; Jayamala et al. (2015); Feher et al. (1989); Kendall-Tackett (2013); Hazelbaker"},
+   sup:["lactation","bodywork","community"],
    repair:["If feeding began apart, or got off to a hard start", "Return to skin to skin, lie back, and let her find the breast in her own time, as in the first hour. Many babies keep these feeding instincts for weeks (La Leche League, laid-back nursing). Tell her: “We are learning this together.” It is not too late, and you do not have to work it out alone."]},
 
   {t:"Love", w:"The connection: being met", span:"LOVE",
@@ -380,6 +383,7 @@ const SLICES = [
        ["Let your calm come first.","Before you pick her up, take one slow breath into your heart. A calm, coherent heart rhythm can steady hers (Appleton). If calm feels far away, that is human: one breath, or a moment while someone else holds her, is enough."],
        ["Mirror and wait.","Copy her expressions and sounds, then wait for her reply. Conversation begins here (Klaus)."]],
      src:"Klaus; Appleton (2017); Goertz-Schroth et al. (2023); Johnson (2017); Castellino, in White (2013)"},
+   sup:["doula","community","mind"],
    repair:["If you misread her", "Every relationship has misses, and no parent reads every cue. Come back and say so: “I did not understand. I am listening now.” A repaired rupture can build stronger trust than if it had not happened (Strange)."]},
 
   // ---------- The first hour ----------
@@ -407,6 +411,7 @@ const SLICES = [
        ["Dim and quiet.","Soft voices and low light protect the hormones that bond them."],
        ["Welcome her with words.","“You are out now. You made it. You are safe.” (Strange)"]],
      src:"Widström et al. (2011); Buckley (2003); Strange; MFCI"},
+   sup:["story","nicu"],
    repair:["If she had to be taken for care", "Someone goes with her and keeps a hand and a voice with her. When you are together again, hold her skin to skin and tell her what happened: “You had to go, and you were not alone. You are back with me now.” The same is true for the mother: if she was apart from her baby, her feelings about it deserve to be heard."]},
 
   {t:"The breast crawl", w:"Stages 4 to 6 · about 4 to 54 minutes", span:"STAGES 4–6",
@@ -433,6 +438,7 @@ const SLICES = [
        ["Expect pauses.","Rest is a stage of its own. A still baby is not a stuck baby. After some labor medications a baby may be sleepier and need more time, and she can still find her way."],
        ["Watch, and do not hurry.","The crawl can take most of an hour. Check her color and breathing, and otherwise wait."]],
      src:"Widström et al. (2011); Bergman; Moore et al. (2016)"},
+   sup:["lactation","bodywork"],
    repair:["If the first hour was interrupted", "The crawl can still happen later. Lie back with her skin to skin and give her time; many babies keep these instincts for weeks. Tell her: “We missed this at first. Take your time now. I am here.” This is not a test either of you can fail: if the crawl does not happen, feeding can still be learned together in many ways."]},
 
   {t:"First feed, first sleep", w:"Stages 7 to 9 · about 30 minutes to 2 hours", span:"STAGES 7–9",
@@ -458,6 +464,7 @@ const SLICES = [
        ["Safe rest on the chest.","If the mother is drowsy, another adult stays awake and watching, or the baby moves to her own safe sleep space."],
        ["Room in.","Keep the baby with her parents from here on, day and night."]],
      src:"Widström et al. (2011); Moore et al. (2016); MFCI"},
+   sup:["lactation","story"],
    repair:["If the first feed happened apart", "The first feed together can still be a gentle meeting: skin to skin, reclined, and unhurried, whenever you are reunited. Tell her: “Here you are. This is yours.” And remember: the first feed is one moment among thousands, and closeness can begin at any of them."]},
 
   // ---------- The first days ----------
@@ -485,6 +492,7 @@ const SLICES = [
        ["Listen to the birth story.","Ask how it was for her and listen, without correcting or comparing (Kendall-Tackett)."],
        ["Narrate to the baby.","Tell her who is here and what is happening as she is examined, changed, or moved."]],
      src:"Klaus; Bergman; Kendall-Tackett (2013)"},
+   sup:["story","nicu","mind"],
    repair:["If she spent time in a nursery or NICU", "As soon as you can, hold her skin to skin and tell her what happened: “You needed extra care, and you were not alone. I am here now.” Ask about kangaroo care in the unit too; Bergman's work shows it helps even very small babies. Pumping, with music or a guided relaxation to ease stress, keeps the milk coming while you are apart (Jayamala et al., 2015). Time apart is hard on parents as well, and it says nothing about how much you love her."]},
 
   {t:"Milk comes in", w:"Days 2 to 4", span:"DAYS 2–4",
@@ -511,6 +519,7 @@ const SLICES = [
        ["Watch her body with curiosity.","Notice where she touches or turns, and say what you see without inventing a story for her (Appleton)."],
        ["Name the baby blues.","Common, temporary, and usually gone by two weeks. Tell someone if it lasts longer or feels heavy."]],
      src:"Bergman; Kendall-Tackett (2013); Appleton (2017)"},
+   sup:["lactation","bodywork","story"],
    repair:["If you see the hard birth in her body", "Acknowledge it out loud: “That was hard for you, wasn't it? I see it now.” Babies often settle when they feel known (Appleton). If seeing it stirs guilt, be gentle with yourself: no one could have known everything then, and noticing it now is already a gift to her."]},
 
   {t:"The lying-in", w:"Days 5 to 14", span:"DAYS 5–14",
@@ -537,6 +546,7 @@ const SLICES = [
        ["Not every cry needs stopping.","When memory crying is always met with a breast, a bottle, or a shush, a baby may give up and become quiet and resigned: Appleton's Good Baby Syndrome."],
        ["Protect her sleep.","Let her finish a sleep on a chest or close to you, rather than moving or waking her often."]],
      src:"Johnson (2017); Appleton (2017); Bergman; ACOG (2018)"},
+   sup:["doula","mind","story"],
    repair:["If you missed what her crying meant", "Come back to it. Hold her and tell her: “I did not understand before. I am listening now.” Being heard late is still being heard."]},
 
   // ---------- The first months ----------
@@ -564,6 +574,7 @@ const SLICES = [
        ["At your limit, pause.","Lay her down somewhere safe, step away for a few minutes, breathe, and call for help. Shaking a baby can cause serious brain injury."],
        ["Check in on both parents.","Ask each other honestly how you are, and reach out early."]],
      src:"Barr (1990); Hunziker & Barr (1986); Dunstan; Appleton (2017); Paulson & Bazemore (2010)"},
+   sup:["bodywork","mind","partner"],
    repair:["After a hard night", "If someone snapped, or cried too, repair with her: hold her, soften, and say, “That was a hard night. It was not your fault. I am here.”"]},
 
   {t:"First smiles", w:"Weeks 7 to 9", span:"WEEKS 7–9",
@@ -590,6 +601,7 @@ const SLICES = [
        ["Tend the mother's healing.","Pelvic floor care, rest, and support for any lingering birth trauma."],
        ["Protect the couple.","A few minutes each day of looking at each other, not only at the baby (Castellino, in White, 2013)."]],
      src:"Bergman; Kendall-Tackett (2013); Castellino, in White (2013)"},
+   sup:["pelvic","mind","partner"],
    repair:["If the early weeks were hard", "The smiling weeks are a fresh chance. Each moment of being met adds to her trust, and relationships keep building over time."]},
 
   {t:"Closing the fourth trimester", w:"Weeks 10 to 12", span:"WEEKS 10–12",
@@ -616,6 +628,7 @@ const SLICES = [
        ["Keep carrying.","She is still a carried baby. Closeness remains her habitat long after twelve weeks."],
        ["Look back together.","Tell the story of these months to each other, and to her."]],
      src:"Bergman"},
+   sup:["lactation","community","partner"],
    repair:["After every separation", "Each time apart can end in a reunion. When you come back, slow down, hold her, and tell her: “I was away, and I came back. I am here now.”"]}
 ];
 
@@ -660,12 +673,60 @@ const DEEPER = [
     ["Conscious Embodiment Trainings (Matthew Appleton, UK).","Training in Integrative Baby Therapy, the approach described in Appleton's article.",0],
     ["Castellino Prenatal and Birth Training.","Ray Castellino's approach to working with babies and families after birth, the source of the principles used in the Pregnancy and Birth Mandala.",0]]}];
 
-// Where to turn when more is needed: the same note closes each quarter (Module 10, Objective 4)
-const MORE_SUPPORT = [
-  "<b>For babies.</b> Integrative Baby Therapy (Appleton), biodynamic craniosacral therapy, cranial osteopathy, the Bowen Technique, and infant massage (Wilks). An IBCLC skilled in suck problems and oral function (Hazelbaker).",
-  "<b>For mothers.</b> Postpartum Support International, perinatal mental health specialists, and trauma therapists using Somatic Experiencing or EMDR. La Leche League and an IBCLC for feeding.",
-  "<b>For partners.</b> Postpartum Support International's support for dads, and a partner's own therapist or group.",
-  "<b>For the whole family.</b> The APPPAH practitioner directory, Prenatal Bonding (BA) facilitators for a next pregnancy, Baby-Friendly USA to find designated hospitals, and kangaroomothercare.com."];
+// Support: who can help with what comes up in these weeks, the signs that a kind of support may help, what they do, and how to find them.
+// Each slice names the ones that fit its moment (sup), and the Support tab gathers them all.
+const URGENT = {
+  mother:"Heavy bleeding (soaking a pad in an hour or less, or large clots), a fever, a severe headache or changes in vision, chest pain or trouble breathing, a swollen, painful leg, or thoughts of harming herself or the baby.",
+  baby:"A fever (in a baby under three months, 100.4°F or 38°C or higher), trouble breathing or a bluish color, being very hard to wake, refusing feeds, far fewer wet diapers, or yellow skin that is spreading or deepening.",
+  note:"Call her care provider or emergency services right away. If a mother feels confused, sees or hears things others do not, or is frightened she might act on harmful thoughts, it is an emergency, and help is available."};
+const SUPPORT = [
+  {id:"lactation", tag:"Lactation support", name:"Lactation and feeding support",
+   when:["Nipple pain that lasts past the first moments of a latch, or cracked or bleeding nipples","Clicking, slipping off, very long feeds, or a baby who seems hungry right after feeding","Fewer wet or dirty diapers than expected, or slow weight gain","Milk that has not come in by about day five, or worry about too little or too much","A hard, red, painful area in the breast, especially with fever (also call her provider)","Pumping for a NICU baby, combining breast and bottle, or planning a return to work"],
+   what:"An IBCLC (an International Board Certified Lactation Consultant) watches a full feed, checks latch, suck, and weight, and makes a plan with her. One skilled in oral function can assess for tongue-tie and other suckling difficulties and refer on when needed (Hazelbaker). Peer supporters offer encouragement and practical know-how from mothers who have been there.",
+   find:"A hospital or birth center lactation service; the International Lactation Consultant Association's Find an IBCLC directory; La Leche League leaders and meetings, which are free; and, in the United States, WIC breastfeeding peer counselors.",
+   note:"Earlier is easier. Most feeding problems are simpler to solve in the first days than after weeks of pain or worry."},
+  {id:"doula", tag:"Postpartum doula", name:"Postpartum doula and help at home",
+   when:["Family is far away, or the partner goes back to work soon","Recovering from a cesarean, a hard birth, or caring for twins","Feeling overwhelmed, alone, or unsure, especially at night","Wanting someone experienced to help with feeding, settling, and baby care"],
+   what:"Practical and emotional care in the home: meals, light housework, help with feeding and newborn care, watching the baby while the parents sleep, listening, and knowing when to refer on. In Johnson's words, a postpartum doula is one of the wise women every new mother needs.",
+   find:"DONA International and CAPPA directories, local doula collectives, and the birth doula, who often knows postpartum doulas nearby. Some insurance plans and state Medicaid programs in the United States now cover doula care. Friends and family can organize a meal train.",
+   note:"Day and overnight support are both common, and a few visits in the first weeks can make a real difference."},
+  {id:"story", tag:"Birth story listening", name:"Birth story listening and debriefing",
+   when:["Replaying the birth over and over, or not wanting to think about it at all","Gaps or confusion about what happened, and why","Feeling cheated, guilty, angry, or let down by the birth","A partner who witnessed something frightening"],
+   what:"A trained listener holds space while a parent tells the story of the birth, without correcting or comparing, so it can begin to settle into something understood. A birth debrief with the midwife or doctor goes through the records: what happened, when, and why. Both can be done months or years later.",
+   find:"Ask the hospital, midwife, or doctor for a birth debrief or a copy of the records. Many doulas and childbirth educators offer birth story listening, and some are trained in Birth Story Medicine (Birthing From Within). A PPN educator or practitioner can help too.",
+   note:"Being heard is part of healing (Kendall-Tackett). If telling the story brings up flashbacks or panic, a trauma therapist is the right next step."},
+  {id:"mind", tag:"Perinatal mental health", name:"Perinatal mental health and birth trauma",
+   when:["The blues have lasted beyond two weeks, or are deepening","Sadness, hopelessness, or numbness, or no longer enjoying anything","Constant worry, panic, or frightening thoughts that will not leave","Anger or rage that feels out of character","Not sleeping even when the baby sleeps","Flashbacks, nightmares, or avoiding reminders of the birth"],
+   what:"Therapists and psychiatric providers trained in perinatal mental health treat postpartum depression, anxiety, OCD, and birth trauma. Trauma therapies such as EMDR and Somatic Experiencing help a hard birth settle in the body and mind (Kendall-Tackett). Medication, when needed, can be chosen to fit breastfeeding.",
+   find:"Postpartum Support International (postpartum.net) has a helpline, free support groups, and a directory of providers, including those certified in perinatal mental health (PMH-C). In the United States, the National Maternal Mental Health Hotline is free, confidential, and open all day and night: call or text 1-833-TLC-MAMA (1-833-852-6262).",
+   note:"These conditions are common, treatable, and not her fault. The same help is there for partners."},
+  {id:"bodywork", tag:"Gentle bodywork for babies", name:"Gentle bodywork for babies",
+   when:["A baby who always turns her head one way, or a head shape that is uneven","Feeding well on one side but not the other, or a tight, clamped jaw","Arching, stiffness, or seeming uncomfortable when held in certain positions","Crying a great deal or being very hard to settle, once her care provider has checked for medical causes","After a long, very fast, or stuck labor, forceps or vacuum, a cesarean, or a NICU stay","The body language Appleton describes: touching the same spot, a sensitive area of the head"],
+   what:"Very gentle, hands-on therapies that work with a baby's body and nervous system, often with the parent holding her: biodynamic craniosacral therapy, cranial osteopathy, Integrative Baby Therapy (Appleton), and the Bowen Technique (Wilks). Infant massage is taught to parents to do at home. These often work best alongside lactation support.",
+   find:"Practitioners with specific training in babies: the Biodynamic Craniosacral Therapy Association directory, osteopaths with paediatric training, Conscious Embodiment Trainings (Appleton), and the APPPAH directory. Ask about their experience with newborns. A strong head-turn preference or a flattening head shape may also call for a pediatric physical therapist.",
+   note:"Families and lactation consultants often describe these therapies as helpful, though the research is still limited. They work alongside medical care, not in place of it."},
+  {id:"pelvic", tag:"Pelvic floor physio", name:"Pelvic floor physiotherapy",
+   when:["Leaking urine or stool, or a feeling of heaviness or bulging","Pain when sitting, with a cesarean scar, or with sex","A gap in the belly muscles (diastasis) or a weak core","Wanting guidance before returning to running or exercise"],
+   what:"A pelvic floor physiotherapist assesses and gently rebuilds the muscles of the pelvic floor and belly after pregnancy and birth.",
+   find:"Ask her care provider for a referral, or search a pelvic health directory such as the American Physical Therapy Association's.",
+   note:"These symptoms are common after birth, and treatable. They are not something she has to live with."},
+  {id:"partner", tag:"Support for partners", name:"Support for partners",
+   when:["Withdrawing, irritability, or working all the time","Drinking more, or numbing out","Feeling left out, useless, or unsure how to help","Being shaken by something they saw at the birth"],
+   what:"Partners can experience depression, anxiety, and birth trauma too, most often in the months after the birth (Paulson & Bazemore, 2010). Peer groups, counseling, and simply being asked how they are, help.",
+   find:"Postpartum Support International's resources and groups for dads and partners, local fathers' and parents' groups, and a counselor or therapist of their own.",
+   note:"A partner who is held can keep holding the mother and baby (Castellino, in White, 2013)."},
+  {id:"community", tag:"Community and peers", name:"Community and peer support",
+   when:["Feeling isolated, especially after a move or far from family","Wanting to be around others with babies the same age","Learning to carry the baby in a wrap or carrier"],
+   what:"Company and practical wisdom from other parents: parent and baby groups, breastfeeding meetings, babywearing groups, and classes with a PPN educator.",
+   find:"La Leche League meetings, local parent groups, libraries and community centers, babywearing libraries, and childbirth or PPN educators.",
+   note:"Johnson names the company of wise women as one of the five needs of every new mother."},
+  {id:"nicu", tag:"NICU support", name:"Support after a NICU stay or separation",
+   when:["A baby who needed special care after birth","Pumping while apart","Feeling robbed of the first days, or afraid to hold a small baby"],
+   what:"Kangaroo care in the unit, help with pumping and moving to the breast, and peer support from families who have been through the NICU.",
+   find:"The unit's nurses and lactation team, the hospital social worker, and family support organizations such as Hand to Hold and March of Dimes.",
+   note:"Bergman's work began with small babies: kangaroo care helps even the tiniest, and the mother's milk is especially precious for them."}];
+const SUP = Object.fromEntries(SUPPORT.map(x=>[x.id,x]));
+
 
 // The marks on the time wheel. Foundations: Bergman's four needs. First hour: Widström's nine stages.
 const NEEDS = [
@@ -990,21 +1051,21 @@ function select(q, ring, idx, user){
         <p class="herq"><span>Baby's question</span>${s.baby.q}<small>${s.baby.why}</small></p></div>
       <div class="lane l-mother${hl("mother",i)}"><h4>${sw("--mother")}The mother</h4><p><b>Her body.</b> ${s.mother.body}</p><p><b>Her emotional life.</b> ${s.mother.heart}</p><p><b>Caring for herself.</b> ${s.mother.self}</p></div>
       <div class="lane l-partner${hl("partner",i)}"><h4>${sw("--partner")}The partner</h4><p><b>Protecting the dyad.</b> ${s.partner.dyad}</p><p><b>Supporting the mother.</b> ${s.partner.mother}</p><p><b>For the partner.</b> ${s.partner.self}</p></div>
-      <div class="lane l-circle${hl("circle",i)}"><h4>${sw("--circle")}The circle</h4><p><b>Who.</b> ${s.circle.who}</p><p><b>How they help.</b> ${s.circle.how}</p><p><b>Holding the partner.</b> ${s.circle.partner}</p></div>
+      <div class="lane l-circle${hl("circle",i)}"><h4>${sw("--circle")}The circle</h4><p><b>Who.</b> ${s.circle.who}</p><p><b>How they help.</b> ${s.circle.how}</p><p><b>Holding the partner.</b> ${s.circle.partner}</p><p><b>Support to look into.</b> ${s.sup.map(id=>`<a class="go" href="#sup-${id}" data-go="sup:${id}">${SUP[id].tag}</a>`).join(" · ")}</p></div>
       <div class="lane l-best${hl("best",i)}"><h4>${sw("--best")}Best practices</h4>${ul(s.best.items.map(([h,w])=>`<b>${h}</b> ${w}`))}<p class="src">${s.best.src}</p></div>
       <p class="repair"><b>Repair. ${s.repair[0]}.</b> ${s.repair[1]}</p>
     </article>`;
   }).join("");
   panel.innerHTML=`<div class="phasehead"><h2>${qq.name}</h2><div class="meta">${qq.sub}${ts!=null&&Math.floor(ts/3)===q?" · you are here":""}</div><p>${qq.intro}</p></div>
     ${cards}
-    <div class="support"><h3>If more support is needed</h3><p>No one is meant to carry these weeks alone. When feelings or symptoms feel too big to hold, for the baby, the mother, or the partner, these are places to turn.</p>${ul(MORE_SUPPORT)}</div>`;
+    <div class="support"><h3>If more support is needed</h3><p>No one is meant to carry these weeks alone. When something feels too big to hold, for the baby, the mother, or the partner, help is out there: someone for feeding, for rest, for the birth story, for her mind and her body, and for the baby's body too.</p><p><a class="go" href="#support" data-go="sup">See who can help, the signs that support may help, and how to find it.</a></p></div>`;
   const target = idx!=null ? document.getElementById("sl-"+idx) : null;
   if(!user) return;
   if(window.matchMedia("(max-width:900px)").matches) (target||panel).scrollIntoView({behavior:"smooth",block:"start"});
   else if(target){ const r=target.getBoundingClientRect(); if(r.top<0||r.top>window.innerHeight*0.7) target.scrollIntoView({behavior:"smooth",block:"start"}); }
 }
 function showLanguage(user){
-  sel={q:null,ring:null,idx:null,lang:true}; applySel(); markTabs();
+  sel={q:null,ring:null,idx:null,page:"lang"}; applySel(); markTabs();
   panel.innerHTML=`<div class="phasehead"><h2>Her language</h2><div class="meta">States · cues · crying</div>
       <p>Long before words, a baby is talking with us. Crying is her first spoken language, her voice, and around it is a whole language of the body: her eyes, her hands, her color, her breath, the way she turns toward you or away. Learning it takes time, and no parent reads every cue. Watching with curiosity, and answering, is how a family comes to understand each other.</p></div>
     <article class="scard lang"><h3>Her six states</h3>
@@ -1020,12 +1081,28 @@ function showLanguage(user){
       <p class="hint">These readings explain the work; they do not replace it. Working with a baby's birth story calls for a trained practitioner, and practitioners in this field are taught to tend their own birth history first (Appleton).</p></article>`;
   if(user) panel.scrollIntoView({behavior:"smooth",block:"start"});
 }
+function showSupport(focus){
+  sel={q:null,ring:null,idx:null,page:"support"}; applySel(); markTabs();
+  panel.innerHTML=`<div class="phasehead"><h2>Support</h2><div class="meta">Who can help · signs it may help · how to find them</div>
+      <p>Asking for help is part of caring for a baby, not a sign of falling short. Most families need more than one kind of support in these weeks, and what is needed can change from one week to the next. Here are the people who can help, the signs that a particular kind of support may be worth reaching for, and where to find them.</p></div>
+    <div class="support urgent"><h3>When to call right away</h3>
+      <p><b>For the mother.</b> ${URGENT.mother}</p><p><b>For the baby.</b> ${URGENT.baby}</p><p>${URGENT.note}</p></div>
+    ${SUPPORT.map(x=>`<article class="scard lang" id="sup-${x.id}"><h3>${x.name}</h3>
+      <div class="state"><b class="nm">Signs it may help</b>${ul(x.when)}</div>
+      <div class="state"><b class="nm">What they do</b><p>${x.what}</p></div>
+      <div class="state"><b class="nm">How to find them</b><p>${x.find}</p></div>
+      <p class="hint">${x.note}</p></article>`).join("")}`;
+  const t=focus?document.getElementById("sup-"+focus):panel;
+  if(focus||window.matchMedia("(max-width:900px)").matches) t.scrollIntoView({behavior:"smooth",block:"start"});
+}
 function markTabs(){
-  [...tabs.children].forEach((b,i)=>b.setAttribute("aria-selected", (i===0 && sel.q==null && !sel.lang) || (i>0 && i<=QUARTERS.length && sel.q===i-1) || (i===QUARTERS.length+1 && !!sel.lang) ? "true":"false"));
+  [...tabs.children].forEach((b,i)=>b.setAttribute("aria-selected", (i===0 && sel.q==null && !sel.page) || (i>0 && i<=QUARTERS.length && sel.q===i-1) || (i===QUARTERS.length+1 && sel.page==="lang") || (i===QUARTERS.length+2 && sel.page==="support") ? "true":"false"));
 }
 // links inside the panel that open Her language
 panel.addEventListener("click",e=>{ const a=e.target.closest("[data-go]"); if(!a) return; e.preventDefault();
-  if(a.dataset.go==="deeper"){ showLanguage(false); document.getElementById("deeper").scrollIntoView({behavior:"smooth",block:"start"}); }
+  const go=a.dataset.go;
+  if(go==="deeper"){ showLanguage(false); document.getElementById("deeper").scrollIntoView({behavior:"smooth",block:"start"}); }
+  else if(go.startsWith("sup")) showSupport(go.split(":")[1]||null);
   else showLanguage(true); });
 function applySel(){
   const so=document.getElementById("selOutline");
@@ -1047,6 +1124,7 @@ const ab=document.createElement("button"); ab.className="tab"; ab.type="button";
 QUARTERS.forEach((qq,q)=>{ const b=document.createElement("button"); b.className="tab"; b.type="button"; b.setAttribute("role","tab"); b.textContent=qq.tab;
   b.addEventListener("click",()=>select(q,null,null,false)); tabs.appendChild(b); });
 const lb=document.createElement("button"); lb.className="tab"; lb.type="button"; lb.setAttribute("role","tab"); lb.textContent="Her language"; lb.addEventListener("click",()=>showLanguage(false)); tabs.appendChild(lb);
+const sb=document.createElement("button"); sb.className="tab"; sb.type="button"; sb.setAttribute("role","tab"); sb.textContent="Support"; sb.addEventListener("click",()=>showSupport(null)); tabs.appendChild(sb);
 
 /* light and dark switch */
 const root=document.documentElement, tbtn=document.getElementById("themebtn");
