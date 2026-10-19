@@ -13,19 +13,19 @@
 /* Layout: the mandala holds the left (sticky on wide screens); the reading panel sits to the right. Center-out order everywhere. */
 :root{
   --bg:#FDF7F1; --surface:#FFFFFF; --ink:#4E2A2E; --muted:#8E6366; --line:#F1DCD2;
-  --baby:#F8E2A6; --mother:#F2D1B3; --partner:#E6B697; --circle:#D99C82; --best:#C4806D; --time:#EFD9C8; --time2:#F6E7DB;
-  --on-dark:#FFFFFF; --on-light:#4E2A2E; --gold:#C08A2E; --seed:#FFFBEC; --center:#F5D27A; --unit:#E9CBB6;
+  --baby:#FAE29C; --mother:#F8C8B8; --partner:#F1B097; --circle:#E89A8F; --best:#D87F88; --time:#F4D7CB; --time2:#F9E6DD;
+  --on-dark:#FFFFFF; --on-light:#4E2A2E; --gold:#C08A2E; --seed:#FFFBEC; --center:#F5D27A; --unit:#EFC6B8;
   --display:"Marcellus", "Cormorant Garamond", Georgia, serif;
   --body:"Mulish", "Avenir Next", "Segoe UI", system-ui, sans-serif;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
   --bg:#261A1C; --surface:#302124; --ink:#F6E6DE; --muted:#CBA39D; --line:#4A3135;
-  --baby:#F0D592; --mother:#E7C2A4; --partner:#DAA688; --circle:#C98B73; --best:#B07360; --time:#6E4C45; --time2:#7E5A50;
-  --on-dark:#FFFFFF; --on-light:#3A1F22; --gold:#E8BE5E; --seed:#FFF6DA; --center:#E8C467; --unit:#6A4A42; color-scheme:dark }}
+  --baby:#F3D78A; --mother:#F0BCAB; --partner:#E8A48A; --circle:#DA8C84; --best:#C4707C; --time:#714A48; --time2:#835752;
+  --on-dark:#FFFFFF; --on-light:#3A1F22; --gold:#E8BE5E; --seed:#FFF6DA; --center:#E8C467; --unit:#6E4846; color-scheme:dark }}
 :root[data-theme="dark"]{
   --bg:#261A1C; --surface:#302124; --ink:#F6E6DE; --muted:#CBA39D; --line:#4A3135;
-  --baby:#F0D592; --mother:#E7C2A4; --partner:#DAA688; --circle:#C98B73; --best:#B07360; --time:#6E4C45; --time2:#7E5A50;
-  --on-dark:#FFFFFF; --on-light:#3A1F22; --gold:#E8BE5E; --seed:#FFF6DA; --center:#E8C467; --unit:#6A4A42; color-scheme:dark }
+  --baby:#F3D78A; --mother:#F0BCAB; --partner:#E8A48A; --circle:#DA8C84; --best:#C4707C; --time:#714A48; --time2:#835752;
+  --on-dark:#FFFFFF; --on-light:#3A1F22; --gold:#E8BE5E; --seed:#FFF6DA; --center:#E8C467; --unit:#6E4846; color-scheme:dark }
 :root[data-theme="light"]{color-scheme:light}
 
 *{box-sizing:border-box}
@@ -211,7 +211,7 @@ try{ var t=localStorage.getItem("ft-theme"); if(t==="light"||t==="dark") documen
     <h3>Why a fourth trimester</h3>
     <p>A human baby is born very immature. Nils Bergman notes that her brain is only about a quarter developed at birth, and the first weeks are a critical window for its wiring. Human milk is low in protein and fat, the milk of a species whose young are carried and fed often, not left in a nest or a hiding place between feeds. In this sense the gestation continues after birth, on the mother's body instead of inside it. As Bergman puts it, the mother's body is the newborn's habitat, and breastfeeding, sleep, and connection are her niche: what that habitat makes possible.</p>
     <h3>How it is built</h3>
-    <p>The circle begins at the top with the foundations: warmth, milk, and love, which hold true for the whole fourth trimester and are best learned before the birth. The doctors in Bogotá who first described kangaroo mother care in the late 1970s, Edgar Rey and Héctor Martínez, summed it up as <i>calor, leche, y amor</i>. From there the wheel moves clockwise in time: the first hour, with the nine stages a newborn moves through when she is left skin to skin, then the first two weeks, then weeks three to twelve, returning to the top where the foundations began.</p>
+    <p>The circle begins at the top with the foundations: warmth, milk, and love, which hold true for the whole fourth trimester and are best learned before the birth. The doctors in Bogotá who first described kangaroo mother care in the late 1970s, Edgar Rey and Héctor Martínez, summed it up as warmth, milk, and love. From there the wheel moves clockwise in time: the first hour, with the nine stages a newborn moves through when she is left skin to skin, then the first two weeks, then weeks three to twelve, returning to the top where the foundations began.</p>
     <p>The rings line up slice by slice, so reading straight out from any slice shows, at the same moment, the baby, the mother, the partner, the wider circle, and the best practices. Hover over a slice to light it from the center out.</p>
     <p>The rings are also layers of support: each one holds the one inside it. Ray Castellino taught that everyone who gives support needs support too, and that the mother and baby each need at least two layers (Castellino, in White, 2013). Here the first layer is the partner: one solid, consistent person around the mother. Families take many shapes, so that person may be the baby's father, another parent, a grandmother, or a close friend. What matters is that there is at least one, and that someone holds them too.</p>
     <p>Around the petals, the time wheel holds the markers of time: Bergman's four needs of every newborn in the foundations, Widström's nine stages in the first hour, the first fourteen days, and the weeks from three to twelve. Entering a birth date marks today. At the edge, a braid of three strands, the baby, the mother, and the support around them, holds the mandala together.</p>
@@ -276,7 +276,7 @@ const RING_TAG={baby:"Baby ring", mother:"Mother ring", partner:"Partner ring", 
 
 const QUARTERS = [
   {id:"found", name:"The foundations", tab:"Foundations", sub:"Warmth · milk · love",
-   intro:"What every newborn needs, from the first minute through the whole fourth trimester: oxygen, warmth, nutrition, and protection. Bergman calls the mother's body the newborn's habitat and feeding her niche, and the two belong together. The doctors who first described kangaroo care named its three parts calor, leche, y amor: warmth, milk, and love. Learned before birth, these three hold everything that follows."},
+   intro:"What every newborn needs, from the first minute through the whole fourth trimester: oxygen, warmth, nutrition, and protection. Bergman calls the mother's body the newborn's habitat and feeding her niche, and the two belong together. The doctors who first described kangaroo care named its three parts warmth, milk, and love. Learned before birth, these three hold everything that follows."},
   {id:"hour", name:"The first hour", tab:"First hour", sub:"The nine stages",
    intro:"The sacred hour: the baby's transition from womb to air, and the start of feeding. Placed skin to skin and left undisturbed, a newborn moves through nine instinctive stages, from her birth cry to finding the breast and falling into her first deep sleep (Widström et al., 2011). Bergman's point is that she carries the program; the adults' work is to protect the space, wait, and keep her close."},
   {id:"days", name:"The first days", tab:"First days", sub:"Day 1 to two weeks",
@@ -288,7 +288,7 @@ const QUARTERS = [
 // Twelve slices, three per quarter. Every ring shares these slices, so reading straight out shows one moment.
 const SLICES = [
   // ---------- The foundations ----------
-  {t:"Warmth", es:"Calor", w:"The habitat: skin to skin", span:"WARMTH · CALOR",
+  {t:"Warmth", w:"The habitat: skin to skin", span:"WARMTH",
    baby:{tip:"On her mother's bare chest, her heart, breathing, and temperature steady. This is where she belongs.",
      body:"Her brain is only about a quarter developed at birth, so she depends completely on being in the right place (Bergman). On her mother's chest, within minutes, her heart rate steadies, irregular breathing smooths out, and pauses in breathing become rare. Her mother's chest even adjusts its warmth to her, rising about two degrees to warm a cool baby and falling about one degree to cool a warm one: thermal synchrony.",
      feel:"To a newborn there are only two places: mother, or other. Skin to skin, her brain runs its program for growth. Apart, it switches to defense: protest first, crying to restore contact, and then despair, with stress hormones high, temperature and heart rate falling, and energy saved for survival (Bergman).",
@@ -314,7 +314,7 @@ const SLICES = [
      src:"Bergman; Erlandsson et al. (2007); WHO (2003); Moore et al. (2016)"},
    repair:["If you were apart", "Begin skin to skin as soon as you are together, and stay as long as you can. It is not too late. Tell her: “We were apart, and I missed you. You are with me now. This is where you belong.”"]},
 
-  {t:"Milk", es:"Leche", w:"The niche: feeding close", span:"MILK · LECHE",
+  {t:"Milk", w:"The niche: feeding close", span:"MILK",
    baby:{tip:"Her mother's milk is made for her immature body: protection first, then food, changing with her needs.",
      body:"Colostrum, her first milk, is rich in whey proteins that protect rather than feed: antibodies against infection and factors that guard against allergy. Human milk is low in protein and fat, the milk of a species that is carried and fed often, roughly every two hours or whenever she asks (Bergman). It changes from feed to feed and day to day to match her.",
      feel:"Suckling at the breast keeps her oxygen steady, and the nipple pressing on the back of her palate stimulates the vagus nerve, switching on digestion and calm. Near the end of a feed she keeps suckling without swallowing: comfort sucking, which matters too (Bergman).",
@@ -341,7 +341,7 @@ const SLICES = [
      src:"Bergman; Jayamala et al. (2015); Feher et al. (1989); Kendall-Tackett (2013); Hazelbaker"},
    repair:["If feeding began apart, or got off to a hard start", "Return to skin to skin, lie back, and let her find the breast in her own time, as in the first hour. Many babies keep these feeding instincts for weeks (La Leche League, laid-back nursing). Tell her: “We are learning this together.”"]},
 
-  {t:"Love", es:"Amor", w:"The connection: being met", span:"LOVE · AMOR",
+  {t:"Love", w:"The connection: being met", span:"LOVE",
    baby:{tip:"She is a feeling, remembering person. She needs to be understood, not only fed and warmed.",
      body:"Within hours of birth newborns can recognize their parents' voices, prefer faces and their mother's smell, and imitate expressions such as sticking out the tongue (Klaus). She learns best in the quiet alert state, eyes wide and bright, body still, looking at you.",
      feel:"Her mother's heart. When the mother feels calm and loving, her coherent heart rhythm can draw her baby's into step, most strongly within about three feet (Appleton). Each time a need is met, she relaxes, and trust grows.",
@@ -800,7 +800,7 @@ function draw(){
   SLICES.forEach((s,i)=>{
     const a0=i*30, a1=a0+30, q=Math.floor(i/3);
     const sp=el("path",{d:sector(R.span[0],R.span[1],a0+0.4,a1-0.4,1,0),class:i%2?"sspan alt":"sspan",tabindex:"0",role:"button","aria-label":`${s.t}, ${s.w}. Open this slice`});
-    const info=()=>{ const [x,y]=P(R.span[1],a0+15); return {x,y,html:`<b>${s.t}${s.es?` · <i>${s.es}</i>`:""}</b>${s.w}<span>Tap to open.</span>`}; };
+    const info=()=>{ const [x,y]=P(R.span[1],a0+15); return {x,y,html:`<b>${s.t}</b>${s.w}<span>Tap to open.</span>`}; };
     sp.addEventListener("mouseenter",()=>{ if(!openTip) showTip(sp,info(),true); hover(i); });
     sp.addEventListener("mouseleave",()=>{ if(!openTip) showTip(null); hover(null); });
     sp.addEventListener("focus",()=>{ if(sp.matches(":focus-visible")) showTip(sp,info(),true); });
@@ -929,7 +929,7 @@ function select(q, ring, idx, user){
   const cards=[q*3,q*3+1,q*3+2].map(i=>{
     const s=SLICES[i], isNow=(ts===i);
     return `<article class="scard${idx===i?" cur":""}" id="sl-${i}">
-      <div class="st">${s.t}${s.es?` <b>${s.es}</b>`:""}<span>${s.w}${isNow?" · <b>today</b>":""}</span></div>
+      <div class="st">${s.t}<span>${s.w}${isNow?" · <b>today</b>":""}</span></div>
       <div class="lane l-baby${hl("baby",i)}"><h4>${sw("--baby")}The baby</h4><p>${s.baby.body}</p><p class="take">${s.baby.feel}</p>
         <p class="herq"><span>Baby's question</span>${s.baby.q}<small>${s.baby.why}</small></p></div>
       <div class="lane l-mother${hl("mother",i)}"><h4>${sw("--mother")}The mother</h4><p><b>Her body.</b> ${s.mother.body}</p><p><b>Her emotional life.</b> ${s.mother.heart}</p><p><b>Caring for herself.</b> ${s.mother.self}</p></div>
