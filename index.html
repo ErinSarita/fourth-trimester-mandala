@@ -214,7 +214,7 @@ try{ var t=localStorage.getItem("ft-theme"); if(t==="light"||t==="dark") documen
     <p>The circle begins at the top with the foundations: warmth, milk, and love, which hold true for the whole fourth trimester and are best learned before the birth. The doctors in Bogotá who first described kangaroo mother care in the late 1970s, Edgar Rey and Héctor Martínez, summed it up as warmth, milk, and love. From there the wheel moves clockwise in time: the first hour, with the nine stages a newborn moves through when she is left skin to skin, then the first two weeks, then weeks three to twelve, returning to the top where the foundations began.</p>
     <p>The rings line up slice by slice, so reading straight out from any slice shows, at the same moment, the baby, the mother, the partner, the wider circle, and the best practices. Hover over a slice to light it from the center out.</p>
     <p>The rings are also layers of support: each one holds the one inside it. Ray Castellino taught that everyone who gives support needs support too, and that the mother and baby each need at least two layers (Castellino, in White, 2013). Here the first layer is the partner: one solid, consistent person around the mother. Families take many shapes, so that person may be the baby's father, another parent, a grandmother, or a close friend. What matters is that there is at least one, and that someone holds them too.</p>
-    <p>Around the petals, the time wheel holds the markers of time: Bergman's four needs of every newborn in the foundations, Widström's nine stages in the first hour, the first fourteen days, and the weeks from three to twelve. Entering a birth date marks today. At the edge, a braid of three strands, the baby, the mother, and the support around them, holds the mandala together.</p>
+    <p>Around the petals, the time wheel holds the markers of time: Bergman's four needs of every newborn in the foundations, Widström's nine stages in the first hour, the first fourteen days, and the weeks from three to twelve. Entering a birth date marks today. At the edge, a braid of three strands, the baby, the mother, and the partner, holds the mandala together.</p>
     <h3>When to share it</h3>
     <p>Families often plan carefully for the birth and much less for what comes after, and many live far from their own parents. Planning for the postpartum is as important as planning for the birth. Share the foundations and the first hour in the third trimester, around weeks 28 to 34, alongside the birth quarter of the Pregnancy and Birth Mandala, so the family can line up their circle and practice before the birth. Return to the first days and first months in the last weeks of pregnancy, and again as each arrives.</p>
     <h3>When it was hard</h3>
@@ -751,14 +751,14 @@ function addCell(d, ring, idx, label, at){
   cells.push(c); return c;
 }
 
-/* The braid: three strands, the baby, the mother and the support around them, plaited around the whole wheel.
+/* The braid: three strands, the baby, the mother and the partner, plaited around the whole wheel.
    Each strand is cut where it changes from lying underneath to lying on top; the lower pieces are drawn
    first and the upper pieces over them, so each crossing shows who is on top. */
 function drawBraid(){
   const r0=R.braid[0], r1=R.braid[1];
   const hit=el("path",{d:`M0 ${-r1-4} A${r1+4} ${r1+4} 0 1 1 0 ${r1+4} A${r1+4} ${r1+4} 0 1 1 0 ${-r1-4} M0 ${-r0+4} A${r0-4} ${r0-4} 0 1 0 0 ${r0-4} A${r0-4} ${r0-4} 0 1 0 0 ${-r0+4}Z`,
     class:"braidhit","fill-rule":"evenodd",tabindex:"0",role:"button","aria-label":"The sacred braid. Read what it means"});
-  const html=`<b>The sacred braid</b>Three strands woven together: the baby, the mother, and the support around them. Their relationships hold this mandala in place.`;
+  const html=`<b>The sacred braid</b>Three strands woven together: the baby, the mother, and the partner who holds them. Their relationships hold this mandala in place.`;
   hit.addEventListener("click",e=>{ e.stopPropagation();
     if(hit.classList.contains("open")){ showTip(null); return; }
     const pt=new DOMPoint(e.clientX,e.clientY).matrixTransform(svg.getScreenCTM().inverse());
@@ -767,7 +767,7 @@ function drawBraid(){
   hit.addEventListener("blur",()=>{ if(openTip===hit) showTip(null); });
   const g=el("g",{class:"braid","pointer-events":"none","aria-hidden":"true"});
   const rc=(r0+r1)/2, A=8.5, N=53, SUB=8;   // N plaits round the circle
-  const strands=[["--baby",0],["--mother",2*Math.PI/3],["--circle",4*Math.PI/3]];
+  const strands=[["--baby",0],["--mother",2*Math.PI/3],["--partner",4*Math.PI/3]];
   const pieces=[[],[]];   // [under, over]
   strands.forEach(([color,ph])=>{
     for(let m=0;m<N*4;m++){
