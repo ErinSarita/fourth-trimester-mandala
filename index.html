@@ -137,7 +137,7 @@ svg.dimming .cell.off{opacity:.28}
 .st{font-family:var(--display);font-size:24px;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;line-height:1.2}
 .st span{font-family:var(--body);font-size:13.5px;color:var(--muted)}
 .st b{font-family:var(--body);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--best)}
-.lane{display:grid;gap:6px;padding:2px 0 2px 14px;border-left:3px solid var(--line)}
+.lane{display:grid;gap:6px;padding:2px 0 2px 14px;border-left:3px solid var(--line);scroll-margin-top:16px}
 .lane p{margin:0}
 .lane h4{display:flex;align-items:center;gap:8px;margin:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .lane h4 .sw{width:12px;height:12px}
@@ -1121,10 +1121,13 @@ function select(q, ring, idx, user){
   panel.innerHTML=`<div class="phasehead"><h2>${qq.name}</h2><div class="meta">${qq.sub}${ts!=null&&Math.floor(ts/3)===q?" · you are here":""}</div><p>${qq.intro}</p></div>
     ${cards}
     <div class="support"><h3>If more support is needed</h3><p>No one is meant to carry these weeks alone. When something feels too big to hold, for the baby, the mother, or the partner, help is out there: someone for feeding, for rest, for the birth story, for her mind and her body, and for the baby's body too.</p><p><a class="go" href="#support" data-go="sup">See who can help, the signs that support may help, and how to find it.</a></p></div>`;
-  const target = idx!=null ? document.getElementById("sl-"+idx) : null;
+  const card = idx!=null ? document.getElementById("sl-"+idx) : null;
+  // a tap on a ring goes straight to that ring's part of the slice; a tap on the slice as a whole goes to its card
+  const lane = card && ring ? card.querySelector(".l-"+ring) : null;
   if(!user) return;
-  if(window.matchMedia("(max-width:900px)").matches) (target||panel).scrollIntoView({behavior:"smooth",block:"start"});
-  else if(target){ const r=target.getBoundingClientRect(); if(r.top<0||r.top>window.innerHeight*0.7) target.scrollIntoView({behavior:"smooth",block:"start"}); }
+  if(lane) lane.scrollIntoView({behavior:"smooth",block:"start"});
+  else if(window.matchMedia("(max-width:900px)").matches) (card||panel).scrollIntoView({behavior:"smooth",block:"start"});
+  else if(card){ const r=card.getBoundingClientRect(); if(r.top<0||r.top>window.innerHeight*0.7) card.scrollIntoView({behavior:"smooth",block:"start"}); }
 }
 function showLanguage(user){
   sel={q:null,ring:null,idx:null,page:"lang"}; applySel(); markTabs();
