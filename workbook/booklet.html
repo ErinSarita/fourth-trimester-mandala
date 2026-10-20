@@ -7,7 +7,6 @@
 <link rel="icon" href="../favicon.svg?v=1" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="visitor-card.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Mulish:ital,wght@0,400;0,600;0,700;1,400&display=swap">
 <style>
 /* The booklet, drawn at Letter size: 816 × 1056 px is 8.5 × 11 in, sixteen pages, printed double-sided on ordinary paper.
@@ -320,9 +319,6 @@ page(`${head("09 · 10","Rest, recovery, and watching over me","Kimberly Ann Joh
   ${sec("--best","Watching over me")}<p class="small muted" style="margin:0">The baby blues are common and usually pass within two weeks. Sadness, worry, frightening thoughts, rage, or numbness that last or deepen may be postpartum depression or anxiety: common, treatable, and not her fault.</p>
   <div class="three">${q("watch.signs","Signs that I am struggling",3)}${q("watch.helps","What helps me come back",3)}${q("watch.call","Who to call if you are worried about me",3)}</div>
   <div class="urgent"><p><b>When to call right away.</b> For the mother: heavy bleeding (soaking a pad in an hour or less), a fever, a severe headache or changes in vision, chest pain or trouble breathing, a swollen, painful leg, or thoughts of harming herself or the baby. For the baby: a fever (under three months, 100.4°F or 38°C), trouble breathing or a bluish color, being very hard to wake, refusing feeds, far fewer wet diapers, or yellow skin that is spreading.</p><p>National Maternal Mental Health Hotline (US), free, day and night: 1-833-TLC-MAMA (1-833-852-6262) · Postpartum Support International: postpartum.net</p></div>`,{c:"--edu",toc:["Rest and recovery","Watching over me"]});
-
-// visitor cards: four to the page, to cut apart
-page(`<div class="vc-sheet" style="position:absolute;inset:0">${[0,1,2,3].map(i=>`<div>${visitorCard(v,i,esc)}</div>`).join("")}</div>`,{cls:"",c:"--best",foot:false,toc:"Visitor cards"});
 
 // 13 · birth story, kept private unless she chooses to share it
 const storyOn=!MINE || v["story.print"];

@@ -17,22 +17,30 @@ body{margin:0;background:#E9DDD7;font-family:Mulish,"Avenir Next","Segoe UI",san
 .bar a,.bar button{font:inherit;font-weight:600;border:1px solid #EBD8CF;background:#fff;color:#4E2A2E;border-radius:999px;padding:6px 14px;cursor:pointer;text-decoration:none}
 .bar .primary{background:#4E2A2E;color:#fff;border-color:#4E2A2E}
 .wrap{display:flex;justify-content:center;padding:24px 12px 60px}
+.pages{display:grid;gap:12px;justify-items:center}
+.how{max-width:640px;text-align:center;font-size:14px;color:#8E6366;margin:0 0 6px}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#8E6366;margin-top:10px}
 .vc-sheet{box-shadow:0 10px 30px rgba(78,42,46,.18)}
-@media print{ @page{size:letter;margin:0} body{background:none} .bar{display:none} .wrap{padding:0;display:block} .vc-sheet{box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact} }
+@media print{ @page{size:letter;margin:0} body{background:none} .bar,.how,.lbl{display:none} .wrap,.pages{padding:0;display:block} .vc-sheet{box-shadow:none;break-after:page;-webkit-print-color-adjust:exact;print-color-adjust:exact} }
 @media (max-width:840px){ .wrap{zoom:.45} }
 </style>
 </head>
 <body>
 <div class="bar"><a href="./">Back to the workbook</a><button class="primary" type="button" onclick="print()">Print or save as PDF</button></div>
-<div class="wrap"><div class="vc-sheet" id="sheet"></div></div>
+<div class="wrap"><div class="pages">
+  <p class="how">Print both pages double-sided, flipping on the long edge, on card stock if you have it. Then cut along the fine dotted lines: each card has its front and its back.</p>
+  <div class="lbl">The fronts</div><div class="vc-sheet" id="fronts"></div>
+  <div class="lbl">The backs</div><div class="vc-sheet" id="backs"></div></div></div>
 <script src="content.js"></script>
 <script>
 (function(){
 "use strict";
 const MINE=new URLSearchParams(location.search).has("mine");
-let v={}; if(MINE){ try{ const d=JSON.parse(localStorage.getItem("ftw-plan")||"null"); if(d) v=d.v||{}; }catch(e){} }
+let v={}, photo=""; if(MINE){ try{ const d=JSON.parse(localStorage.getItem("ftw-plan")||"null"); if(d) v=d.v||{}; photo=localStorage.getItem("ftw-photo")||""; }catch(e){} }
 const esc=t=>String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;");
-document.getElementById("sheet").innerHTML=[0,1,2,3].map(i=>`<div>${visitorCard(v,i,esc)}</div>`).join("");
+document.getElementById("fronts").innerHTML=[0,1,2,3].map(()=>`<div>${visitorFront(v,photo,esc,MINE)}</div>`).join("");
+// printed double-sided and flipped on the long edge, each back lands behind its own front: left and right trade places
+document.getElementById("backs").innerHTML=[1,0,3,2].map(i=>`<div>${visitorBack(v,i,esc)}</div>`).join("");
 if(new URLSearchParams(location.search).has("print")) addEventListener("load",()=>setTimeout(()=>print(),400));
 })();
 </script>

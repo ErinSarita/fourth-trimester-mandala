@@ -42,27 +42,47 @@ const VC_EXPECT = ["We are resting, so visits may be short","The baby may stay i
 const VC_HELP = ["Wash your hands when you arrive","Please stay home if you feel unwell","Bring a meal or a snack to share","Do one small chore: dishes, laundry, or a tidy","Hold the baby only if I offer","Please skip kissing the baby's face","Keep it short and sweet"];
 const VC_DUR = ["15 minutes","30 minutes","About an hour","As long as feels right"];
 
-/* One visitor card, about 4.25 x 5.5 in. v holds her answers (empty for a blank card); i is the card, 0 to 3. */
-function visitorCard(v, i, esc){
+/* Visitor invitations, each 4.25 x 5.5 in (408 x 528 px): a front with her photo and the baby's name, and a back with the visit.
+   v holds her answers (empty for a blank card), photo is a data URL or "" (with ?mine and no photo, the mandala's wheel stands in). */
+const vcNice=t=>{ if(!t) return ""; let m=String(t).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if(m) return new Date(+m[1],+m[2]-1,+m[3]).toLocaleDateString(undefined,{month:"long",day:"numeric",year:"numeric"});
+  m=String(t).match(/^(\d{1,2}):(\d{2})$/); if(m){ const h=+m[1]; return `${h%12||12}:${m[2]} ${h<12?"am":"pm"}`; } return t; };
+const vcFirst=t=>(t||"").trim().split(/\s+/)[0]||"";
+// twelve petals round the photo, in the mandala's colors from the yellow center out to rose
+function vcPetals(){ const cols=["--center","--baby","--mother","--partner","--circle","--edu","--best","--edu","--circle","--partner","--mother","--baby"];
+  return `<svg class="vc-ring" viewBox="-150 -150 300 300" aria-hidden="true">${cols.map((c,k)=>`<path transform="rotate(${k*30})" d="M0 -146C10 -136 12 -124 0 -112C-12 -124 -10 -136 0 -146Z" fill="var(${c})"/>`).join("")}<circle r="108" fill="none" stroke="#C08A2E" stroke-width="1.2"/><circle r="103" fill="none" stroke="#E7CFA3" stroke-width=".8"/></svg>`; }
+function visitorFront(v, photo, esc, mine){
+  const baby=v["vc.baby"]||v["me.baby"]||"";
+  const from=v["vc.from"]||[vcFirst(v["me.name"]),vcFirst(v["p.name"])].filter(Boolean).join(" & ");
+  const facts=[v["vc.weight"],v["vc.length"]].filter(Boolean).map(esc).join(" · ");
+  const pic=photo?`<img class="vc-photo" src="${photo}" alt="">`:mine?`<img class="vc-photo wheel" src="img/wheel.webp" alt="">`:`<div class="vc-photo empty"><span>Place a photo here</span></div>`;
+  return `<div class="vc vc-front"><div class="vc-frame"></div>
+    <div class="vc-eb">With love, we invite you to meet</div>
+    <div class="vc-pic">${vcPetals()}${pic}</div>
+    <div class="vc-name">${baby?esc(baby):`<span class="vc-ln" style="min-width:220px;height:30px"></span>`}</div>
+    <div class="vc-born">${v["vc.born"]||v["me.born"]?`born ${esc(vcNice(v["vc.born"]||v["me.born"]))}${v["vc.time"]?` at ${esc(vcNice(v["vc.time"]))}`:""}`:`born <span class="vc-ln" style="min-width:150px"></span> at <span class="vc-ln" style="min-width:60px"></span>`}</div>
+    ${facts?`<div class="vc-facts">${facts}</div>`:mine?"":`<div class="vc-facts"><span class="vc-ln" style="min-width:70px"></span> · <span class="vc-ln" style="min-width:60px"></span></div>`}
+    <div class="vc-from"><span>With love,</span> ${from?esc(from):`<span class="vc-ln" style="min-width:150px"></span>`}</div>
+  </div>`;
+}
+function visitorBack(v, i, esc){
   const o=on=>`<span class="vc-o${on?" on":""}"></span>`;
-  const pick=(key,list)=>{ const chosen=list.map((t,j)=>[t,!!v[`${key}.${j}`]]).filter(x=>x[1]);
-    return (chosen.length?chosen:list.map(t=>[t,false])).map(([t,c])=>`<li>${o(c)}<span>${t}</span></li>`).join(""); };
-  const baby=v["vc.baby"]||v["me.baby"]||"", dur=v[`vis.${i}.dur`];
-  const nice=t=>{ if(!t) return ""; let m=String(t).match(/^(\d{4})-(\d{2})-(\d{2})$/);
-    if(m) return new Date(+m[1],+m[2]-1,+m[3]).toLocaleDateString(undefined,{month:"long",day:"numeric"});
-    m=String(t).match(/^(\d{1,2}):(\d{2})$/); if(m){ const h=+m[1]; return `${h%12||12}:${m[2]} ${h<12?"am":"pm"}`; } return t; };
-  const ln=(t,w)=>`<span class="vc-ln" style="min-width:${w}px">${esc(nice(t))}</span>`;
-  return `<div class="vc">
-    <div class="vc-band"></div>
-    <div class="vc-eb">You are invited to visit</div>
-    <div class="vc-t">Come meet ${baby?esc(baby):`<span class="vc-ln" style="min-width:150px"></span>`}</div>
-    <div class="vc-born">Born ${ln(v["vc.born"]||v["me.born"],92)} at ${ln(v["vc.time"],60)}</div>
-    <div class="vc-row"><b>For</b>${ln(v[`vis.${i}.for`],210)}</div>
-    <div class="vc-row"><b>When</b>${ln(v[`vis.${i}.date`],110)}<b>at</b>${ln(v[`vis.${i}.time`],60)}</div>
-    <div class="vc-row"><b>For about</b>${dur!=null&&dur!==""?`<span class="vc-ln">${esc(VC_DUR[+dur]||dur)}</span>`:VC_DUR.map(d=>`<span class="vc-dur">${o(false)}${d}</span>`).join("")}</div>
-    <div class="vc-h">A few words from us</div><div class="vc-words">${esc(v["vc.words"]||"")}</div>
+  const pick=(key,list,extra)=>{ let chosen=list.map((t,j)=>[t,!!v[`${key}.${j}`]]).filter(x=>x[1]); if(extra) chosen.push([extra,true]);
+    return (chosen.length?chosen:list.map(t=>[t,false])).map(([t,c])=>`<li>${o(c)}<span>${esc(t)}</span></li>`).join(""); };
+  const dur=v[`vis.${i}.dur`], who=v[`vis.${i}.for`];
+  // a note for the visitor fits when her chosen lists are short; a blank card lists every option instead
+  const nE=VC_EXPECT.filter((_,j)=>v[`vc.expect.${j}`]).length, nH=VC_HELP.filter((_,j)=>v[`vc.help.${j}`]).length+(v["vc.x"]?1:0);
+  const roomForNote=nE>0 && nH>0 && Math.max(nE,nH)<=4;
+  const ln=(t,w)=>t?`<span class="vc-val">${esc(vcNice(t))}</span>`:`<span class="vc-ln" style="min-width:${w}px"></span>`;
+  return `<div class="vc vc-back"><div class="vc-frame"></div>
+    <div class="vc-eb">Your visit</div>
+    <div class="vc-dear">Dear ${who?esc(who):`<span class="vc-ln" style="min-width:180px;height:26px"></span>`},</div>
+    <div class="vc-when"><div><b>Date</b>${ln(v[`vis.${i}.date`],120)}</div><div><b>Time</b>${ln(v[`vis.${i}.time`],70)}</div>
+      <div><b>For about</b>${dur!=null&&dur!==""?`<span class="vc-val">${esc(VC_DUR[+dur]||dur)}</span>`:VC_DUR.map(d=>`<span class="vc-dur">${o(false)}${d}</span>`).join("")}</div></div>
+    <div class="vc-words">${v["vc.words"]?esc(v["vc.words"]):""}</div>
     <div class="vc-cols"><div><div class="vc-h">What to expect</div><ul>${pick("vc.expect",VC_EXPECT)}</ul></div>
-    <div><div class="vc-h">How you can help</div><ul>${pick("vc.help",VC_HELP)}${v["vc.x"]?`<li>${o(true)}<span>${esc(v["vc.x"])}</span></li>`:""}</ul></div></div>
+      <div><div class="vc-h">How you can help</div><ul>${pick("vc.help",VC_HELP,v["vc.x"])}</ul></div></div>
+    ${roomForNote?`<div class="vc-note"><div class="vc-h">A note for you</div><div class="vc-lines"></div></div>`:""}
     <div class="vc-foot">Thank you for helping us rest, heal, and fall in love.</div>
   </div>`;
 }

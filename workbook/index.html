@@ -127,6 +127,11 @@ ul.checks .why{display:block;font-size:13.5px;color:var(--muted)}
 .learn ul{margin:0;padding-left:20px;display:grid;gap:5px}
 .urgent{border:1px solid var(--best);border-left:5px solid var(--best);border-radius:12px;padding:12px 14px;display:grid;gap:6px}
 .urgent p{margin:0}
+.photo{display:flex;flex-wrap:wrap;gap:14px 18px;align-items:center}
+.photo-frame{width:120px;height:120px;border-radius:50%;border:2px solid var(--gold);box-shadow:0 0 0 6px color-mix(in srgb, var(--mother) 40%, transparent);overflow:hidden;display:grid;place-items:center;background:var(--field);flex:none}
+.photo-frame img{width:100%;height:100%;object-fit:cover}
+.photo-frame span{font-size:12px;color:var(--muted)}
+label.btn{display:inline-flex;cursor:pointer}
 .private{background:color-mix(in srgb, var(--mother) 22%, transparent);border-radius:10px;padding:10px 12px;font-size:14.5px;margin:0}
 .foot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin-top:10px}
 
@@ -311,8 +316,12 @@ const PARTS=[
    ${area("visit.news","How and when we will share the news, and who will share it")}`},
 
  {id:"cards", c:"--best", title:"Visitor cards", html:()=>`
-   <p class="intro">An invitation to visit, with a few words from you, what to expect, and how to help, so visits are easy and short, and leave you rested. Fill in the parts that are the same for everyone, then a line for each visit. They print four to a page, ready to cut, hand over, or photograph and send.</p>
-   <div class="grid">${txt("vc.baby","My baby's name","")}${txt("vc.born","Born on","","date")}${txt("vc.time","At","","time")}</div>
+   <p class="intro">A personal invitation to visit. The front carries your photo and your baby's name; the back holds the visit, a few words from you, what to expect, and how to help, so visits are easy, short, and leave you rested. Fill in the parts that are the same for everyone, then a line for each visit. They print four to a page, front and back, ready to cut and give.</p>
+   <div class="photo" id="photo"><div class="photo-frame" id="photo-frame"><span>No photo yet</span></div>
+     <div><label class="btn" for="photo-file">Add a photo for the front</label><input type="file" id="photo-file" accept="image/*" hidden>
+     <button class="btn" type="button" id="photo-clear" hidden>Remove the photo</button>
+     <p class="hint">A photo of your baby, or of your family. It is made smaller and saved only on this device.</p></div></div>
+   <div class="grid">${txt("vc.baby","My baby's name","")}${txt("vc.born","Born on","","date")}${txt("vc.time","At","","time")}${txt("vc.weight","Weight","Optional, for example 7 lb 4 oz")}${txt("vc.length","Length","Optional, for example 20 in")}${txt("vc.from","With love, from","For example: Maya & Sam")}</div>
    ${area("vc.words","A few words from us","We are so happy to share our little one with you. These first weeks are for resting and getting to know each other.")}
    <h3>What to expect</h3>${checks("vc.expect",VC_EXPECT)}
    <h3>How you can help</h3>${checks("vc.help",VC_HELP)}
@@ -465,7 +474,7 @@ function storyToggle(){ document.getElementById("story").classList.toggle("skip"
 document.getElementById("print").addEventListener("click",()=>{ save(); window.open("booklet.html?mine&print","_blank"); });
 document.getElementById("clear").addEventListener("click",()=>{
   if(!confirm("Clear everything you have written in this workbook on this device? This cannot be undone.")) return;
-  data={v:{},rep:{}}; try{ localStorage.removeItem(KEY); }catch(e){}
+  data={v:{},rep:{}}; try{ localStorage.removeItem(KEY); localStorage.removeItem("ftw-photo"); }catch(e){} if(typeof showPhoto==="function") showPhoto();
   counts(); form.querySelectorAll("input,textarea,select").forEach(el=>{ if(el.type==="checkbox"||el.type==="radio") el.checked=false; else el.value=""; }); fill();
 });
 // empty dropdowns and dates print as clean lines to write on
@@ -480,6 +489,19 @@ tbtn.addEventListener("click",()=>{ const next=isDark()?"light":"dark"; root.set
 sysDark.addEventListener("change",syncTheme); syncTheme();
 
 counts(); fill();
+
+/* the photo for the visitor cards: made smaller, and kept on this device, apart from the written plan */
+const PKEY="ftw-photo", pf=document.getElementById("photo-file"), pframe=document.getElementById("photo-frame"), pclear=document.getElementById("photo-clear");
+function showPhoto(){ let d=""; try{ d=localStorage.getItem(PKEY)||""; }catch(e){} pframe.innerHTML=d?`<img src="${d}" alt="The photo for the front of the visitor cards">`:`<span>No photo yet</span>`; pclear.hidden=!d; }
+pf.addEventListener("change",()=>{ const file=pf.files&&pf.files[0]; if(!file) return;
+  const img=new Image(), url=URL.createObjectURL(file);
+  img.onload=()=>{ const k=Math.min(1,900/Math.max(img.width,img.height)), c=document.createElement("canvas"); c.width=Math.round(img.width*k); c.height=Math.round(img.height*k);
+    c.getContext("2d").drawImage(img,0,0,c.width,c.height); URL.revokeObjectURL(url);
+    try{ localStorage.setItem(PKEY,c.toDataURL("image/jpeg",.86)); }catch(e){ alert("That photo is too large to save on this device. Please try a smaller one."); }
+    showPhoto(); pf.value=""; };
+  img.src=url; });
+pclear.addEventListener("click",()=>{ try{ localStorage.removeItem(PKEY); }catch(e){} showPhoto(); });
+showPhoto();
 
 /* two views: turn the pages of the booklet, or fill it in. The booklet always shows her latest words. */
 const frame=document.getElementById("bookframe");

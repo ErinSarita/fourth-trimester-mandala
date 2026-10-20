@@ -1,23 +1,44 @@
-/* Visitor cards: four to a Letter page, each 408 x 528 px (4.25 x 5.5 in), in the mandala's palette. Shared by the booklet and visitor-cards.html. */
-.vc{position:relative;width:100%;height:100%;padding:26px 24px 18px;font-family:Mulish,"Avenir Next","Segoe UI",sans-serif;color:#4E2A2E;font-size:10.6px;line-height:1.42;background:#FFFBF6;overflow:hidden}
-.vc-band{position:absolute;left:0;right:0;top:0;height:7px;background:linear-gradient(90deg,#F5D27A,#FAE29C 16%,#F8C8B8 34%,#F1B097 52%,#EA9C91 68%,#DF8A8E 84%,#D17489)}
-.vc-eb{font-size:8.6px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#C08A2E;margin-bottom:4px}
-.vc-t{font-family:Marcellus,Georgia,serif;font-size:26px;line-height:1.1;margin:0 0 4px}
-.vc-born{font-size:11px;color:#8E6366;margin:0 0 8px}
-.vc-row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:4px 8px;margin:0 0 5px}
-.vc-row b{font-size:8.6px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8E6366}
-.vc-ln{display:inline-block;border-bottom:1px solid #E6CFC5;min-height:15px;font-style:italic;padding:0 2px}
-.vc-dur{display:inline-flex;align-items:center;gap:4px;margin-right:4px}
-.vc-h{font-family:Marcellus,Georgia,serif;font-size:12.6px;margin:7px 0 3px;color:#4E2A2E}
-.vc-words{min-height:44px;background-image:linear-gradient(to bottom,transparent 21px,#E6CFC5 21px,#E6CFC5 22px);background-size:100% 22px;font-style:italic;line-height:22px;white-space:pre-wrap;max-height:66px;overflow:hidden}
-.vc-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+/* Visitor invitations: 408 x 528 px each (4.25 x 5.5 in, the A2 invitation size), four to a Letter page.
+   A front with her photo and the baby's name; a back with the visit. In the mandala's palette, with a fine gold frame. */
+.vc{--center:#F5D27A;--baby:#FAE29C;--mother:#F8C8B8;--partner:#F1B097;--circle:#EA9C91;--edu:#DF8A8E;--best:#D17489;--gold:#C08A2E;
+  position:relative;width:100%;height:100%;overflow:hidden;color:#4E2A2E;font-family:Mulish,"Avenir Next","Segoe UI",sans-serif;text-align:center;
+  background:radial-gradient(circle at 50% 36%, #FFF7E8 0%, #FFFBF6 46%, #FBEDE6 100%)}
+.vc-frame{position:absolute;inset:14px;border:1.4px solid var(--gold);border-radius:6px;pointer-events:none}
+.vc-frame::after{content:"";position:absolute;inset:4px;border:.7px solid #E7CFA3;border-radius:4px}
+.vc-eb{font-size:8.4px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin:40px 0 0}
+.vc-ln{display:inline-block;border-bottom:1px solid #E1C3B8;min-height:15px;vertical-align:bottom}
+.vc-val{font-style:italic;font-family:Marcellus,Georgia,serif;font-size:13px}
+/* front */
+.vc-pic{position:relative;width:236px;height:236px;margin:12px auto 10px}
+.vc-ring{position:absolute;inset:0;width:100%;height:100%}
+.vc-photo{position:absolute;left:50%;top:50%;width:162px;height:162px;transform:translate(-50%,-50%);border-radius:50%;object-fit:cover;box-shadow:0 6px 18px rgba(209,116,137,.25)}
+.vc-photo.wheel{object-fit:contain;box-shadow:none;background:#FFFBF6}
+.vc-photo.empty{display:flex;align-items:center;justify-content:center;border:1.2px dashed #E1C3B8;background:#FFFDF9;box-shadow:none}
+.vc-photo.empty span{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#B08A80}
+.vc-name{font-family:Marcellus,Georgia,serif;font-size:36px;line-height:1.05;margin:4px 30px 6px;min-height:38px}
+.vc-born{font-family:Marcellus,Georgia,serif;font-style:italic;font-size:13.5px;color:#8E6366;margin:0 28px 4px}
+.vc-facts{font-size:11px;letter-spacing:.08em;color:#8E6366;margin:0 0 4px}
+.vc-from{position:absolute;left:0;right:0;bottom:40px;font-family:Marcellus,Georgia,serif;font-size:15px;color:var(--best)}
+.vc-from span{font-style:italic;color:#8E6366;font-size:13px}
+/* back */
+.vc-back{text-align:left;padding:0 38px}
+.vc-back .vc-eb{text-align:center}
+.vc-dear{font-family:Marcellus,Georgia,serif;font-size:24px;margin:10px 0 10px;text-align:center}
+.vc-when{display:grid;gap:5px;font-size:11px;margin:0 0 8px;padding:9px 12px;border:1px solid #EBD8CF;border-radius:10px;background:rgba(255,255,255,.7)}
+.vc-when>div{display:flex;flex-wrap:wrap;align-items:flex-end;gap:4px 8px}
+.vc-when b{font-size:8.4px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#8E6366;min-width:58px}
+.vc-dur{display:inline-flex;align-items:center;gap:4px;margin-right:4px;font-size:10.4px}
+.vc-words{font-family:Marcellus,Georgia,serif;font-style:italic;font-size:13px;line-height:22px;min-height:44px;max-height:66px;overflow:hidden;white-space:pre-wrap;text-align:center;margin:0 0 6px;
+  background-image:linear-gradient(to bottom,transparent 21px,#EAD7CE 21px,#EAD7CE 22px);background-size:100% 22px}
+.vc-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:10.2px;line-height:1.38}
+.vc-h{font-family:Marcellus,Georgia,serif;font-size:13px;margin:0 0 4px;padding-bottom:3px;border-bottom:1px solid #EBD8CF}
 .vc ul{list-style:none;margin:0;padding:0;display:grid;gap:3px}
 .vc li{display:grid;grid-template-columns:11px 1fr;gap:6px;align-items:start}
-.vc-o{display:inline-block;width:9px;height:9px;border-radius:50%;border:1.2px solid #D17489;margin-top:2px;flex:none}
-.vc-o.on{background:#D17489}
-.vc-foot{position:absolute;left:24px;right:24px;bottom:16px;font-family:Marcellus,Georgia,serif;font-size:11.5px;color:#D17489;text-align:center;border-top:1px solid #EBD8CF;padding-top:7px}
-/* four cards on a page, with dotted lines to cut along */
+.vc-o{display:inline-block;width:9px;height:9px;border-radius:50%;border:1.2px solid var(--best);margin-top:2px;flex:none}
+.vc-o.on{background:var(--best)}
+.vc-note{position:absolute;left:38px;right:38px;bottom:60px}
+.vc-lines{height:66px;background-image:linear-gradient(to bottom,transparent 21px,#EAD7CE 21px,#EAD7CE 22px);background-size:100% 22px}
+.vc-foot{position:absolute;left:38px;right:38px;bottom:34px;font-family:Marcellus,Georgia,serif;font-size:12px;color:var(--best);text-align:center}
+/* four cards to a page, with fine guides to cut along */
 .vc-sheet{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;width:816px;height:1056px;background:#FFFBF6}
-.vc-sheet>div{border-right:1px dashed #E1C3B8;border-bottom:1px dashed #E1C3B8}
-.vc-sheet>div:nth-child(2n){border-right:none}
-.vc-sheet>div:nth-child(n+3){border-bottom:none}
+.vc-sheet>div{outline:.6px dashed #E1C3B8;outline-offset:-.3px}
