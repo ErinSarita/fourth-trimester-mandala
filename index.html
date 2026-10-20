@@ -1209,8 +1209,7 @@ function showCalm(user){
     <article class="scard lang" id="calm-hormones"><h3>The hormones of bonding</h3>
       ${HORMONES.map(([n,role,what,block])=>`<div class="state"><b class="nm">${n}</b><p><i>${role}</i> ${what}</p><p class="help"><b>What gets in the way:</b> ${block}</p></div>`).join("")}
       <p class="hint">Partners' bodies change too: in fathers who are close and hands-on, oxytocin and prolactin rise and testosterone falls, readying them for care (Gordon et al., 2010; Gettler et al., 2011).</p></article>
-    <article class="scard lang" id="calm-coreg"><h3>Regulation and co-regulation</h3>${ul(COREG)}
-      <p class="hint">The <a class="go" href="https://erinsarita.github.io/window-mandala/">Window Mandala</a> maps these states of the nervous system, and the ways back to the center, in depth.</p></article>
+    <article class="scard lang" id="calm-coreg"><h3>Regulation and co-regulation</h3>${ul(COREG)}</article>
     <article class="scard lang" id="calm-ways"><h3>Ways back to a receptive state</h3>
       <p class="hint">Practices work best when they match where she is. These are offerings, not tasks. On many days, the most regulating thing is food, rest, and someone else holding the baby for a while.</p>
       ${WAYS.map(g=>`<div class="state"><b class="nm">${g.h}</b>${ul(g.items)}</div>`).join("")}
