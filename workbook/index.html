@@ -181,6 +181,8 @@ try{ var t=localStorage.getItem("ft-theme"); if(t==="light"||t==="dark") documen
     <a class="btn" href="ways-to-help.html?mine" target="_blank" rel="noopener">My Ways to help sheet</a>
     <a class="btn" href="my-fourth-trimester-plan.pdf" target="_blank" rel="noopener">Blank booklet (PDF)</a>
     <a class="btn" href="ways-to-help.pdf" target="_blank" rel="noopener">Blank Ways to help (PDF)</a>
+    <a class="btn" href="visitor-cards.html?mine" target="_blank" rel="noopener">My visitor cards</a>
+    <a class="btn" href="visitor-cards.pdf" target="_blank" rel="noopener">Blank visitor cards (PDF)</a>
     <button class="btn" type="button" id="clear">Clear everything</button>
     <span class="saved" id="saved" aria-live="polite"></span>
     <p class="note">Fill it in here, and turn the pages of the booklet to see it with your own words written in. Print it as a booklet, or open the blank booklet to print and fill in by hand. The Ways to help sheet is a single page for the fridge, with every task you have circled and its priority. What you write here is saved only in this browser, on this device, and is not sent anywhere. To share it, print it or save it as a PDF. Your birth story is printed only if you choose.</p>
@@ -261,6 +263,11 @@ const PARTS=[
    ${area("hour.words","The first words I would like my baby to hear","You are out now. You made it. We are here.")}
    ${area("hour.notes","Notes for my care team")}`},
 
+ {id:"kangaroo", c:"--baby", title:"Kangaroo care", html:()=>`
+   <p class="intro">Kangaroo care means holding your baby skin to skin on your bare chest, as much as you can, and keeping her close. On her mother's chest a newborn's heart rate, breathing, and temperature settle, the milk flows more easily, and both bodies stay calm (Bergman). It is the heart of this plan.</p>
+   ${checks("kc",KANGAROO_PLAN)}
+   ${area("kc.notes","My notes on skin to skin and carrying","Who will help, when we will do it, what we need")}`},
+
  {id:"feeding", c:"--mother", title:"My feeding plan", html:()=>`
    <p class="intro">Feeding is food and relationship at once. Whatever path you choose, every feed can be close and calm, and skilled help early makes a real difference.</p>
    <h3>How I plan to feed</h3>
@@ -269,6 +276,17 @@ const PARTS=[
    <div class="grid">${txt("feed.ibclc","My lactation contact")}${txt("feed.ibclcphone","Their phone","","tel")}</div>
    ${area("feed.help","What I would like from others while I am feeding")}
    ${area("feed.know","What I would like everyone to know about how I feed my baby","Please support me, whatever I choose")}`},
+
+ {id:"sleep", c:"--edu", title:"Sleep and nights", html:()=>`
+   <p class="intro">Babies wake to feed often, day and night, and want to be close. A plan for nights lets everyone rest more, and keeps the baby safe. Choose what feels right for your family, and talk it through with your provider.</p>
+   <h3>Where my baby will sleep</h3>
+   ${checks("sleep.where",SLEEP_WHERE)}
+   <div class="urgent" style="border-color:var(--edu);border-left-color:var(--edu)"><b>For every sleep</b><p>On her back, on a firm, flat surface, with no pillows, loose blankets, bumpers, or toys, not too warm, and in a smoke-free home. Falling asleep with a baby on a sofa or armchair carries the highest risk, so move to a safe place, or hand her to someone awake, before you doze.</p>
+   <p><b>If you plan to bed-share while breastfeeding,</b> La Leche League's Safe Sleep Seven describes when it is safest: ${SAFE_SLEEP_SEVEN.join("; ").toLowerCase()}.</p></div>
+   ${area("sleep.who","Who helps at night, and how")}
+   ${area("sleep.feeds","Our plan for night feeds")}
+   ${area("sleep.naps","How I will rest during the day")}
+   ${area("sleep.drowsy","If I feel drowsy with the baby on my chest, the baby goes…","To my partner, or into her own safe space")}`},
 
  {id:"home", c:"--circle", title:"Ways to help me", html:()=>`
    <p class="intro">In these weeks, the mother's work is to rest, heal, feed, and be with her baby. Everything else can be shared. Check anything you would like help with, mark how much it matters, then choose who you would like to ask: anyone you have named in your circle, or anyone who can help. Each person's tasks are gathered for them in the next part. The baby stays close to her mother; helpers take care of everything around them.</p>
@@ -291,6 +309,17 @@ const PARTS=[
    ${checks("visit",VISIT)}
    ${area("visit.who","Who is welcome in the first days, and when")}
    ${area("visit.news","How and when we will share the news, and who will share it")}`},
+
+ {id:"cards", c:"--best", title:"Visitor cards", html:()=>`
+   <p class="intro">An invitation to visit, with a few words from you, what to expect, and how to help, so visits are easy and short, and leave you rested. Fill in the parts that are the same for everyone, then a line for each visit. They print four to a page, ready to cut, hand over, or photograph and send.</p>
+   <div class="grid">${txt("vc.baby","My baby's name","")}${txt("vc.born","Born on","","date")}${txt("vc.time","At","","time")}</div>
+   ${area("vc.words","A few words from us","We are so happy to share our little one with you. These first weeks are for resting and getting to know each other.")}
+   <h3>What to expect</h3>${checks("vc.expect",VC_EXPECT)}
+   <h3>How you can help</h3>${checks("vc.help",VC_HELP)}
+   ${txt("vc.x","Another way to help","For example: walk the dog on your way in")}
+   <h3>Each visit</h3>
+   ${rep("vis",4,i=>"Card "+(i+1),k=>`<div class="grid">${txt(k+".for","For")}${txt(k+".date","Date","","date")}${txt(k+".time","Time","","time")}<label class="f">For about<select name="${k}.dur"><option value="">Choose, or leave open</option>${VC_DUR.map((d,j)=>`<option value="${j}">${d}</option>`).join("")}</select></label></div>`)}
+   <p><a class="btn" href="visitor-cards.html?mine" target="_blank" rel="noopener">See and print my visitor cards</a></p>`},
 
  {id:"watch", c:"--best", title:"Watching over me", html:()=>`
    <p class="intro">The baby blues are common in the first two weeks and usually pass. When sadness, worry, frightening thoughts, rage, or numbness last longer or deepen, it may be postpartum depression or anxiety, which are common, treatable, and not her fault. Partners can feel this too. These notes help the people closest to me notice early, and know what to do.</p>

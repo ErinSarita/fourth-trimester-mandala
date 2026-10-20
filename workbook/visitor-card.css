@@ -1,0 +1,23 @@
+/* Visitor cards: four to a Letter page, each 408 x 528 px (4.25 x 5.5 in), in the mandala's palette. Shared by the booklet and visitor-cards.html. */
+.vc{position:relative;width:100%;height:100%;padding:26px 24px 18px;font-family:Mulish,"Avenir Next","Segoe UI",sans-serif;color:#4E2A2E;font-size:10.6px;line-height:1.42;background:#FFFBF6;overflow:hidden}
+.vc-band{position:absolute;left:0;right:0;top:0;height:7px;background:linear-gradient(90deg,#F5D27A,#FAE29C 16%,#F8C8B8 34%,#F1B097 52%,#EA9C91 68%,#DF8A8E 84%,#D17489)}
+.vc-eb{font-size:8.6px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#C08A2E;margin-bottom:4px}
+.vc-t{font-family:Marcellus,Georgia,serif;font-size:26px;line-height:1.1;margin:0 0 4px}
+.vc-born{font-size:11px;color:#8E6366;margin:0 0 8px}
+.vc-row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:4px 8px;margin:0 0 5px}
+.vc-row b{font-size:8.6px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8E6366}
+.vc-ln{display:inline-block;border-bottom:1px solid #E6CFC5;min-height:15px;font-style:italic;padding:0 2px}
+.vc-dur{display:inline-flex;align-items:center;gap:4px;margin-right:4px}
+.vc-h{font-family:Marcellus,Georgia,serif;font-size:12.6px;margin:7px 0 3px;color:#4E2A2E}
+.vc-words{min-height:44px;background-image:linear-gradient(to bottom,transparent 21px,#E6CFC5 21px,#E6CFC5 22px);background-size:100% 22px;font-style:italic;line-height:22px;white-space:pre-wrap;max-height:66px;overflow:hidden}
+.vc-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.vc ul{list-style:none;margin:0;padding:0;display:grid;gap:3px}
+.vc li{display:grid;grid-template-columns:11px 1fr;gap:6px;align-items:start}
+.vc-o{display:inline-block;width:9px;height:9px;border-radius:50%;border:1.2px solid #D17489;margin-top:2px;flex:none}
+.vc-o.on{background:#D17489}
+.vc-foot{position:absolute;left:24px;right:24px;bottom:16px;font-family:Marcellus,Georgia,serif;font-size:11.5px;color:#D17489;text-align:center;border-top:1px solid #EBD8CF;padding-top:7px}
+/* four cards on a page, with dotted lines to cut along */
+.vc-sheet{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;width:816px;height:1056px;background:#FFFBF6}
+.vc-sheet>div{border-right:1px dashed #E1C3B8;border-bottom:1px dashed #E1C3B8}
+.vc-sheet>div:nth-child(2n){border-right:none}
+.vc-sheet>div:nth-child(n+3){border-bottom:none}

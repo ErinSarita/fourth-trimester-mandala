@@ -7,6 +7,7 @@
 <link rel="icon" href="../favicon.svg?v=1" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="visitor-card.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Mulish:ital,wght@0,400;0,600;0,700;1,400&display=swap">
 <style>
 /* The booklet, drawn at Letter size: 816 × 1056 px is 8.5 × 11 in, sixteen pages, printed double-sided on ordinary paper.
@@ -214,6 +215,23 @@ page(`<div class="two"><div>${head("Welcome","Dear mother","")}
   <p class="small muted">You can also fill it in online, on your phone or computer, and print it with your own words written in.</p></div>
   <div><div class="eb"><i style="background:var(--center)"></i>Contents</div><h1>Inside</h1><ol class="contents" id="toc"></ol><div style="margin-top:28px">${orn(240)}</div></div></div>`,{c:"--center"});
 
+// kangaroo care: the heart of the plan
+page(`${head("The heart of this plan","Kangaroo care","Kangaroo care means holding your baby skin to skin on your bare chest, as much as you can, and keeping her close. It began in 1978 with doctors in Bogotá caring for small babies, and the research now shows it helps every newborn (Bergman; Moore et al., 2016).")}
+  <div class="two"><div>
+    ${sec("--baby","Why it matters")}
+    <p>A newborn's brain is only about a quarter developed at birth, and to her there are two places: mother, or other. On her mother's bare chest, within minutes, her heart rate and breathing settle. Her mother's chest warms by up to about 2°C (3.6°F) to warm her, or cools by about 1°C to cool her, and only the mother's chest adjusts this way. Oxytocin rises, the milk flows, and both stay calm. Apart, her body moves into defense: crying to bring her mother back, then shutting down to save energy (Bergman).</p>
+    ${sec("--mother","Three parts")}
+    <ul class="ck">${["Skin to skin from birth, as continuously as you can.","Breast milk from birth, then feeding on cue, day and night.","Support for the mother and baby: whatever is needed, from whoever can give it."].map(t=>`<li><span class="o on" style="--c:var(--mother)"></span><span>${t}</span></li>`).join("")}</ul>
+    ${sec("--partner","Partners too")}
+    <p>A baby on her partner's bare chest is kept warm and settles too, though only the mother's chest changes its temperature to match her. After a cesarean, babies held skin to skin by their fathers cried less and calmed sooner (Erlandsson et al., 2007).</p>
+  </div><div>
+    ${sec("--circle","How to hold her")}
+    <ul class="ck">${["Upright on your bare chest, chest to chest, between your breasts.","Her head turned to one side, her nose and mouth visible, her chin slightly lifted.","Her legs tucked up, like a little frog.","A blanket or your top over you both, not between you.","Stay awake, or have another adult watching. If you feel drowsy, hand her over or move her to her own safe space.","Stay for at least an hour at a time, since each move disturbs her (WHO)."].map(t=>`<li><span class="o" style="--c:var(--circle)"></span><span>${t}</span></li>`).join("")}</ul>
+    ${sec("--edu","Carrying her close")}
+    <p>A wrap or soft carrier keeps her in her habitat while you move. Keep her snug and upright, high enough to kiss the top of her head, her face always in view, her chin off her chest, and her back supported.</p>
+    ${sec("--best","My kangaroo care plan")}${ckItems("kc",KANGAROO_PLAN)}
+  </div></div>`,{c:"--baby",toc:"Kangaroo care"});
+
 // 3 · about me, and my circle
 const ringName=k=>v[k]?esc(v[k].trim().split(/\s+/)[0]):"";
 page(`${head("01 · 02","About me, and my circle of support","")}
@@ -267,6 +285,14 @@ page(`${head("06","My feeding plan","Whatever path you choose, every feed can be
 // my own requests: anything she added online, then blank lines to write on, five in all
 const OWN=(()=>{ const out=[]; CATS.forEach(([k])=>{ for(let i=0;i<(rep["x"+k]||0);i++){ const t=v[`x${k}.${i}.task`]; if(t) out.push([t,+(v[`x${k}.${i}.pri`]||0)]); } }); return out; })();
 const ownGrp=()=>`<div class="grp own" style="--c:var(--best)"><h3><i></i>My own requests</h3><ul>${Array.from({length:Math.max(5,OWN.length)},(_,i)=>{ const o=OWN[i]; return `<li><span class="o${o?" on":""}"></span>${o?`<span>${esc(o[0])}</span>`:`<span class="blank"></span>`}${petals(o?o[1]:0)}</li>`; }).join("")}</ul></div>`;
+// sleep and nights
+page(`${head("06","Sleep and nights","Babies wake to feed often, day and night, and want to be close. A plan for nights lets everyone rest more and keeps the baby safe. Choose what feels right for your family, and talk it through with your provider.")}
+  <div class="two"><div><div class="lab">Where my baby will sleep</div>${ckItems("sleep.where",SLEEP_WHERE)}
+    <div class="urgent" style="border-color:var(--edu);border-left-color:var(--edu)"><p><b>For every sleep:</b> on her back, on a firm, flat surface, with no pillows, loose blankets, bumpers, or toys, not too warm, in a smoke-free home. Falling asleep with a baby on a sofa or armchair carries the highest risk, so move somewhere safe, or hand her to someone awake, before you doze.</p></div></div>
+  <div><div class="box" style="--c:var(--edu)"><h3>If I bed-share while breastfeeding</h3><p class="small muted" style="margin:2px 0 4px">La Leche League's Safe Sleep Seven describes when it is safest:</p><ul class="ck" style="gap:4px">${SAFE_SLEEP_SEVEN.map(t=>`<li><span class="o" style="--c:var(--edu)"></span><span>${t}</span></li>`).join("")}</ul></div>
+    ${q("sleep.who","Who helps at night, and how",3)}${q("sleep.feeds","Our plan for night feeds",3)}</div></div>
+  <div class="two">${q("sleep.naps","How I will rest during the day",3)}${q("sleep.drowsy","If I feel drowsy with the baby on my chest, she goes to…",3)}</div>`,{c:"--edu",toc:"Sleep and nights"});
+
 // 9 · ways to help, on one page
 const legend=`<div class="legend"><span><span class="o"></span>Circle what you would like</span><span>${petals(1)} nice to have</span><span>${petals(2)} would love</span><span>${petals(3)} most important</span></div>`;
 const grp=([k,name,c,items])=>`<div class="grp" style="--c:var(${c})"><h3><i></i>${name}</h3><ul>${items.map((t,i)=>`<li><span class="o${v[`home.${k}.${i}`]?" on":""}"></span><span>${t}</span>${petals(+(v[`home.${k}.${i}.pri`]||0))}</li>`).join("")}</ul></div>`;
@@ -295,6 +321,9 @@ page(`${head("09 · 10","Rest, recovery, and watching over me","Kimberly Ann Joh
   <div class="three">${q("watch.signs","Signs that I am struggling",3)}${q("watch.helps","What helps me come back",3)}${q("watch.call","Who to call if you are worried about me",3)}</div>
   <div class="urgent"><p><b>When to call right away.</b> For the mother: heavy bleeding (soaking a pad in an hour or less), a fever, a severe headache or changes in vision, chest pain or trouble breathing, a swollen, painful leg, or thoughts of harming herself or the baby. For the baby: a fever (under three months, 100.4°F or 38°C), trouble breathing or a bluish color, being very hard to wake, refusing feeds, far fewer wet diapers, or yellow skin that is spreading.</p><p>National Maternal Mental Health Hotline (US), free, day and night: 1-833-TLC-MAMA (1-833-852-6262) · Postpartum Support International: postpartum.net</p></div>`,{c:"--edu",toc:["Rest and recovery","Watching over me"]});
 
+// visitor cards: four to the page, to cut apart
+page(`<div class="vc-sheet" style="position:absolute;inset:0">${[0,1,2,3].map(i=>`<div>${visitorCard(v,i,esc)}</div>`).join("")}</div>`,{cls:"",c:"--best",foot:false,toc:"Visitor cards"});
+
 // 13 · birth story, kept private unless she chooses to share it
 const storyOn=!MINE || v["story.print"];
 page(storyOn?`${head("11","My birth story","Telling the story of a birth, and being heard, is part of healing (Kendall-Tackett). Write as much or as little as you like, whenever you are ready. There is no right way for a birth to have gone.")}
@@ -309,7 +338,18 @@ page(`<div class="read">${head("12","For my supporters: why this matters","The k
 page(`${head("13","Important contacts","")}
   <div class="two">${[["c.provider","My midwife or doctor"],["c.babydoc","My baby's care provider"],["c.hosp","Hospital or birth center"],["c.ibclc","Lactation consultant"],["c.doula","Birth doula"],["c.ppdoula","Postpartum doula"],["c.therapist","Therapist or counselor"],["c.other","Someone I trust"]].map(([k,l])=>field(k,l)).join("")}</div>
   <p class="small muted" style="margin-top:8px">In the United States: emergency 911 · crisis line 988 · National Maternal Mental Health Hotline 1-833-TLC-MAMA · Postpartum Support International postpartum.net</p>
-  ${sec("--center","Notes")}${lines("",19)}`,{c:"--center",toc:"Important contacts"});
+  ${sec("--baby","Caring for your baby: key notes")}
+  <div class="two read"><ul>
+    <li><b>Feeding:</b> eight or more times in 24 hours in the early weeks, on cue: stirring, rooting, hands to mouth come before crying.</li>
+    <li><b>Diapers:</b> by about day five, around six or more wet diapers a day, and regular stools. Ask your provider what to expect day by day.</li>
+    <li><b>The cord:</b> keep the stump clean and dry; it usually falls off within one to three weeks. Sponge baths until then.</li>
+    <li><b>Holding:</b> support her head and neck, keep her close, and skin to skin often.</li></ul>
+  <ul>
+    <li><b>Her states:</b> quiet alert, eyes bright and still, is her best time to connect. Looking away, yawning, or hiccups mean she needs a pause.</li>
+    <li><b>Crying:</b> meet her needs first, then hold her, stay calm, and say what you see. Crying often peaks around six weeks. At your limit, lay her down somewhere safe and breathe.</li>
+    <li><b>The car seat:</b> rear-facing, for every ride.</li>
+    <li><b>Sleep</b> and <b>when to call</b> are on pages <span class="pref-sleep"></span> and <span class="pref-watch"></span>.</li></ul></div>
+  ${sec("--center","Notes")}${lines("",10)}`,{c:"--center",toc:["Important contacts","Caring for your baby"]});
 
 // 16 · back cover
 page(`${orn(220)}
@@ -321,6 +361,9 @@ page(`${orn(220)}
 const book=document.getElementById("book");
 book.innerHTML=PAGES.join("");
 book.querySelector("#toc").innerHTML=TOC.map(([t,c,n])=>`<li style="--c:var(${c})"><i></i>${t}<span>${n}</span></li>`).join("");
+const pnum=t=>{ const e=TOC.find(x=>x[0]===t); return e?e[2]:""; };
+book.querySelectorAll(".pref-sleep").forEach(e=>e.textContent=pnum("Sleep and nights"));
+book.querySelectorAll(".pref-watch").forEach(e=>e.textContent=pnum("Watching over me"));
 const pages=[...book.querySelectorAll(".pg")];
 
 /* ---------- the page turner: two facing pages on a wide screen, one at a time on a narrow one ---------- */

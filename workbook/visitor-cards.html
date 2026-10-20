@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Visitor Cards · My Fourth Trimester Plan</title>
+<link rel="icon" href="../favicon.svg?v=1" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="visitor-card.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Mulish:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+/* Four visitor cards on one Letter page, to cut apart along the dotted lines. Blank, or with her own words from the workbook (?mine). */
+*{box-sizing:border-box}
+body{margin:0;background:#E9DDD7;font-family:Mulish,"Avenir Next","Segoe UI",sans-serif;color:#4E2A2E}
+.bar{position:sticky;top:0;z-index:5;display:flex;gap:8px;justify-content:center;padding:10px;background:rgba(255,251,246,.92);border-bottom:1px solid #EBD8CF;font-size:14px}
+.bar a,.bar button{font:inherit;font-weight:600;border:1px solid #EBD8CF;background:#fff;color:#4E2A2E;border-radius:999px;padding:6px 14px;cursor:pointer;text-decoration:none}
+.bar .primary{background:#4E2A2E;color:#fff;border-color:#4E2A2E}
+.wrap{display:flex;justify-content:center;padding:24px 12px 60px}
+.vc-sheet{box-shadow:0 10px 30px rgba(78,42,46,.18)}
+@media print{ @page{size:letter;margin:0} body{background:none} .bar{display:none} .wrap{padding:0;display:block} .vc-sheet{box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact} }
+@media (max-width:840px){ .wrap{zoom:.45} }
+</style>
+</head>
+<body>
+<div class="bar"><a href="./">Back to the workbook</a><button class="primary" type="button" onclick="print()">Print or save as PDF</button></div>
+<div class="wrap"><div class="vc-sheet" id="sheet"></div></div>
+<script src="content.js"></script>
+<script>
+(function(){
+"use strict";
+const MINE=new URLSearchParams(location.search).has("mine");
+let v={}; if(MINE){ try{ const d=JSON.parse(localStorage.getItem("ftw-plan")||"null"); if(d) v=d.v||{}; }catch(e){} }
+const esc=t=>String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+document.getElementById("sheet").innerHTML=[0,1,2,3].map(i=>`<div>${visitorCard(v,i,esc)}</div>`).join("");
+if(new URLSearchParams(location.search).has("print")) addEventListener("load",()=>setTimeout(()=>print(),400));
+})();
+</script>
+</body>
+</html>

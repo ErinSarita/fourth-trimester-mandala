@@ -17,3 +17,52 @@ const LEARN = [
   {c:"--circle", h:"How to support", html:"<ul><li>Do the tasks so the mother can hold the baby, rather than holding the baby so the mother can do the tasks.</li><li>Keep visits short, quiet, and helpful.</li><li>Listen to her birth story without correcting or comparing.</li><li>Tell her what she is doing well.</li><li>Watch for signs she is struggling, and help her reach care early.</li></ul>"},
   {c:"--best", h:"If you are caring for the baby", html:"<ul><li>Hold her close, skin to skin on your bare chest if you can, with her face visible and her nose and mouth clear.</li><li>Tell her who you are and what you are doing, in a calm, low voice.</li><li>Watch her cues, and bring her to her mother at the first signs of hunger.</li><li>If you give a bottle, do it as her mother has asked: hold her close and upright, let her set the pace, and switch sides.</li><li>For sleep: on her back, on a firm, flat surface of her own, with no pillows, blankets, or toys, in the room where her parents sleep.</li><li>Return her to her mother as soon as she can be together with her, and let her mother know how the time apart went.</li></ul>"}
 ];
+
+// ---------- kangaroo care, sleep, and visitor cards (added October 2026) ----------
+// Her own kangaroo care plan: skin to skin and closeness through the weeks (Bergman; WHO, 2003; Moore et al., 2016)
+const KANGAROO_PLAN = [
+  ["Skin to skin from birth, as continuously as we can",""],
+  ["Sessions of at least an hour, several times a day","Each move in and out is a disruption for a small baby."],
+  ["Skin to skin during feeds",""],
+  ["My partner holds the baby skin to skin every day",""],
+  ["A wrap or soft carrier, so she can be carried close",""],
+  ["A warm room, a front-opening top, and a blanket over us both",""],
+  ["Someone awake and watching whenever I feel drowsy",""]];
+// Where the baby will sleep: what she chooses, with what each choice means
+const SLEEP_WHERE = [
+  ["In a bassinet or crib beside our bed, in the same room","Room-sharing is recommended for at least the first six months (AAP)."],
+  ["In a bedside or side-car sleeper, close enough to reach",""],
+  ["In our bed with me, for nursing through the night","Many breastfeeding mothers choose this. The AAP advises against bed-sharing; if you plan it, learn the Safe Sleep Seven below and talk with your provider."],
+  ["Skin to skin on a parent's chest, while that parent is awake",""],
+  ["Not sure yet; I would like to learn more",""]];
+// The Safe Sleep Seven, from La Leche League, for breastfeeding mothers who bed-share
+const SAFE_SLEEP_SEVEN = ["You are a nonsmoker","You are sober and unimpaired","You are breastfeeding","Your baby is healthy and full-term","Your baby is on her back","Your baby is lightly dressed, not swaddled","You are both on a safe surface: a firm mattress, light covers, no gaps, away from pillows"];
+// Visitor cards
+const VC_EXPECT = ["We are resting, so visits may be short","The baby may stay in my arms or on my chest the whole time","I may be feeding while you are here","Plans may change at the last minute","We may still be in our pajamas"];
+const VC_HELP = ["Wash your hands when you arrive","Please stay home if you feel unwell","Bring a meal or a snack to share","Do one small chore: dishes, laundry, or a tidy","Hold the baby only if I offer","Please skip kissing the baby's face","Keep it short and sweet"];
+const VC_DUR = ["15 minutes","30 minutes","About an hour","As long as feels right"];
+
+/* One visitor card, about 4.25 x 5.5 in. v holds her answers (empty for a blank card); i is the card, 0 to 3. */
+function visitorCard(v, i, esc){
+  const o=on=>`<span class="vc-o${on?" on":""}"></span>`;
+  const pick=(key,list)=>{ const chosen=list.map((t,j)=>[t,!!v[`${key}.${j}`]]).filter(x=>x[1]);
+    return (chosen.length?chosen:list.map(t=>[t,false])).map(([t,c])=>`<li>${o(c)}<span>${t}</span></li>`).join(""); };
+  const baby=v["vc.baby"]||v["me.baby"]||"", dur=v[`vis.${i}.dur`];
+  const nice=t=>{ if(!t) return ""; let m=String(t).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if(m) return new Date(+m[1],+m[2]-1,+m[3]).toLocaleDateString(undefined,{month:"long",day:"numeric"});
+    m=String(t).match(/^(\d{1,2}):(\d{2})$/); if(m){ const h=+m[1]; return `${h%12||12}:${m[2]} ${h<12?"am":"pm"}`; } return t; };
+  const ln=(t,w)=>`<span class="vc-ln" style="min-width:${w}px">${esc(nice(t))}</span>`;
+  return `<div class="vc">
+    <div class="vc-band"></div>
+    <div class="vc-eb">You are invited to visit</div>
+    <div class="vc-t">Come meet ${baby?esc(baby):`<span class="vc-ln" style="min-width:150px"></span>`}</div>
+    <div class="vc-born">Born ${ln(v["vc.born"]||v["me.born"],92)} at ${ln(v["vc.time"],60)}</div>
+    <div class="vc-row"><b>For</b>${ln(v[`vis.${i}.for`],210)}</div>
+    <div class="vc-row"><b>When</b>${ln(v[`vis.${i}.date`],110)}<b>at</b>${ln(v[`vis.${i}.time`],60)}</div>
+    <div class="vc-row"><b>For about</b>${dur!=null&&dur!==""?`<span class="vc-ln">${esc(VC_DUR[+dur]||dur)}</span>`:VC_DUR.map(d=>`<span class="vc-dur">${o(false)}${d}</span>`).join("")}</div>
+    <div class="vc-h">A few words from us</div><div class="vc-words">${esc(v["vc.words"]||"")}</div>
+    <div class="vc-cols"><div><div class="vc-h">What to expect</div><ul>${pick("vc.expect",VC_EXPECT)}</ul></div>
+    <div><div class="vc-h">How you can help</div><ul>${pick("vc.help",VC_HELP)}${v["vc.x"]?`<li>${o(true)}<span>${esc(v["vc.x"])}</span></li>`:""}</ul></div></div>
+    <div class="vc-foot">Thank you for helping us rest, heal, and fall in love.</div>
+  </div>`;
+}
