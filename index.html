@@ -47,20 +47,16 @@ h1{font-family:var(--display);font-weight:400;font-size:clamp(34px,5vw,54px);lin
 .planlink{margin:6px 0 0;font-size:14.5px;color:var(--muted)}
 .planlink a{color:var(--ink);font-weight:700;text-underline-offset:3px}
 
-.main{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:36px;align-items:start}
-@media (max-width:900px){.main{grid-template-columns:1fr}}
-/* on wide screens the wheel column stays in view and scrolls on its own, so what sits under the wheel is reachable from anywhere in the reading */
-.stage{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);display:grid;gap:14px;max-height:calc(100vh - 24px - env(safe-area-inset-top,0px));overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:4px 6px 12px 2px}
-@media (max-width:900px){.stage{position:static;max-height:none;overflow:visible;padding:0}}
+/* the wheel on the left, and beside it the key, what the pointer is resting on, and the birth date; the reading sits below */
+.main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:28px 40px;align-items:center}
+@media (max-width:900px){.main{grid-template-columns:1fr} .ringkey{justify-content:center} .tip.info{min-height:0}}
+.stage{display:grid;gap:14px;min-width:0}
+.side{display:grid;gap:14px;align-content:center;min-width:0}
+.panel{grid-column:1/-1;width:100%;max-width:940px;margin:10px auto 0}
 .svgbox{width:100%;max-width:640px;margin:0 auto;aspect-ratio:1/1;position:relative}
 svg{width:100%;height:100%;display:block;overflow:visible}
 
 /* hover cards */
-.coretip{position:absolute;left:50%;top:50%;transform:translate(-50%,calc(-100% - 9%));width:min(250px,70%);color:var(--ink);border:1px solid var(--line);border-top:5px solid var(--center);border-radius:12px;padding:10px 12px;font-size:13.5px;line-height:1.45;text-align:center;background:color-mix(in srgb, var(--center) 18%, var(--surface));box-shadow:0 6px 20px color-mix(in srgb, var(--ink) 16%, transparent);pointer-events:none;opacity:0;transition:opacity .2s ease;z-index:2}
-.coretip.on{opacity:1}
-.coretip .coreicon{width:44px;height:44px;display:block;margin:2px auto 6px;overflow:visible}
-.coretip span{display:block;color:var(--muted);font-size:12.5px;margin-top:4px}
-.coretip b{font-family:var(--display);font-weight:400;font-size:16px;display:block;margin-bottom:2px}
 .tip{position:absolute;left:0;top:0;z-index:2;width:max-content;max-width:min(260px,72%);background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13.5px;line-height:1.4;text-align:center;box-shadow:0 6px 20px color-mix(in srgb, var(--ink) 16%, transparent);pointer-events:none;opacity:0;transition:opacity .15s ease}
 .tip.on{opacity:1}
 .tip.ringed{border-top:5px solid var(--tipc);background:color-mix(in srgb, var(--tipc) 14%, var(--surface))}
@@ -68,6 +64,12 @@ svg{width:100%;height:100%;display:block;overflow:visible}
 .tip .ringtag i{width:10px;height:10px;border-radius:50%;background:var(--tipc);box-shadow:0 0 0 1px color-mix(in srgb, var(--ink) 25%, transparent)}
 .tip b{font-family:var(--display);font-weight:400;font-size:16px;display:block}
 .tip span{color:var(--muted);font-size:12.5px;display:block}
+/* the stationary card beside the wheel */
+.tip.info{position:static;width:auto;max-width:none;opacity:1;pointer-events:auto;text-align:left;box-shadow:none;border-radius:16px;padding:16px 18px;font-size:15px;line-height:1.5;min-height:190px;transition:background .15s ease,border-color .15s ease}
+.tip.info b{font-size:22px;line-height:1.2;margin:2px 0 4px}
+.tip.info span{font-size:13.5px;margin-top:6px}
+.tip.info .coreicon{width:52px;height:52px;display:block;margin:0 0 8px;overflow:visible}
+.tip.info.ringed{border-top-width:6px}
 
 /* the wheel */
 .cell{cursor:pointer;transition:opacity .25s ease;stroke:var(--bg);stroke-width:2.5}
@@ -103,7 +105,7 @@ svg.dimming .cell.off{opacity:.28}
 .braidhit:focus{outline:none}
 
 /* the birth date */
-.datebar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;max-width:640px;margin:0 auto;width:100%}
+.datebar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;width:100%}
 .datebar label{font-size:14px;font-weight:600}
 .datebar input{font:inherit;font-size:15px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
 .btn{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer}
@@ -112,7 +114,7 @@ svg.dimming .cell.off{opacity:.28}
 .status{flex-basis:100%;text-align:center;font-size:14px;color:var(--muted);margin:0}
 .status b{color:var(--ink)}
 
-.ringkey{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:640px;margin:0 auto}
+.ringkey{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
 .ringkey button{display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:13.5px;font-weight:600;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 12px 5px 8px;cursor:pointer}
 .sw{width:14px;height:14px;border-radius:50%;flex:none;display:inline-block;box-shadow:0 0 0 1px color-mix(in srgb, var(--ink) 12%, transparent)}
 
@@ -222,7 +224,12 @@ try{ var t=localStorage.getItem("ft-theme"); if(t==="light"||t==="dark") documen
 
   <div class="main">
     <div class="stage">
-      <div class="svgbox"><div class="tip" id="tip" role="status"></div><div class="coretip" id="coretip" aria-hidden="true"><svg class="coreicon" viewBox="-68 -68 136 136" aria-hidden="true"><circle r="66" fill="var(--center)"/><path d="M0 -24.25A28 28 0 0 1 0 24.25A28 28 0 0 1 0 -24.25Z" fill="var(--seed)"/><g fill="none" stroke="var(--seed)" stroke-width="5"><circle cx="-14" r="28"/><circle cx="14" r="28"/><circle r="56"/></g></svg><b>The dyad at the center</b>Mother and baby, one unit, continuing the gestation outside the womb.<span>Tap to read more.</span></div><svg id="m" viewBox="-560 -560 1120 1120" role="group" aria-label="Fourth trimester mandala"></svg></div>
+      <div class="svgbox"><svg id="m" viewBox="-560 -560 1120 1120" role="group" aria-label="Fourth trimester mandala"></svg></div>
+    </div>
+
+    <aside class="side" aria-label="About the wheel">
+      <div class="ringkey" id="ringkey" aria-label="Rings"></div>
+      <div class="tip info" id="tip" role="status" aria-live="polite"></div>
       <form class="datebar" id="dateform" autocomplete="off">
         <label for="born">Baby's birth date</label>
         <input type="date" id="born" name="born">
@@ -230,8 +237,7 @@ try{ var t=localStorage.getItem("ft-theme"); if(t==="light"||t==="dark") documen
         <button class="btn" type="button" id="clear" hidden>Clear</button>
         <p class="status" id="status">Enter the baby's birth date, actual or expected, to see where you are in the fourth trimester.</p>
       </form>
-      <div class="ringkey" id="ringkey" aria-label="Rings"></div>
-    </div>
+    </aside>
 
     <div class="panel">
       <nav class="nav" id="nav" aria-label="Sections of the mandala"></nav>
@@ -917,21 +923,17 @@ const UNITS=[];
 
 /* ---------- Hover cards ---------- */
 const tipEl=document.getElementById("tip");
+const CORE_TIP=`<svg class="coreicon" viewBox="-68 -68 136 136" aria-hidden="true"><circle r="66" fill="var(--center)"/><path d="M0 -24.25A28 28 0 0 1 0 24.25A28 28 0 0 1 0 -24.25Z" fill="var(--seed)"/><g fill="none" stroke="var(--seed)" stroke-width="5"><circle cx="-14" r="28"/><circle cx="14" r="28"/><circle r="56"/></g></svg><b>The dyad at the center</b>Mother and baby, one unit, continuing the gestation outside the womb.<span>Tap to read more.</span>`;
 let openTip=null;
+const TIP_REST=`<span class="ringtag"><i style="background:var(--center)"></i>The wheel</span><b>Rest your pointer on the mandala</b>Hover over, or tap, any petal, ring, or mark, and what it holds appears here. Tap a petal to open it in full below.`;
 function showTip(node, info, hoverOnly){
   if(openTip) openTip.classList.remove("open");
   openTip=null;
-  if(!node){ tipEl.classList.remove("on"); return; }
+  if(!node){ tipEl.innerHTML=TIP_REST; tipEl.classList.remove("ringed"); return; }
   if(!hoverOnly){ openTip=node; node.classList.add("open"); }
   tipEl.innerHTML=info.html;
   tipEl.classList.toggle("ringed",!!info.color);
   if(info.color) tipEl.style.setProperty("--tipc",`var(${info.color})`);
-  const box=tipEl.parentElement, W=box.clientWidth, scale=W/(2*VB);
-  const px=(info.x+VB)*scale, py=(info.y+VB)*scale, w=tipEl.offsetWidth, h=tipEl.offsetHeight;
-  const left=Math.min(Math.max(px-w/2, 0), W-w);
-  const above=py-h-22*scale-6;
-  tipEl.style.left=left+"px"; tipEl.style.top=(above>=0 ? above : py+22*scale+6)+"px";
-  tipEl.classList.add("on");
 }
 // tap or click pins a card open; a mouse hover shows it while over; keyboard focus opens it too
 function tipOn(node, info){
@@ -1075,9 +1077,9 @@ function draw(){
   el("circle",{cx:-14,cy:0,r:sr},g); el("circle",{cx:14,cy:0,r:sr},g);
   el("circle",{cx:0,cy:0,r:sr*2,"stroke-width":2.8,opacity:.9},g);
   core.addEventListener("click",()=>showCenter(true)); core.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();showCenter(true);}});
-  const ct=document.getElementById("coretip");
-  ["mouseenter","focus"].forEach(ev=>core.addEventListener(ev,()=>ct.classList.add("on")));
-  ["mouseleave","blur","click"].forEach(ev=>core.addEventListener(ev,()=>ct.classList.remove("on")));
+  const coreInfo={html:CORE_TIP,color:"--center"};
+  ["mouseenter","focus"].forEach(ev=>core.addEventListener(ev,()=>{ if(!openTip) showTip(core,coreInfo,true); }));
+  ["mouseleave","blur"].forEach(ev=>core.addEventListener(ev,()=>{ if(!openTip) showTip(null); }));
   el("g",{id:"selOutline"});
   markToday(); applySel();
 }
@@ -1308,7 +1310,7 @@ function setBorn(v, save){
 form.addEventListener("submit",e=>{ e.preventDefault(); if(inp.value) setBorn(inp.value,true); });
 document.getElementById("clear").addEventListener("click",()=>setBorn(null,true));
 
-draw();
+draw(); showTip(null);
 let saved=null; try{ saved=localStorage.getItem("ft-born"); }catch(e){}
 if(saved) setBorn(saved,false); else { setStatus(); showIntro(); }
 
