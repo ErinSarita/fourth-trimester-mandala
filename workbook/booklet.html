@@ -96,6 +96,15 @@ table.plan td.w{width:150px} table.plan td.n{width:110px}
 .read h2{font-size:17px;margin:12px 0 4px}
 .read p,.read li{font-size:11.6px;line-height:1.52}
 .read ul{margin:0 0 6px;padding-left:16px}
+.kcols{columns:2;column-gap:28px}
+.kcols h2{break-after:avoid;margin:4px 0 6px;font-size:16px}
+.kcols h2:not(:first-child){margin-top:10px}
+.kcard{break-inside:avoid;border-left:3px solid var(--c);padding:0 0 0 10px;margin:0 0 9px;font-size:10.8px;line-height:1.45}
+.kcard b.nm{display:block;font-family:var(--display);font-weight:400;font-size:13.5px;line-height:1.25}
+.kcard p{margin:0 0 2px}
+.kcard .from{color:var(--muted);font-style:italic}
+.kcard ul{margin:0 0 2px;padding-left:14px}
+.kcard .where{color:var(--muted);font-size:10px}
 .urgent{border:1px solid var(--best);border-left:5px solid var(--best);border-radius:12px;padding:10px 14px;font-size:11.2px;line-height:1.5;background:#fff;margin-top:10px}
 .urgent p{margin:0 0 5px}
 .need{display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start}
@@ -147,6 +156,7 @@ table.plan td.w{width:150px} table.plan td.n{width:110px}
 </div>
 <div id="book"></div>
 <script src="content.js"></script>
+<script src="../key-concepts.js"></script>
 <script>
 (function(){
 "use strict";
@@ -328,7 +338,7 @@ page(storyOn?`${head("11","My birth story","Telling the story of a birth, and be
   :`<div class="private"><div class="eb">11 · My birth story</div><p class="lede" style="max-width:360px">My birth story is kept private for now.</p></div>`,{c:"--mother",toc:"My birth story"});
 
 // 14 · for my supporters
-page(`<div class="read">${head("12","For my supporters: why this matters","The key ideas behind the requests in this workbook, so you know why closeness and quiet matter so much right now. There is more in The Fourth Trimester Mandala.")}
+page(`<div class="read">${head("12","For my supporters: why this matters","The key ideas behind the requests in this workbook, so you know why closeness and quiet matter so much right now. The ideas behind them are gathered in Key concepts on page <span class='pref-key'></span>, and there is more in The Fourth Trimester Mandala.")}
   <div class="two"><div>${LEARN.slice(0,4).map(a=>`${sec(a.c,a.h)}${a.html}`).join("")}</div><div>${LEARN.slice(4).map(a=>`${sec(a.c,a.h)}${a.html}`).join("")}</div></div></div>`,{c:"--edu",toc:"For my supporters"});
 
 // 15 · contacts and notes
@@ -348,6 +358,20 @@ page(`${head("13","Important contacts","")}
     <li><b>Sleep</b> and <b>when to call</b> are on pages <span class="pref-sleep"></span> and <span class="pref-watch"></span>.</li></ul></div>
   ${sec("--center","Notes")}${lines("",10)}`,{c:"--center",toc:["Important contacts","Caring for your baby"]});
 
+// key concepts, for reference
+const kcard=(k,c)=>{ const short=k.parts&&k.parts.every(t=>t.length<20);
+  const inMandala=k.where.filter(w=>w[1]!=="workbook").map(w=>w[0]).join(", "), inPlan=k.where.filter(w=>w[1]==="workbook").map(w=>w[0].replace(" in the workbook","")).filter(l=>l!=="The workbook").join(", ");
+  const where=[inMandala&&`In the mandala: ${inMandala}`, inPlan&&`In this plan: ${inPlan}`].filter(Boolean).join(" · ");
+  return `<div class="kcard" style="--c:var(${c})"><b class="nm">${k.n}</b><p class="from">From: ${k.from}</p>${k.what?`<p>${k.what}${short?" "+k.parts.join(" · ")+".":""}</p>`:""}${k.parts&&!short?`<ul>${k.parts.map(t=>`<li>${t}</li>`).join("")}</ul>`:""}<p><b>Why it matters.</b> ${k.why}</p><p class="where">${where}</p></div>`; };
+// each part is [group id, first item, last item], so a group can carry on to the next page
+const kgroups=parts=>`<div class="kcols">${parts.map(([id,a=0,b])=>{ const g=KEYS.find(x=>x.id===id); return sec(g.c,g.h+(a?", continued":""))+g.items.slice(a,b).map(k=>kcard(k,g.c)).join(""); }).join("")}</div>`;
+page(`${head("Reference","Key concepts","The named ideas behind this plan and The Fourth Trimester Mandala, gathered in one place: where each comes from, what it is, and why it matters.")}${kgroups([["ft"],["kc",0,6]])}`,{c:"--edu",toc:"Key concepts"});
+page(`<div class="eb"><i></i>Key concepts, continued</div>${kgroups([["kc",6],["hour"],["read"],["bond",0,3]])}`,{c:"--edu"});
+page(`<div class="eb"><i></i>Key concepts, continued</div>${kgroups([["bond",3],["mother"],["repair"]])}${sec("--center","My notes")}${lines("",5)}`,{c:"--edu"});
+
+// a full page for notes, so the booklet folds to an even number of pages
+page(`${head("Notes","My notes","")}${lines("",32)}`,{c:"--center",toc:"My notes"});
+
 // 16 · back cover
 page(`${orn(220)}
   <p class="lede" style="font-size:22px;max-width:520px;margin:30px auto 0">No one is meant to carry these weeks alone. Hold your baby; let your circle hold you.</p>
@@ -361,6 +385,7 @@ book.querySelector("#toc").innerHTML=TOC.map(([t,c,n])=>`<li style="--c:var(${c}
 const pnum=t=>{ const e=TOC.find(x=>x[0]===t); return e?e[2]:""; };
 book.querySelectorAll(".pref-sleep").forEach(e=>e.textContent=pnum("Sleep and nights"));
 book.querySelectorAll(".pref-watch").forEach(e=>e.textContent=pnum("Watching over me"));
+book.querySelectorAll(".pref-key").forEach(e=>e.textContent=pnum("Key concepts"));
 const pages=[...book.querySelectorAll(".pg")];
 
 /* ---------- the page turner: two facing pages on a wide screen, one at a time on a narrow one ---------- */

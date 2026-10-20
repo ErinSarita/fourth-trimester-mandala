@@ -199,6 +199,12 @@ a.go{color:var(--ink);font-weight:600;text-underline-offset:2px}
 .state p{margin:0}
 .state .help{color:var(--muted);font-size:14.5px}
 .lang ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.key .state{gap:6px;padding:4px 0 6px 14px}
+.key .state.cur{border-left-width:6px;padding-left:11px}
+.key .state{scroll-margin-top:16px}
+.key .from{font-size:14px;color:var(--muted);font-style:italic}
+.key .where{font-size:14px;color:var(--muted)}
+.key .where a{white-space:nowrap}
 .support.urgent{border-color:var(--best);border-left:5px solid var(--best)}
 
 section.about{margin-top:56px;display:grid;gap:18px;max-width:880px}
@@ -320,6 +326,7 @@ try{ var t=localStorage.getItem("ft-theme"); if(t==="light"||t==="dark") documen
   </section>
 </div>
 
+<script src="key-concepts.js"></script>
 <script>
 (function(){
 "use strict";
@@ -894,9 +901,10 @@ function arcText(r,a0,a1,text,cls,size,ls,parent){
 const UNITS=[];
 (function(){
   NEEDS.forEach(([n,line],k)=>UNITS.push({id:"n"+k, a0:k*22.5, a1:(k+1)*22.5, lbl:n.toUpperCase(), word:true,
-    html:`<b>${n}</b>${line}<span>One of Bergman's four needs of every newborn, all met on her mother's chest.</span>`}));
-  STAGES.forEach(([n,when,line],k)=>UNITS.push({id:"s"+(k+1), a0:90+k*10, a1:100+k*10, lbl:String(k+1),
-    html:`<b>Stage ${k+1}: ${n}</b>${line}<span>${when}</span>`}));
+    key:"the-four-needs-of-every-newborn",
+    html:`<b>${n}</b>${line}<span>One of Bergman's four needs of every newborn, all met on her mother's chest.<br>Tap to read more in Key concepts.</span>`}));
+  STAGES.forEach(([n,when,line],k)=>UNITS.push({id:"s"+(k+1), a0:90+k*10, a1:100+k*10, lbl:String(k+1), key:"widstroms-nine-stages",
+    html:`<b>Stage ${k+1}: ${n}</b>${line}<span>${when}<br>Tap to read more in Key concepts.</span>`}));
   const dayA=d=> d===1 ? [180,210] : d<=4 ? [210+(d-2)*10, 220+(d-2)*10] : [240+(d-5)*3, 243+(d-5)*3];
   for(let d=1;d<=14;d++){ const [a0,a1]=dayA(d), s=d===1?6:d<=4?7:8;
     UNITS.push({id:"d"+d, a0, a1, lbl:String(d), html:`<b>Day ${d}</b>${DAY_NOTE[d]||SLICES[s].baby.tip}<span>${SLICES[s].t} · ${SLICES[s].w}</span>`}); }
@@ -1029,7 +1037,16 @@ function draw(){
     const pt=document.getElementById("u-"+u.id), warm=on=>pt.classList.toggle("hov",on);
     hit.addEventListener("mouseenter",()=>warm(true)); hit.addEventListener("mouseleave",()=>warm(false));
     hit.addEventListener("focus",()=>warm(true)); hit.addEventListener("blur",()=>warm(false));
-    tipOn(hit,()=>{ const [x,y]=P(R.unit[1],(u.a0+u.a1)/2); return {x,y,html:u.html+(u.id===todayUnit()?`<span><b>Today</b></span>`:"")}; });
+    const info=()=>{ const [x,y]=P(R.unit[1],(u.a0+u.a1)/2); return {x,y,html:u.html+(u.id===todayUnit()?`<span><b>Today</b></span>`:"")}; };
+    if(!u.key){ tipOn(hit,info); return; }
+    // the four needs and the nine stages open their concept in Key concepts
+    const open=()=>{ showTip(null); showKeys(false, u.key); };
+    hit.addEventListener("click",e=>{ e.stopPropagation(); open(); });
+    hit.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); open(); } });
+    hit.addEventListener("mouseenter",()=>{ if(!openTip) showTip(hit,info(),true); });
+    hit.addEventListener("mouseleave",()=>{ if(!openTip) showTip(null); });
+    hit.addEventListener("focus",()=>{ if(hit.matches(":focus-visible")) showTip(hit,info(),true); });
+    hit.addEventListener("blur",()=>{ if(!openTip) showTip(null); });
   });
   // gold marks where each quarter begins: the foundations, birth, the first days, the first months
   [0,90,180,270].forEach(a=>{ const [x0,y0]=P(R.span[0]-2,a), [x1,y1]=P(R.unit[1]+2,a), [gx,gy]=P(R.unit[0],a);
@@ -1129,6 +1146,7 @@ function showIntro(){
     </ul>
     <p>The wheel begins at the top with the foundations, warmth, milk, and love, which hold for the whole fourth trimester. Then it moves clockwise through time: the first hour, the first days, and the first months, closing at twelve weeks where the foundations began.</p>
     <p class="hint">Choose any petal or ring on the mandala, or a quarter above, to open it.</p>
+    <p class="hint">The named ideas behind the mandala, such as Bergman's four needs and Widström's nine stages, are gathered in <a class="go" href="#" data-go="key">Key concepts</a>.</p>
   </div>`;
 }
 
@@ -1219,9 +1237,26 @@ function showSupport(focus){
   const t=focus?document.getElementById("sup-"+focus):panel;
   if(focus||window.matchMedia("(max-width:900px)").matches) t.scrollIntoView({behavior:"smooth",block:"start"});
 }
+const keyId=n=>"key-"+n.normalize("NFD").replace(/[\u0300-\u036f']/g,"").toLowerCase().replace(/[^a-z]+/g,"-").replace(/-$/,"");
+function showKeys(user, focus){
+  sel={q:null,ring:null,idx:null,page:"key"}; applySel(); markTabs();
+  const go=([l,g])=>g==="workbook"?`<a class="go" href="workbook/">${l}</a>`:g==="about"?`<a class="go" href="#about">${l}</a>`:`<a class="go" href="#" data-go="${g}">${l}</a>`;
+  panel.innerHTML=`<div class="phasehead"><h2>Key concepts</h2><div class="meta">${KEYS.map(g=>g.short).join(" · ")}</div>
+      <p>The named ideas behind this mandala, gathered in one place. Each one says where it comes from, what it is, why it matters, and where to find it on the wheel.</p></div>
+    ${KEYS.map(g=>`<article class="scard lang key" id="key-${g.id}"><h3>${g.h}</h3>
+      ${g.items.map(k=>`<div class="state${focus&&keyId(k.n)==="key-"+focus?" cur":""}" id="${keyId(k.n)}" style="border-left-color:var(${g.c})"><b class="nm">${k.n}</b>
+        <p class="from">From: ${k.from}</p>
+        ${k.what?`<p>${k.what}</p>`:""}${k.parts?ul(k.parts):""}
+        <p><b>Why it matters.</b> ${k.why}</p>
+        <p class="where">Where it appears: ${k.where.map(go).join(" · ")}</p></div>`).join("")}</article>`).join("")}`;
+  const t=focus&&document.getElementById("key-"+focus);
+  if(t) t.scrollIntoView({behavior:"smooth",block:"start"});
+  else if(user||window.matchMedia("(max-width:900px)").matches) panel.scrollIntoView({behavior:"smooth",block:"start"});
+}
 // The guides beside the mandala, each with an index of its sections
 const GUIDES = [
   {id:"intro", tab:"How to read", open:()=>showIntro(), subs:[["intro-center","The dyad at the center"],["intro-read","Reading the rings"]]},
+  {id:"key", tab:"Key concepts", open:()=>showKeys(false), subs:KEYS.map(g=>["key-"+g.id,g.short])},
   {id:"lang", tab:"Her language", open:()=>showLanguage(false), subs:[["lang-states","Six states"],["lang-cues","Body cues"],["lang-crying","Crying"],["deeper","Going deeper"]]},
   {id:"calm", tab:"Co-regulation", open:()=>showCalm(false), subs:[["calm-borrow","Borrowing your brain"],["calm-hormones","Hormones"],["calm-coreg","Co-regulation"],["calm-ways","Ways back"]]},
   {id:"support", tab:"Support", open:()=>showSupport(null), subs:[["sup-urgent","Call right away"]].concat(SUPPORT.map(x=>["sup-"+x.id,x.tag]))}];
@@ -1249,7 +1284,14 @@ nav.addEventListener("click",e=>{
 // links inside the panel that open Her language
 panel.addEventListener("click",e=>{ const a=e.target.closest("[data-go]"); if(!a) return; e.preventDefault();
   const go=a.dataset.go;
-  if(go==="deeper"){ showLanguage(false); document.getElementById("deeper").scrollIntoView({behavior:"smooth",block:"start"}); }
+  const to=id=>{ const t=document.getElementById(id); if(t) t.scrollIntoView({behavior:"smooth",block:"start"}); };
+  if(go==="deeper"){ showLanguage(false); to("deeper"); }
+  else if(go.startsWith("slice:")){ const [,i,ring]=go.split(":"); select(Math.floor(+i/3),ring||null,+i,true); }
+  else if(go.startsWith("q:")) select(+go.slice(2),null,null,true);
+  else if(go==="intro"){ showIntro(); to("intro-read"); }
+  else if(go==="key") showKeys(true);
+  else if(go.startsWith("lang:")){ showLanguage(false); to(go.slice(5)); }
+  else if(go.startsWith("calm:")){ showCalm(false); to(go.slice(5)); }
   else if(go.startsWith("sup")) showSupport(go.split(":")[1]||null);
   else if(go==="calm") showCalm(true);
   else showLanguage(true); });
