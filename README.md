@@ -4,7 +4,7 @@ A teaching map of the first twelve weeks after birth, read from the center out: 
 
 The wheel begins at the top with the foundations (warmth, milk, and love: Bergman's habitat and niche), then moves clockwise through the first hour (Widström's nine stages), the first days (day 1 to two weeks), and the first months (weeks 3 to 12).
 
-Created by Erin Singleton, a student in APPPAH's Prenatal & Perinatal Educator certification, as a project for Module Ten, on the fourth trimester. It continues from The Pregnancy and Birth Mandala. An educational map, not medical advice.
+Created by Erin Singleton, a student in APPPAH's Prenatal & Perinatal Educator certification. It continues from The Pregnancy and Birth Mandala. An educational map, not medical advice.
 
 The mandala is the single file `index.html`. Its content lives in the `SLICES` array (twelve slices, each with the baby, mother, partner, circle, educator, best practices, the support to look into, and a repair), plus `QUARTERS`, `NEEDS`, `STAGES`, and the guide pages' content: `STATES`, `CUES`, `CRYING`, `DEEPER`, `HORMONES`, `COREG`, `WAYS`, `URGENT`, and `SUPPORT`. The Key concepts guide reads `KEYS` from `key-concepts.js`, which the booklet shares. Settings saved in the browser use the `ft-` prefix (`ft-theme`, `ft-born`).
 
