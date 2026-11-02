@@ -215,6 +215,13 @@ section.about h3{font-family:var(--display);font-weight:400;font-size:21px;margi
 section.about p{margin:0;max-width:68ch}
 section.about a{color:var(--ink)}
 .refs{margin:0;padding-left:20px;display:grid;gap:6px;font-size:14.5px}
+.citedin{display:block;margin-top:1px;font-size:12.5px;color:var(--muted)}
+.citedin summary{cursor:pointer;list-style:none}
+.citedin summary::-webkit-details-marker{display:none}
+.citedin summary::before{content:"";display:inline-block;width:6px;height:6px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);margin-right:6px;transition:transform .2s ease}
+.citedin[open] summary::before{transform:rotate(45deg)}
+.citedin a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.citedin a:hover{color:var(--ink)}
 .foot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin-top:10px}
 @media (prefers-reduced-motion: reduce){.cell{transition:none}}
 </style>
@@ -1402,6 +1409,51 @@ function setBorn(v, save){
 }
 form.addEventListener("submit",e=>{ e.preventDefault(); if(inp.value) setBorn(inp.value,true); });
 document.getElementById("clear").addEventListener("click",()=>setBorn(null,true));
+
+/* Cited in: under each reference, the places in the mandala that cite it */
+function annotateRefs(){
+  const ol=document.querySelector("ol.refs"); if(!ol) return;
+  // the text of data, and of the page functions, which carry some sentences of their own
+  const txt=o=>{ try{ return JSON.stringify(o,(k,v)=>typeof v==="function"?v.toString():v).replace(/&amp;/g,"&"); }catch(e){ return ""; } };
+  const pages=SLICES.map((sl,i)=>({id:"s:"+i,label:sl.t,text:txt(sl)}));
+  pages.push({id:"g:lang",label:"Her language",text:txt([STATES,CUES,CRYING,DEEPER,TALK_WHY,TALK_HOW,TALK_WORDS,TALK_READ,MEET,showLanguage])});
+  pages.push({id:"g:calm",label:"Co-regulation",text:txt([HORMONES,COREG,WAYS,showCalm])});
+  pages.push({id:"g:support",label:"Support",text:txt([SUPPORT,URGENT,showSupport])});
+  if(typeof KEYS!=="undefined") pages.push({id:"g:key",label:"Key concepts",text:txt(KEYS)});
+  const alias=[["World Health Organization & UNICEF",["WHO and UNICEF","WHO & UNICEF"]],["World Health Organization",["WHO (2003)","MFCI"]],["American College of Obstetricians",["ACOG"]]];
+  const esc=t=>t.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+  const items=[...ol.querySelectorAll("li")].map(li=>{
+    const t=li.textContent.replace(/\s+/g," ").trim();
+    const al=alias.find(([k])=>t.startsWith(k));
+    const sur=(t.match(/^([^,.(]+)/)||["",""])[1].trim();
+    const ym=t.match(/\((\d{4})\)/);
+    return {li,t,al:al?al[1]:null,sur,year:ym?ym[1]:null};
+  });
+  items.forEach(it=>{ it.shared=items.filter(o=>o!==it&&o.sur===it.sur).length>0; });
+  const hit=(it,text)=>{
+    if(it.al) return it.al.some(a=>text.includes(a));
+    if(!it.sur) return false;
+    const sr=esc(it.sur);
+    if(it.year){
+      if(new RegExp(sr+"[^;)\\]]{0,30}?"+it.year).test(text)) return true;
+      return !it.shared && new RegExp("\\b"+sr+"\\b").test(text);
+    }
+    // an undated reference answers to citations of the name alone, with no year after it
+    return new RegExp("\\b"+sr+"\\b(?![^;)\\]]{0,25}\\b(?:19|20)\\d\\d\\b)").test(text);
+  };
+  items.forEach(it=>{
+    const found=pages.filter(pg=>hit(it,pg.text)); if(!found.length) return;
+    const links=found.map(pg=>`<a href="#" data-cite="${pg.id}">${pg.label}</a>`).join(" · ");
+    const box=found.length>3 ? `<details class="citedin"><summary>Cited in ${found.length} places</summary>${links}</details>` : `<span class="citedin">Cited in: ${links}</span>`;
+    it.li.insertAdjacentHTML("beforeend",box);
+  });
+  ol.addEventListener("click",e=>{ const a=e.target.closest("a[data-cite]"); if(!a) return; e.preventDefault();
+    const [k,v]=a.dataset.cite.split(":");
+    if(k==="s"){ const i=+v; select(Math.floor(i/3),null,i,true); }
+    else if(v==="lang") showLanguage(true); else if(v==="calm") showCalm(true); else if(v==="key") showKeys(true);
+    else { showSupport(null); panel.scrollIntoView({behavior:"smooth",block:"start"}); } });
+}
+annotateRefs();
 
 draw();
 let saved=null; try{ saved=localStorage.getItem("ft-born"); }catch(e){}
