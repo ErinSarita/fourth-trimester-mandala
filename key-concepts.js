@@ -55,8 +55,8 @@ const KEYS = [
    why:"A baby who goes quiet when apart may be shutting down, not settling.",
    where:[["Warmth","slice:0"],["The crying weeks","slice:9"]]},
   {n:"Thermal synchrony",
-   from:"Bergman; Ludington-Hoe and colleagues.",
-   what:"A mother's breast warms by up to about 2°C to warm a cool baby, and cools by about 1°C to cool a warm one. With twins, it responds to each twin. Only the mother's chest does this.",
+   from:"Bergman.",
+   what:"A mother's breast warms to warm a cool baby, and cools to cool a warm one. Only the mother's chest does this.",
    why:"It is one reason the mother's chest is a baby's first place.",
    where:[["Warmth","slice:0"]]}]},
  {id:"hour", h:"The first hour", short:"The first hour", c:"--mother", items:[
@@ -68,7 +68,7 @@ const KEYS = [
    where:[["The First hour quarter and its time wheel petals","q:1"]]}]},
  {id:"read", h:"Reading the baby", short:"Reading the baby", c:"--partner", items:[
   {n:"The six states",
-   from:"Marshall Klaus; T. Berry Brazelton.",
+   from:"Marshall Klaus.",
    what:"Quiet sleep, active sleep, drowsy, quiet alert, active alert, and crying.",
    why:"Each state has its own look and needs. Quiet alert is her best time to connect.",
    where:[["Her language","lang:lang-states"],["Day 1","slice:6"]]},
@@ -142,7 +142,7 @@ const KEYS = [
    why:"What turns a hard birth into lasting trauma is often a lack of empathy for what the baby went through, and being understood can change that.",
    where:[["The lying-in","slice:8"]]},
   {n:"Rupture and repair",
-   from:"Edward Tronick; Karen Strange.",
-   what:"Even close, loving pairs are often out of step, and they find their way back again and again. The still-face research showed how a baby suffers when her parent goes blank, and how quickly she recovers when the connection returns.",
+   from:"Karen Strange.",
+   what:"Even close, loving pairs are often out of step, and they find their way back again and again.",
    why:"Repair is the point. Each return teaches her that connection comes back.",
    where:[["The repair in every slice","slice:0"],["First smiles","slice:10"]]}]}];

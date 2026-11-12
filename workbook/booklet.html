@@ -225,14 +225,14 @@ page(`<div class="two"><div>${head("Welcome","Dear mother","")}
   <div><div class="eb"><i style="background:var(--center)"></i>Contents</div><h1>Inside</h1><ol class="contents" id="toc"></ol><div style="margin-top:28px">${orn(240)}</div></div></div>`,{c:"--center"});
 
 // kangaroo care: the heart of the plan
-page(`${head("The heart of this plan","Kangaroo care","Kangaroo care means holding your baby skin to skin on your bare chest, as much as you can, and keeping her close. It began in 1978 with doctors in Bogotá caring for small babies, and the research now shows it helps every newborn (Bergman; Moore et al., 2016).")}
+page(`${head("The heart of this plan","Kangaroo care","Kangaroo care means holding your baby skin to skin on your bare chest, as much as you can, and keeping her close. It began in 1978 with doctors in Bogotá caring for small babies, and it is now understood to help every newborn (Bergman).")}
   <div class="two"><div>
     ${sec("--baby","Why it matters")}
-    <p>A newborn's brain is only about a quarter developed at birth, and to her there are two places: mother, or other. On her mother's bare chest, within minutes, her heart rate and breathing settle. Her mother's chest warms by up to about 2°C (3.6°F) to warm her, or cools by about 1°C to cool her, and only the mother's chest adjusts this way. Oxytocin rises, the milk flows, and both stay calm. Apart, her body moves into defense: crying to bring her mother back, then shutting down to save energy (Bergman).</p>
+    <p>A newborn's brain is only about a quarter developed at birth, and to her there are two places: mother, or other. On her mother's bare chest, within minutes, her heart rate and breathing settle. Her mother's chest warms to warm her, or cools to cool her, and only the mother's chest adjusts this way. Oxytocin rises, the milk flows, and both stay calm. Apart, her body moves into defense: crying to bring her mother back, then shutting down to save energy (Bergman).</p>
     ${sec("--mother","Three parts")}
     <ul class="ck">${["Skin to skin from birth, as continuously as you can.","Breast milk from birth, then feeding on cue, day and night.","Support for the mother and baby: whatever is needed, from whoever can give it."].map(t=>`<li><span class="o on" style="--c:var(--mother)"></span><span>${t}</span></li>`).join("")}</ul>
     ${sec("--partner","Partners too")}
-    <p>A baby on her partner's bare chest is kept warm and settles too, though only the mother's chest changes its temperature to match her. After a cesarean, babies held skin to skin by their fathers cried less and calmed sooner (Erlandsson et al., 2007).</p>
+    <p>A baby on her partner's bare chest is kept warm and settles too, though only the mother's chest changes its temperature to match her.</p>
     ${q("kc.song","Our song, and our calming playlist",3)}
   </div><div>
     ${sec("--circle","How to hold her")}
