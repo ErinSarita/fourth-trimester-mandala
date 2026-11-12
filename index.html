@@ -1086,7 +1086,7 @@ function showKeys(user, focus){
   sel={q:null,ring:null,idx:null,page:"key"}; applySel(); markTabs();
   const go=([l,g])=>g==="about"?`<a class="go" href="#about">${l}</a>`:`<a class="go" href="#" data-go="${g}">${l}</a>`;
   panel.innerHTML=`<div class="phasehead"><h2>Key concepts</h2><div class="meta">${KEYS.map(g=>g.short).join(" · ")}</div>
-      <p>In the pre- and perinatal view, a new baby is already a person who feels and remembers, and she does best close to her mother's body, with a mother who is cared for too. Warmth, safety, and being listened to help her settle and begin to trust, and when something goes differently than hoped, a way back together is possible. The key concepts here are the ideas that help us understand this closeness and protect it.</p></div>
+      <p>A new baby is already a person who feels and remembers, and she does best close to her mother's body, with a mother who is cared for too. Warmth, safety, and being listened to help her settle and begin to trust, and when something goes differently than hoped, a way back together is possible. The key concepts here are the ideas that help us understand this closeness and protect it.</p></div>
     ${KEYS.map(g=>`<article class="scard lang key" id="key-${g.id}"><h3>${g.h}</h3>
       ${g.items.map(k=>`<div class="state${focus&&keyId(k.n)==="key-"+focus?" cur":""}" id="${keyId(k.n)}" style="border-left-color:var(${g.c})"><b class="nm">${k.n}</b>
         <p class="from">From: ${k.from}</p>
