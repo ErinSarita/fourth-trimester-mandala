@@ -69,8 +69,9 @@ const KEYS = [
  {id:"read", h:"Reading the baby", short:"Reading the baby", c:"--partner", items:[
   {n:"The six states",
    from:"Marshall Klaus.",
-   what:"Quiet sleep, active sleep, drowsy, quiet alert, active alert, and crying.",
-   why:"Each state has its own look and its own needs. Quiet alert is her best time to connect with you.",
+   what:"A newborn moves through six states of awareness, from deep sleep to crying, and each one has its own look and its own needs. Knowing which state she is in helps you know what she can take in, and what she is asking for.",
+   parts:["<b>Quiet sleep.</b> Deep sleep. Her body is still, her breathing slow and even, and her face relaxed. She is hard to wake. Let her sleep: much of her brain's wiring happens in quiet sleep (Bergman), so this is not the time for feeding or play.", "<b>Active sleep.</b> Lighter sleep, with eyes moving under the lids, uneven breathing, twitches, small sounds, and sucking movements. Newborns spend much of their sleep here. It can look like waking, so pause before you pick her up. She may settle back on her own.", "<b>Drowsy.</b> Heavy eyelids that open and close, slow movements, and a dazed look. This is a doorway between sleeping and waking. Keep things gentle and quiet. She may drift off, or wake into quiet alert.", "<b>Quiet alert.</b> Eyes wide and bright, body still, her whole attention on your face and voice. It is often long in the first hour after birth, then comes in shorter windows. This is her best time to look, listen, and learn (Klaus). Meet her face to face, talk, copy her expressions, and wait for her reply.", "<b>Active alert.</b> Eyes open but less focused, lots of movement, fussy sounds, and more sensitivity to light, noise, and handling. Something is building: hunger, tiredness, or too much at once. Lower the stimulation, and offer a feed or a close hold before she has to cry.", "<b>Crying.</b> Her strongest signal: a reddened face, moving limbs, eyes squeezed shut or wide. Come to her, meet the need, hold her close, and stay with her. Crying is how she asks."],
+   why:"Knowing her state helps you meet her where she is. Quiet alert is her best time to connect with you.",
    where:[["Day 1","slice:6"]]},
   {n:"Needs crying and memory crying",
    from:"Matthew Appleton.",
