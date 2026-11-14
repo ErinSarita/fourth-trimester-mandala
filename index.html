@@ -177,7 +177,7 @@ svg.dimming .cell.off{opacity:.28}
 .center-msg .sym{font-size:14.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
 .center-msg + .intro{margin-top:16px;padding-top:24px;border-top:1px solid var(--line)}
 .legend{display:grid;gap:12px;margin:0;padding:0;list-style:none}
-.legend li{display:grid;grid-template-columns:18px 1fr;gap:12px;align-items:start}
+.legend li{display:grid;grid-template-columns:18px 1fr;gap:12px;align-items:start;padding:6px 8px;border-radius:8px;transition:background .4s ease;scroll-margin-top:16px}
 .legend .sw{margin-top:5px;width:18px;height:18px}
 .legend b{font-family:var(--display);font-weight:400;font-size:19px;display:block}
 .legend .more{margin:10px 0 0}
@@ -217,7 +217,7 @@ section.about a{color:var(--ink)}
 .refnote a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .refnote a:hover{color:var(--ink)}
 ol.refs li{transition:background .4s ease}
-ol.refs li.refhit{background:color-mix(in srgb, var(--edu) 30%, transparent);border-radius:6px}
+ol.refs li.refhit,.legend li.refhit{background:color-mix(in srgb, var(--edu) 30%, transparent);border-radius:6px}
 .citedin{display:block;margin-top:1px;font-size:12.5px;color:var(--muted)}
 .citedin summary{cursor:pointer;list-style:none}
 .citedin summary::-webkit-details-marker{display:none}
@@ -628,7 +628,7 @@ const SLICES = [
    best:{tip:"Carry her more, answer her cries, and take turns. At your limit, lay her down safely and breathe.",
      items:[["Carry her more.","Carrying her through the day often helps her settle."],
        ["Answer her cries whenever you can.","Needs first, then listening. You will not always know why she is crying, and staying with her is the answer that matters most."],
-       ["Try her reflex sounds.","Some parents find Dunstan's five sounds helpful: “neh” hungry, “owh” sleepy, “heh” discomfort, “eairh” lower gas, “eh” a burp."],
+       ["Try her reflex sounds.","Some parents find Dunstan's five early cry sounds helpful. <a class='go' href='#' data-go='keycard:her-cry-sounds'>Each one is described in Key concepts.</a>"],
        ["At your limit, pause.","When you reach your limit, lay your baby down somewhere safe, step away for a few minutes, breathe, and call someone for help. Shaking a baby can cause serious brain injury, so a safe place and a few slow breaths are the right move."],
        ["Check in on both parents.","Ask each other honestly how you are, and reach out early."],
        ["The magical daddy hold.","Any partner can do it. Swaddle her arms and shoulders snugly, hands near her face. Lay her on her side along your forearm, head near your elbow facing out, nose clear of the blanket, body snug against your chest, feet tucked in. Then rock gently up and down, bending your knees, and back and forth, like the motion she felt as her mother walked (Phillips). Keep the swaddle loose at her hips. Once she settles, lay her on her back to sleep, and stop swaddling when she starts to roll."]],
@@ -1023,9 +1023,21 @@ function showCenter(user){
   showIntro();
   if(user && window.matchMedia("(max-width:900px)").matches) panel.scrollIntoView({behavior:"smooth",block:"start"});
 }
+// a couple of sentences for each ring, shown on the Start here page
+const RING_KEY = {
+  baby:"What your newborn is doing, sensing, and needing in each moment. Each moment holds a question she may be asking, and the possible imprints of how it is answered.",
+  mother:"Her body as it recovers and makes milk, her emotional life, and how she can care for herself. Her body is the baby's habitat, so caring for her is caring for the baby.",
+  partner:"The first layer of support: one steady, consistent person around the mother, whoever fills that role. They protect mother and baby so they can stay together, and they are supported too.",
+  circle:"The wider layers: family, friends, a doula, a midwife or doctor, a lactation consultant, and the community. They hold the partner as well as the mother.",
+  edu:"The pre- and perinatal view, that a baby is aware, feeling, and remembering, with the science behind each moment for anyone who wants to go deeper.",
+  best:"What to do in each moment, each paired with the reason behind it."};
 function showIntro(){
   sel={q:null,ring:null,idx:null}; applySel(); markTabs();
   panel.innerHTML=CENTER_HTML+`<div class="intro" id="intro-read">
+    <h2>The rings</h2>
+    <ul class="legend">
+      ${RING_ORDER.map(k=>`<li id="ringdesc-${k}">${sw(RINGS[k].color)}<div><b>${RINGS[k].name}</b>${RING_KEY[k]}</div></li>`).join("")}
+    </ul>
     <p class="hint">Explore at your own pace: tap any part of the wheel to open it, or choose a quarter above.</p>
     <p class="hint">If you would like to see the named ideas behind all of this, such as Bergman's four needs and Widström's nine stages, you will find them gathered in <a class="go" href="#" data-go="key">Key concepts</a>.</p>
   </div>`;
@@ -1170,7 +1182,7 @@ syncTheme();
 const rk=document.getElementById("ringkey");
 RING_ORDER.forEach(k=>{
   const b=document.createElement("button"); b.type="button"; b.innerHTML=sw(RINGS[k].color)+RINGS[k].name;
-  b.addEventListener("click",()=>{ const ts=todaySlice(); const q = sel.q!=null?sel.q:(ts!=null?Math.floor(ts/3):0); select(q,k,null,true); });
+  b.addEventListener("click",()=>{ showIntro(); const li=document.getElementById("ringdesc-"+k); if(li){ li.scrollIntoView({behavior:"smooth",block:"center"}); li.classList.add("refhit"); setTimeout(()=>li.classList.remove("refhit"),2600); } });
   rk.appendChild(b);
 });
 
@@ -1197,6 +1209,8 @@ const escRe=t=>t.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
 function refItems(){
   if(REFITEMS) return REFITEMS;
   const ols=[...document.querySelectorAll("ol.refs")];
+  // keep the numbering continuous when the list is split under Further reading
+  ols.reduce((n,o)=>{ if(n>0) o.setAttribute("start",n+1); return n+o.querySelectorAll("li").length; },0);
   const alias=[["Bergman, N., & Bergman, L.",["(Bergman)","Bergman;"]]];
   const items=ols.flatMap(o=>[...o.querySelectorAll("li")]).map((li,n)=>{
     li.id="ref-"+n;
